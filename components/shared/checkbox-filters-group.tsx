@@ -1,7 +1,7 @@
 'use client'
 
 import { useSet } from 'react-use'
-import { FC, useEffect, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
 
 import { Input } from '@/components/ui'
 import { CheckboxFilter, FilterChecboxProps } from '@/components/shared'
@@ -9,7 +9,7 @@ import { CheckboxFilter, FilterChecboxProps } from '@/components/shared'
 interface Props {
 	title: string
 	items: FilterChecboxProps[]
-	defaultItems?: FilterChecboxProps[]
+	defaultItems: FilterChecboxProps[]
 	limit?: number
 	searchInputPlaceholder?: string
 	className?: string
@@ -28,7 +28,16 @@ export const CheckboxFiltersGroup: FC<Props> = ({
 	defaultValue,
 }) => {
 	const [showAll, setShowAll] = useState(false)
+	const [search, setSearch] = useState('')
 	const [selected, { add, toggle }] = useSet<string>(new Set([]))
+
+	const list = showAll
+		? items.filter((item) => item.text.toLowerCase().includes(search.toLowerCase()))
+		: defaultItems.slice(0, limit)
+
+	const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearch(e.target.value)
+	}
 
 	const onCheckedChange = (value: string) => {
 		toggle(value)
@@ -50,12 +59,16 @@ export const CheckboxFiltersGroup: FC<Props> = ({
 
 			{showAll && (
 				<div className="mb-5">
-					<Input placeholder={searchInputPlaceholder} className="bg-gray-50 border-none" />
+					<Input
+						onChange={onSearchChange}
+						placeholder={searchInputPlaceholder}
+						className="bg-gray-50 border-none"
+					/>
 				</div>
 			)}
 
 			<div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
-				{(showAll ? items : defaultItems || items).map((item, index) => (
+				{list.map((item, index) => (
 					<CheckboxFilter
 						key={index}
 						text={item.text}

@@ -1,4 +1,4 @@
-import { Container, Filters, Title, TopBar } from '@/components/shared'
+import { Container, Filters, ProductsGroupList, Title, TopBar } from '@/components/shared'
 
 export default function Home() {
 	return (
@@ -10,7 +10,7 @@ export default function Home() {
 			<TopBar />
 
 			<Container className="mt-10 pb-14">
-				<div className="flex gap-[60px]">
+				<div className="flex gap-[80px]">
 					{/* Filter */}
 					<div className="w-[250px]">
 						<Filters />
@@ -18,7 +18,13 @@ export default function Home() {
 
 					{/* Product list */}
 					<div className="flex-1">
-						<div className="flex flex-col gap-16">Cписок товарів</div>
+						<div className="flex flex-col gap-16">
+							<ProductsGroupList
+								title={'Піци'}
+								items={[{ id: 1, name: 'Піци', imageUrl: '', price: 10, items: [{ price: 500 }] }]}
+								categoryId={1}
+							/>
+						</div>
 					</div>
 				</div>
 			</Container>
