@@ -1,6 +1,9 @@
+'use client'
+
 import { FC } from 'react'
 
 import { Input } from '@/components/ui'
+import { useFilterIngredients } from '@/hooks/useFilterIngredients'
 import { CheckboxFiltersGroup, CheckboxFilter, Title, RangeSlider } from '@/components/shared'
 
 interface Props {
@@ -8,14 +11,21 @@ interface Props {
 }
 
 export const Filters: FC<Props> = ({ className }) => {
+	const { ingredients, loading, onAddId, selectedIds } = useFilterIngredients()
+
+	const items = ingredients.map((item) => ({
+		value: String(item.id),
+		text: item.name,
+	}))
+
 	return (
 		<div className={className}>
 			<Title text="Фільтрування" size="sm" className="mb-5 font-bold" />
 
 			{/* Top checkboxes */}
 			<div className="flex flex-col gap-4">
-				<CheckboxFilter text="Можна збирати" value="1" />
-				<CheckboxFilter text="Новинки" value="2" />
+				<CheckboxFilter name="top" text="Можна збирати" value="1" />
+				<CheckboxFilter name="top2" text="Новинки" value="2" />
 			</div>
 
 			{/* Price filter */}
@@ -35,83 +45,13 @@ export const Filters: FC<Props> = ({ className }) => {
 			<CheckboxFiltersGroup
 				className="mt-5"
 				title="Інгредієнти"
+				name="ingredients"
 				limit={6}
-				defaultItems={[
-					{
-						text: 'Сирний соус',
-						value: '1',
-					},
-					{
-						text: 'Моцарелла',
-						value: '2',
-					},
-					{
-						text: 'Часник',
-						value: '3',
-					},
-					{
-						text: 'Солоні огірочки',
-						value: '4',
-					},
-					{
-						text: 'Червона цибуля',
-						value: '5',
-					},
-					{
-						text: 'Томати',
-						value: '6',
-					},
-				]}
-				items={[
-					{
-						text: 'Сирний соус',
-						value: '1',
-					},
-					{
-						text: 'Моцарелла',
-						value: '2',
-					},
-					{
-						text: 'Часник',
-						value: '3',
-					},
-					{
-						text: 'Солоні огірочки',
-						value: '4',
-					},
-					{
-						text: 'Червона цибуля',
-						value: '5',
-					},
-					{
-						text: 'Томати',
-						value: '6',
-					},
-					{
-						text: 'Сирний соус',
-						value: '1',
-					},
-					{
-						text: 'Моцарелла',
-						value: '2',
-					},
-					{
-						text: 'Часник',
-						value: '3',
-					},
-					{
-						text: 'Солоні огірочки',
-						value: '4',
-					},
-					{
-						text: 'Червона цибуля',
-						value: '5',
-					},
-					{
-						text: 'Томати',
-						value: '6',
-					},
-				]}
+				defaultItems={items.slice(0, 6)}
+				items={items}
+				loading={loading}
+				onClickCheckbox={onAddId}
+				selectedIds={selectedIds}
 			/>
 		</div>
 	)
