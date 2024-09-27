@@ -21,8 +21,28 @@ export default function Home() {
 						<div className="flex flex-col gap-16">
 							<ProductsGroupList
 								title={'Піци'}
-								items={[{ id: 1, name: 'Піци', imageUrl: '', price: 10, items: [{ price: 500 }] }]}
+								items={[
+									{ id: 1, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 2, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 3, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 4, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 5, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 6, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+								]}
 								categoryId={1}
+							/>
+
+							<ProductsGroupList
+								title={'Комбо'}
+								items={[
+									{ id: 1, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 2, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 3, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 4, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 5, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+									{ id: 6, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
+								]}
+								categoryId={2}
 							/>
 						</div>
 					</div>

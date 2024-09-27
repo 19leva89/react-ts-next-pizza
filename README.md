@@ -3,6 +3,8 @@ This project contains the following technologies:
 - TypeScript
 - Next 14 (framework)
 - Prisma 5 (ORM for DB)
+- Zustand (state management)
+- React Use (custom React Hooks)
 - Tailwind CSS (stylization)
 - shadcn/ui (stylization)
 - Lucide React (stylization)
