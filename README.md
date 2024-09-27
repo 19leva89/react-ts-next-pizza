@@ -14,6 +14,6 @@ This project contains the following technologies:
 To run the client and server via concurrently:
 - npm run all
 
-- npx prisma migrate reset
-- npx prisma db push
 - npx prisma generate
+- npx prisma db push
+- npx prisma migrate reset
