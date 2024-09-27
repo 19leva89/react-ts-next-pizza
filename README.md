@@ -17,3 +17,5 @@ To run the client and server via concurrently:
 - npx prisma generate
 - npx prisma db push
 - npx prisma migrate reset
+
+- npx prisma db seed (loading test database)

@@ -25,35 +25,39 @@ model User {
   password         String
   //
   role             UserRole          @default(USER)
-  orders           Order[]
-  cartItems        CartItem[]
-  cart             Cart?
+  verified         DateTime
   verificationCode VerificationCode?
+  //
+  cart             Cart?
+  cartItems        CartItem[]
+  orders           Order[]
   //
   provider         String?
   providerId       String?
   //
-  verified         DateTime?
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  products Product[]
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  products  Product[]
+  //
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Product {
   id          Int           @id @default(autoincrement())
-  name        String
+  name        String        @unique
   imageUrl    String
   //
   items       ProductItem[]
   ingredients Ingredient[]
   //
-  categoryId  Int
   category    Category      @relation(fields: [categoryId], references: [id])
+  categoryId  Int
   //
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
@@ -61,15 +65,14 @@ model Product {
 
 model ProductItem {
   id        Int        @id @default(autoincrement())
-  //
   price     Int
-  size      Int?
+  pizzaSize Int?
   pizzaType Int?
   //
   cartItems CartItem[]
   //
-  productId Int
   product   Product    @relation(fields: [productId], references: [id])
+  productId Int
   //
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -77,13 +80,12 @@ model ProductItem {
 
 model Ingredient {
   id        Int        @id @default(autoincrement())
-  //
-  name      String
+  name      String     @unique
   price     Int
   imageUrl  String
   //
-  cartItems CartItem[]
   products  Product[]
+  cartItems CartItem[]
   //
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -92,14 +94,13 @@ model Ingredient {
 model Cart {
   id          Int        @id @default(autoincrement())
   //
-  userId      Int?       @unique
   user        User?      @relation(fields: [userId], references: [id])
+  userId      Int?       @unique
   //
-  tokenId     String?
-  //
-  totalAmount Int        @default(0)
+  token       String     @unique
   //
   items       CartItem[]
+  totalAmount Int        @default(0)
   //
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
@@ -108,40 +109,39 @@ model Cart {
 model CartItem {
   id            Int          @id @default(autoincrement())
   //
-  productItemId Int
   productItem   ProductItem  @relation(fields: [productItemId], references: [id])
+  productItemId Int
   //
-  cartId        Int
   cart          Cart         @relation(fields: [cartId], references: [id])
+  cartId        Int
+  //
+  user          User?        @relation(fields: [userId], references: [id])
+  userId        Int?
   //
   ingredients   Ingredient[]
   quantity      Int
-  pizzaSize     Int?
-  type          Int?
   //
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
-  User          User?        @relation(fields: [userId], references: [id])
-  userId        Int?
 }
 
 model Order {
   id          Int         @id @default(autoincrement())
-  //
-  userId      Int
-  user        User        @relation(fields: [userId], references: [id])
-  //
-  items       Json?
-  //
-  status      OrderStatus @default(PENDING)
-  totalAmount Int
-  paymentId   String?
-  //
   fullName    String
-  address     String
   email       String
   phone       String
+  address     String
   comment     String?
+  //
+  user        User?       @relation(fields: [userId], references: [id])
+  userId      Int?
+  //
+  token       String
+  //
+  items       Json
+  totalAmount Int
+  paymentId   String?
+  status      OrderStatus @default(PENDING)
   //
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -150,16 +150,13 @@ model Order {
 model VerificationCode {
   id        Int      @id @default(autoincrement())
   //
-  userId    Int      @unique
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int      @unique
   //
   code      String
   //
-  expiresAt DateTime @default(now())
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
-  //
   @@unique([userId, code])
 }
 
@@ -174,10 +171,10 @@ model Story {
 
 model StoryItem {
   id        Int      @id @default(autoincrement())
-  //
-  storyId   Int
-  story     Story    @relation(fields: [storyId], references: [id])
-  //
   sourceUrl String
+  //
+  story     Story    @relation(fields: [storyId], references: [id])
+  storyId   Int
+  //
   createdAt DateTime @default(now())
 }
