@@ -10,6 +10,7 @@ This project contains the following technologies:
 - Lucide React (stylization)
 - PostCSS (transforms CSS code to AST)
 - Concurrently (all projects are running in tandem)
+axios
 
 To run the client and server via concurrently:
 - npm run all
