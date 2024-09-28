@@ -4,14 +4,14 @@ import { useIntersection } from 'react-use'
 import { FC, useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
+import { ProductWithRelations } from '@/@types/prisma'
 
 import { useCategoryStore } from '@/store'
 import { ProductCard, Title } from '@/components/shared'
-// import { CategoryProducts } from '@/@types/prisma'
 
 interface Props {
 	title: string
-	items: any[]
+	items: ProductWithRelations[]
 	categoryId: number
 	className?: string
 	listClassName?: string
@@ -41,8 +41,9 @@ export const ProductsGroupList: FC<Props> = ({ title, items, categoryId, classNa
 						key={product.id}
 						id={product.id}
 						name={product.name}
-						imageUrl={product.imageUrl}
 						price={product.items[0].price}
+						imageUrl={product.imageUrl}
+						ingredients={product.ingredients}
 					/>
 				))}
 			</div>

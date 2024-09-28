@@ -13,6 +13,9 @@ This project contains the following technologies:
 axios
 qs
 bcrypt
+React hot toast
+zod
+sharp
 
 To run the client and server via concurrently:
 - npm run all

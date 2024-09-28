@@ -23,8 +23,12 @@ export default async function ProductPage({ params: { id } }: { params: { id: st
 	})
 
 	if (!product) {
-		return notFound()
+		notFound()
 	}
 
-	return <Container className="flex flex-col my-10">{/* <ProductForm product={product} /> */}</Container>
+	return (
+		<Container className="flex flex-col my-10">
+			<ProductForm product={product} />
+		</Container>
+	)
 }

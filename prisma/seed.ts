@@ -1,6 +1,6 @@
 import { hashSync } from 'bcrypt'
 
-import { prisma } from './../lib/db'
+import { prisma } from './../prisma/db'
 
 import { categories, ingredients, products, storyItems, storys } from './constants'
 
