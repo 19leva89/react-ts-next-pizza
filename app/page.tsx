@@ -1,13 +1,16 @@
+import { findPizzas, GetSearchParams } from '@/lib'
 import { Container, Filters, ProductsGroupList, Title, TopBar } from '@/components/shared'
 
-export default function Home() {
+export default async function Home({ searchParams }: { searchParams: GetSearchParams }) {
+	const categories = await findPizzas(searchParams)
+
 	return (
 		<>
 			<Container className="mt-10">
 				<Title text="Усі піци" size="lg" className="font-extrabold" />
 			</Container>
 
-			<TopBar />
+			<TopBar categories={categories.filter((category) => category.products.length > 0)} />
 
 			<Container className="mt-10 pb-14">
 				<div className="flex gap-[80px]">
@@ -19,31 +22,17 @@ export default function Home() {
 					{/* Product list */}
 					<div className="flex-1">
 						<div className="flex flex-col gap-16">
-							<ProductsGroupList
-								title={'Піци'}
-								items={[
-									{ id: 1, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 2, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 3, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 4, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 5, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 6, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-								]}
-								categoryId={1}
-							/>
-
-							<ProductsGroupList
-								title={'Комбо'}
-								items={[
-									{ id: 1, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 2, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 3, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 4, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 5, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-									{ id: 6, name: 'Чотири сезони', imageUrl: '', price: 10, items: [{ price: 500 }] },
-								]}
-								categoryId={2}
-							/>
+							{categories.map(
+								(category) =>
+									category.products.length > 0 && (
+										<ProductsGroupList
+											key={category.id}
+											title={category.name}
+											categoryId={category.id}
+											items={category.products}
+										/>
+									),
+							)}
 						</div>
 					</div>
 				</div>

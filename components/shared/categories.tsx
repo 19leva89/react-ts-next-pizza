@@ -4,7 +4,7 @@ import { FC } from 'react'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
-import { useCategoryStore } from '@/store/category'
+import { useCategoryStore } from '@/store'
 
 interface Props {
 	className?: string

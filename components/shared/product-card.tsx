@@ -22,7 +22,7 @@ export const ProductCard: FC<Props> = ({ id, name, price, imageUrl, ingredients,
 		<div className={className}>
 			<Link href={`/product/${id}`}>
 				<div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-					<Image className="w-[215px] h-[215px]" src={imageUrl} alt={name} />
+					<Image src={imageUrl} alt={name} width={212} height={212} />
 				</div>
 
 				<Title text={name} size="sm" className="mb-1 mt-3 font-bold" />

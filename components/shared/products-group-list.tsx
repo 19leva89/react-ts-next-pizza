@@ -1,11 +1,11 @@
 'use client'
 
-import { FC, useEffect, useRef } from 'react'
 import { useIntersection } from 'react-use'
+import { FC, useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
 
-import { useCategoryStore } from '@/store/category'
+import { useCategoryStore } from '@/store'
 import { ProductCard, Title } from '@/components/shared'
 // import { CategoryProducts } from '@/@types/prisma'
 

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { prisma } from '@/lib/db'
+import { prisma } from '@/prisma/db'
 
 import { Container, ProductForm } from '@/components/shared'
 

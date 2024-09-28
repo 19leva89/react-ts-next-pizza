@@ -1,13 +1,13 @@
 'use client'
 
 import { FC } from 'react'
-// import { Category } from '@prisma/client'
+import { Category } from '@prisma/client'
 
 import { cn } from '@/lib/utils'
 import { Container, Categories, SortPopup } from '@/components/shared'
 
 interface Props {
-	// categories: Category[]
+	categories: Category[]
 	className?: string
 }
 

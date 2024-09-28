@@ -3,7 +3,7 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": [
-      "error", { "endOfLine": "auto", "printWidth": 105 },
+      "error", { "endOfLine": "auto", "printWidth": 110 },
 			{ "usePrettierrc": true }
     ]
   }

@@ -28,9 +28,5 @@ export const Title: FC<Props> = ({ text, size = 'sm', className }) => {
 		'2xl': 'text-[48px]',
 	} as const
 
-	return createElement(
-		mapTagBySize[size],
-		{ className: clsx(mapClassNameBySize[size], className) },
-		text,
-	)
+	return createElement(mapTagBySize[size], { className: clsx(mapClassNameBySize[size], className) }, text)
 }

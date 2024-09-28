@@ -1,44 +1,42 @@
 'use client'
 
-import { useSet } from 'react-use'
-import { ChangeEvent, FC, useEffect, useState } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 
 import { Input, Skeleton } from '@/components/ui'
 import { CheckboxFilter, FilterChecboxProps } from '@/components/shared'
 
 interface Props {
 	title: string
+	name: string
 	items: FilterChecboxProps[]
-	defaultItems: FilterChecboxProps[]
-	name?: string
+	defaultItems?: FilterChecboxProps[]
 	limit?: number
 	loading?: boolean
 	searchInputPlaceholder?: string
 	className?: string
 	onClickCheckbox?: (id: string) => void
 	defaultValue?: string[]
-	selectedIds?: Set<string>
+	selected?: Set<string>
 }
 
 export const CheckboxFiltersGroup: FC<Props> = ({
 	title,
+	name,
 	items,
 	defaultItems,
-	name,
 	limit = 5,
 	loading,
 	searchInputPlaceholder = 'Пошук...',
 	className,
 	onClickCheckbox,
-	defaultValue,
-	selectedIds,
+	selected,
 }) => {
 	const [search, setSearch] = useState('')
 	const [showAll, setShowAll] = useState(false)
 
 	const list = showAll
 		? items.filter((item) => item.text.toLowerCase().includes(search.toLowerCase()))
-		: defaultItems.slice(0, limit)
+		: (defaultItems || items).slice(0, limit)
 
 	const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value)
@@ -79,7 +77,7 @@ export const CheckboxFiltersGroup: FC<Props> = ({
 						value={item.value}
 						text={item.text}
 						name={name}
-						checked={selectedIds?.has(item.value)}
+						checked={selected?.has(item.value)}
 						onCheckedChange={() => onClickCheckbox?.(item.value)}
 						endAdornment={item.endAdornment}
 					/>

@@ -11,6 +11,8 @@ This project contains the following technologies:
 - PostCSS (transforms CSS code to AST)
 - Concurrently (all projects are running in tandem)
 axios
+qs
+bcrypt
 
 To run the client and server via concurrently:
 - npm run all
