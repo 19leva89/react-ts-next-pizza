@@ -23,7 +23,7 @@ export default async function ProductPage({ params: { id } }: { params: { id: st
 	})
 
 	if (!product) {
-		notFound()
+		return notFound()
 	}
 
 	return (

@@ -12,10 +12,10 @@ import { Button } from '@/components/ui'
 import { PizzaImage, Title, GroupVariants, IngredientItem } from '@/components/shared'
 
 interface Props {
-	imageUrl: string
 	name: string
-	ingredients: Ingredient[]
 	items: ProductItem[]
+	imageUrl: string
+	ingredients: Ingredient[]
 	loading?: boolean
 	onSubmit: (itemId: number, ingredients: number[]) => void
 	className?: string
