@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import Image from 'next/image'
-
-import { cn } from '@/lib/utils'
 import { CircleCheck } from 'lucide-react'
+
+import { cn } from '@/lib'
 
 interface Props {
 	imageUrl: string

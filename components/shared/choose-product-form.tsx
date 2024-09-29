@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-import { cn } from '@/lib/utils'
-
+import { cn } from '@/lib'
 import { Button } from '@/components/ui'
 import { Title } from '@/components/shared'
 

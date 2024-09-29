@@ -3,9 +3,9 @@
 import { FC } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { cn } from '@/lib/utils'
 import { ProductWithRelations } from '@/@types/prisma'
 
+import { cn } from '@/lib'
 import { ProductForm } from '@/components/shared'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui'
 

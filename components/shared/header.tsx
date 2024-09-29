@@ -3,10 +3,9 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
-import { cn } from '@/lib/utils'
 import { ArrowRight, ShoppingCart, User } from 'lucide-react'
 
+import { cn } from '@/lib'
 import { Button } from '@/components/ui'
 import { Container, SearchInput } from '@/components/shared'
 

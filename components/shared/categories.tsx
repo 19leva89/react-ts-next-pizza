@@ -3,7 +3,7 @@
 import { FC } from 'react'
 import Link from 'next/link'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib'
 import { Category } from '@prisma/client'
 import { useCategoryStore } from '@/store'
 

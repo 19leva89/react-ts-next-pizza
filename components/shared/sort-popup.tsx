@@ -1,7 +1,7 @@
 import { FC } from 'react'
-
-import { cn } from '@/lib/utils'
 import { ArrowUpDown } from 'lucide-react'
+
+import { cn } from '@/lib'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui'
 
 interface Props {

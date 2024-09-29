@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 
 import { prisma } from '@/prisma/db'
-
 import { Container, ProductForm } from '@/components/shared'
 
 export default async function ProductPage({ params: { id } }: { params: { id: string } }) {

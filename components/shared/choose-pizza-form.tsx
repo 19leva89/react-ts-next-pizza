@@ -3,9 +3,8 @@
 import { FC } from 'react'
 import { Ingredient, ProductItem } from '@prisma/client'
 
-import { cn } from '@/lib/utils'
-import { getPizzaDetails } from '@/lib'
 import { usePizzaOptions } from '@/hooks'
+import { cn, getPizzaDetails } from '@/lib'
 import { PizzaSize, PizzaType, pizzaTypes } from '@/constants'
 
 import { Button } from '@/components/ui'

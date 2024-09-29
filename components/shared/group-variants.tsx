@@ -1,7 +1,8 @@
 'use client'
 
 import { FC } from 'react'
-import { cn } from '@/lib/utils'
+
+import { cn } from '@/lib'
 
 export type Variant = {
 	name: string

@@ -3,7 +3,7 @@
 import { FC } from 'react'
 import { Category } from '@prisma/client'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib'
 import { Container, Categories, SortPopup } from '@/components/shared'
 
 interface Props {
