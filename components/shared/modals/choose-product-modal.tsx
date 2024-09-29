@@ -20,7 +20,7 @@ export const ChooseProductModal: FC<Props> = ({ product, className }) => {
 	return (
 		<Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
 			<DialogContent
-				className={cn('p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden', className)}
+				className={cn('p-0 w-[1060px] max-w-[1060px] min-h-[550px] bg-white overflow-hidden', className)}
 			>
 				<DialogTitle className="sr-only">Вибір продукту</DialogTitle>
 

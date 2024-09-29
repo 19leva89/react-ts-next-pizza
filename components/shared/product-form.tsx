@@ -42,23 +42,23 @@ export const ProductForm: FC<Props> = ({ product, onSubmit: _onSubmit }) => {
 	if (isPizzaForm) {
 		return (
 			<ChoosePizzaForm
-				imageUrl={product.imageUrl}
 				name={product.name}
-				ingredients={product.ingredients}
 				items={product.items}
-				onSubmit={() => {}}
+				imageUrl={product.imageUrl}
+				ingredients={product.ingredients}
 				loading={false}
+				onSubmit={() => {}}
 			/>
 		)
 	}
 
 	return (
 		<ChooseProductForm
-			imageUrl={product.imageUrl}
 			name={product.name}
-			onSubmit={() => {}}
 			price={firstItem.price}
+			imageUrl={product.imageUrl}
 			loading={false}
+			onSubmit={() => {}}
 		/>
 	)
 }

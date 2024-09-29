@@ -6,9 +6,9 @@ import { Button } from '@/components/ui'
 import { Title } from '@/components/shared'
 
 interface Props {
-	imageUrl: string
 	name: string
 	price: number
+	imageUrl: string
 	loading?: boolean
 	onSubmit?: VoidFunction
 	className?: string
@@ -17,7 +17,7 @@ interface Props {
 /**
  * PRODUCT selection form
  */
-export const ChooseProductForm: FC<Props> = ({ name, imageUrl, price, onSubmit, className, loading }) => {
+export const ChooseProductForm: FC<Props> = ({ name, price, imageUrl, loading, onSubmit, className }) => {
 	return (
 		<div className={cn(className, 'flex flex-1')}>
 			<div className="flex items-center justify-center flex-1 relative w-full">
@@ -36,7 +36,7 @@ export const ChooseProductForm: FC<Props> = ({ name, imageUrl, price, onSubmit, 
 				<Button
 					loading={loading}
 					onClick={() => onSubmit?.()}
-					className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
+					className="h-[55px] px-10 text-base rounded-[18px] w-full mt-5"
 				>
 					Додати до кошику за {price} грн
 				</Button>

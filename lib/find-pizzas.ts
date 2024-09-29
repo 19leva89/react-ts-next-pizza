@@ -1,5 +1,21 @@
 import { prisma } from '@/prisma/db'
 
+/**
+ * Retrieves a list of pizzas based on the provided search parameters.
+ *
+ * @param params - an object containing search parameters to filter pizzas
+ * @param query - search query string
+ * @param sortBy - field by which to sort the results
+ * @param pizzaSizes - comma-separated string of pizza size IDs to filter by
+ * @param pizzaTypes - comma-separated string of pizza type IDs to filter by
+ * @param ingredients - comma-separated string of ingredient IDs to filter by
+ * @param priceFrom - minimum price to filter pizzas
+ * @param priceTo - maximum price to filter pizzas
+ *
+ * @returns a promise that resolves to an array of categories, each containing
+ *          products that match the specified criteria
+ */
+
 export interface GetSearchParams {
 	query?: string
 	sortBy?: string

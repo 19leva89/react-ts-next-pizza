@@ -8,7 +8,7 @@ import { cn, getPizzaDetails } from '@/lib'
 import { PizzaSize, PizzaType, pizzaTypes } from '@/constants'
 
 import { Button } from '@/components/ui'
-import { PizzaImage, Title, GroupVariants, IngredientItem } from '@/components/shared'
+import { GroupVariants, IngredientItem, PizzaImage, Title } from '@/components/shared'
 
 interface Props {
 	name: string
@@ -32,14 +32,28 @@ export const ChoosePizzaForm: FC<Props> = ({
 	onSubmit,
 	className,
 }) => {
-	const { size, type, selectedIngredients, availableSizes, currentItemId, setSize, setType, addIngredient } =
-		usePizzaOptions(items)
+	const {
+		size,
+		type,
+		selectedIngredientIds,
+		availableSizes,
+		currentItemId,
+		setSize,
+		setType,
+		addIngredient,
+	} = usePizzaOptions(items)
 
-	const { totalPrice, textDetaills } = getPizzaDetails(type, size, items, ingredients, selectedIngredients)
+	const { totalPrice, details, additionalIngredients } = getPizzaDetails(
+		type,
+		size,
+		items,
+		ingredients,
+		selectedIngredientIds,
+	)
 
 	const handleClickAdd = () => {
 		if (currentItemId) {
-			onSubmit(currentItemId, Array.from(selectedIngredients))
+			onSubmit(currentItemId, Array.from(selectedIngredientIds))
 		}
 	}
 
@@ -47,10 +61,12 @@ export const ChoosePizzaForm: FC<Props> = ({
 		<div className={cn(className, 'flex flex-1')}>
 			<PizzaImage imageUrl={imageUrl} size={size} />
 
-			<div className="w-[490px] bg-[#f7f6f5] p-7">
+			<div className="w-[490px] h-[800px] bg-[#f7f6f5] p-7">
 				<Title text={name} size="md" className="font-extrabold mb-1" />
 
-				<p className="text-gray-400">{textDetaills}</p>
+				<p className="text-gray-400">{details}</p>
+
+				<p className="text-gray-400">{additionalIngredients}</p>
 
 				<div className="flex flex-col gap-4 mt-5">
 					<GroupVariants
@@ -75,7 +91,7 @@ export const ChoosePizzaForm: FC<Props> = ({
 								price={ingredient.price}
 								imageUrl={ingredient.imageUrl}
 								onClick={() => addIngredient(ingredient.id)}
-								active={selectedIngredients.has(ingredient.id)}
+								active={selectedIngredientIds.has(ingredient.id)}
 							/>
 						))}
 					</div>
@@ -84,7 +100,7 @@ export const ChoosePizzaForm: FC<Props> = ({
 				<Button
 					loading={loading}
 					onClick={handleClickAdd}
-					className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
+					className="h-[55px] px-10 text-base rounded-[18px] w-full mt-5"
 				>
 					Додати до кошику за {totalPrice} грн
 				</Button>

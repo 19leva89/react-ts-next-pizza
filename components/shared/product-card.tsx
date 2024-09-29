@@ -7,6 +7,7 @@ import { Ingredient } from '@prisma/client'
 
 import { Button } from '@/components/ui'
 import { Title } from '@/components/shared'
+import { cn } from '@/lib'
 
 interface Props {
 	id: number
@@ -19,22 +20,26 @@ interface Props {
 
 export const ProductCard: FC<Props> = ({ id, name, price, imageUrl, ingredients, className }) => {
 	return (
-		<div className={className}>
-			<Link href={`/product/${id}`}>
-				<div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-					<Image src={imageUrl} alt={name} width={212} height={212} />
+		<div className={cn('bg-gray-50 p-2 rounded-lg', className)}>
+			<Link href={`/product/${id}`} className="flex flex-col h-full">
+				<div className="flex-grow">
+					<div className="flex justify-center p-2 rounded-lg">
+						<Image src={imageUrl} alt={name} width={250} height={250} />
+					</div>
+
+					<Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
+
+					<p className="text-sm text-gray-400">
+						{ingredients.map((ingredient) => ingredient.name).join(', ')}
+					</p>
 				</div>
 
-				<Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
-
-				<p className="text-sm text-gray-400">{ingredients.map((ingredient) => ingredient.name).join(', ')}</p>
-
-				<div className="flex justify-between items-center mt-4">
-					<span className="text-[20px]">
+				<div className="flex flex-wrap justify-between items-center content-center mt-4">
+					<span className="text-[20px] whitespace-nowrap">
 						від <b>{price} грн</b>
 					</span>
 
-					<Button variant="secondary" className="text-base font-bold">
+					<Button variant="outline" className="text-base font-bold bg-[#ffe4d5]">
 						<Plus size={20} className="mr-1" />
 						Додати
 					</Button>

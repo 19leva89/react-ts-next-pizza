@@ -5,10 +5,10 @@ import { CartStateItem, getCartDetails } from '@/lib'
 import { CreateCartItemValues } from '@/services/dto/cart.dto'
 
 export interface CartState {
+	items: CartStateItem[]
+	totalAmount: number
 	loading: boolean
 	error: boolean
-	totalAmount: number
-	items: CartStateItem[]
 
 	/* Getting items from the cart */
 	fetchCartItems: () => Promise<void>
@@ -25,9 +25,9 @@ export interface CartState {
 
 export const useCartStore = create<CartState>((set, get) => ({
 	items: [],
-	error: false,
-	loading: true,
 	totalAmount: 0,
+	loading: true,
+	error: false,
 
 	fetchCartItems: async () => {
 		console.log('Fetching cart items...')

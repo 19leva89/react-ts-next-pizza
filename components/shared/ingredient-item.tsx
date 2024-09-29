@@ -5,15 +5,15 @@ import { CircleCheck } from 'lucide-react'
 import { cn } from '@/lib'
 
 interface Props {
-	imageUrl: string
 	name: string
 	price: number
+	imageUrl: string
 	active?: boolean
 	onClick?: () => void
 	className?: string
 }
 
-export const IngredientItem: FC<Props> = ({ className, active, price, name, imageUrl, onClick }) => {
+export const IngredientItem: FC<Props> = ({ name, price, imageUrl, active, onClick, className }) => {
 	return (
 		<div
 			className={cn(
@@ -29,7 +29,7 @@ export const IngredientItem: FC<Props> = ({ className, active, price, name, imag
 
 			<span className="text-xs mb-1">{name}</span>
 
-			<span className="font-bold">{price} ₽</span>
+			<span className="font-bold">{price} грн</span>
 		</div>
 	)
 }

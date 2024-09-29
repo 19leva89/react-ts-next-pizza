@@ -2,16 +2,17 @@ import { PizzaSize, PizzaType } from '@/constants'
 import { Ingredient, ProductItem } from '@prisma/client'
 
 /**
- * Function to calculate the total cost of pizza
+ * Calculates the total price of a pizza based on its type, size, and selected ingredients.
  *
- * @param type - type of dough of the selected pizza
- * @param size - size of the selected pizza
- * @param items - list of variations
- * @param ingredients - list of ingredients
- * @param selectedIngredients - selected ingredients
+ * @param type - The type of the pizza (e.g., vegetarian, meat, etc.).
+ * @param size - The size of the pizza (e.g., small, medium, large).
+ * @param items - An array of ProductItem objects representing available pizza options.
+ * @param ingredients - An array of Ingredient objects representing available ingredients.
+ * @param selectedIngredients - A Set of ingredient IDs that the user has selected.
  *
- * @returns number total cost
+ * @returns The total price of the pizza, including the base price and the cost of selected ingredients.
  */
+
 export const calcTotalPizzaPrice = (
 	type: PizzaType,
 	size: PizzaSize,
@@ -19,11 +20,15 @@ export const calcTotalPizzaPrice = (
 	ingredients: Ingredient[],
 	selectedIngredients: Set<number>,
 ) => {
-	const pizzaPrice = items.find((item) => item.pizzaType === type && item.pizzaSize === size)?.price || 0
+	let pizzaItem = items.find((item) => item.pizzaType === type && item.pizzaSize === size)
+
+	if (!pizzaItem) {
+		pizzaItem = items[0]
+	}
 
 	const totalIngredientsPrice = ingredients
 		.filter((ingredient) => selectedIngredients.has(ingredient.id))
 		.reduce((acc, ingredient) => acc + ingredient.price, 0)
 
-	return pizzaPrice + totalIngredientsPrice
+	return pizzaItem.price + totalIngredientsPrice
 }

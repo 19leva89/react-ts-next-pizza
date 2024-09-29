@@ -9,7 +9,7 @@ import { PizzaSize, PizzaType } from '@/constants'
 interface ReturnProps {
 	size: PizzaSize
 	type: PizzaType
-	selectedIngredients: Set<number>
+	selectedIngredientIds: Set<number>
 	availableSizes: Variant[]
 	currentItemId?: number
 	setSize: (size: PizzaSize) => void
@@ -20,25 +20,25 @@ interface ReturnProps {
 export const usePizzaOptions = (items: ProductItem[]): ReturnProps => {
 	const [size, setSize] = useState<PizzaSize>(20)
 	const [type, setType] = useState<PizzaType>(1)
-	const [selectedIngredients, { toggle: addIngredient }] = useSet(new Set<number>([]))
+	const [selectedIngredientIds, { toggle: addIngredient }] = useSet(new Set<number>([]))
 
 	const availableSizes = getAvailablePizzaSizes(type, items)
 
 	const currentItemId = items.find((item) => item.pizzaType === type && item.pizzaSize === size)?.id
 
 	useEffect(() => {
-		const isAvailableSize = availableSizes?.find((item) => Number(item.value) === size && !item.disabled)
-		const availableSize = availableSizes?.find((item) => !item.disabled)
+		const isSizeAvailable = availableSizes?.find((item) => Number(item.value) === size && !item.disabled)
+		const firstAvailableSize = availableSizes?.find((item) => !item.disabled)
 
-		if (!isAvailableSize && availableSize) {
-			setSize(Number(availableSize.value) as PizzaSize)
+		if (!isSizeAvailable && firstAvailableSize) {
+			setSize(Number(firstAvailableSize.value) as PizzaSize)
 		}
-	}, [availableSizes, size, type])
+	}, [size, type, availableSizes])
 
 	return {
 		size,
 		type,
-		selectedIngredients,
+		selectedIngredientIds,
 		availableSizes,
 		currentItemId,
 		setSize,

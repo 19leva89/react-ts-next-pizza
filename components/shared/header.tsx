@@ -3,11 +3,11 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, ShoppingCart, User } from 'lucide-react'
+import { User } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { Button } from '@/components/ui'
-import { Container, SearchInput } from '@/components/shared'
+import { CartButton, Container, SearchInput } from '@/components/shared'
 
 interface Props {
 	className?: string
@@ -42,22 +42,7 @@ export const Header: FC<Props> = ({ className }) => {
 					</Button>
 
 					<div>
-						<Button className="group relative">
-							<b>520 грн</b>
-
-							<span className="h-full w-[1px] bg-white/30 mx-3" />
-
-							<div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
-								<ShoppingCart className="h-4 w-4 relative" strokeWidth={2} size={16} />
-
-								<b>3</b>
-							</div>
-
-							<ArrowRight
-								size={20}
-								className="w-5 absolute right-5 transition duration-300 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
-							/>
-						</Button>
+						<CartButton />
 					</div>
 				</div>
 			</Container>
