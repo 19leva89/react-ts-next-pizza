@@ -22,8 +22,8 @@ import {
 import { CartDrawerItem, Title } from '@/components/shared'
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
-	const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart()
 	const [redirecting, setRedirecting] = useState(false)
+	const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart()
 
 	const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
 		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
@@ -46,9 +46,9 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 
 					{!totalAmount && (
 						<div className="flex flex-col items-center justify-center w-72 mx-auto">
-							<Image src="/assets/images/empty-box.png" alt="Empty cart" width={120} height={120} />
+							<Image src="/assets/img/empty-box.png" alt="empty cart" width={120} height={120} />
 
-							<Title size="sm" text="Корзина пустая" className="text-center font-bold my-2" />
+							<Title size="sm" text="Корзина порожня" className="text-center font-bold my-2" />
 
 							<p className="text-center text-neutral-500 mb-5">
 								Додайте хоча б один товар, щоб зробити замовлення
@@ -70,6 +70,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 									<div key={item.id} className="mb-2">
 										<CartDrawerItem
 											id={item.id}
+											name={item.name}
 											imageUrl={item.imageUrl}
 											details={getCartItemDetails(
 												item.ingredients,
@@ -77,7 +78,6 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 												item.pizzaSize as PizzaSize,
 											)}
 											disabled={item.disabled}
-											name={item.name}
 											price={item.price}
 											quantity={item.quantity}
 											onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
@@ -100,9 +100,9 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 
 									<Link href="/checkout">
 										<Button
-											onClick={() => setRedirecting(true)}
-											loading={redirecting}
 											type="submit"
+											loading={redirecting}
+											onClick={() => setRedirecting(true)}
 											className="w-full h-12 text-base"
 										>
 											Оформити замовлення

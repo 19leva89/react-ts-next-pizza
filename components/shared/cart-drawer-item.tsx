@@ -1,16 +1,23 @@
 import { FC } from 'react'
+import Image from 'next/image'
 import { Trash2Icon } from 'lucide-react'
 
 import { cn } from '@/lib'
-import { CountButton } from '@/components/shared'
+import { CartItemInfo, CountButton } from '@/components/shared'
 
-import * as CartItem from '@/components/shared/cart-item-details'
-import { CartItemProps } from '@/components/shared/cart-item-details'
-
+export interface CartItemProps {
+	id: number
+	name: string
+	imageUrl: string
+	details: string
+	price: number
+	quantity: number
+	disabled?: boolean
+}
 interface Props extends CartItemProps {
-	onClickCountButton?: (type: 'plus' | 'minus') => void
-	onClickRemove?: () => void
 	className?: string
+	onClickRemove?: () => void
+	onClickCountButton?: (type: 'plus' | 'minus') => void
 }
 
 export const CartDrawerItem: FC<Props> = ({
@@ -34,10 +41,10 @@ export const CartDrawerItem: FC<Props> = ({
 				className,
 			)}
 		>
-			<CartItem.Image src={imageUrl} />
+			<Image className={className} src={imageUrl} width={60} height={60} alt="cart details" />
 
 			<div className="flex-1">
-				<CartItem.Info name={name} details={details} />
+				<CartItemInfo name={name} details={details} />
 
 				<hr className="my-3" />
 
@@ -45,12 +52,12 @@ export const CartDrawerItem: FC<Props> = ({
 					<CountButton onClick={onClickCountButton} value={quantity} />
 
 					<div className="flex items-center gap-3">
-						<CartItem.Price value={price} />
+						<h2 className={cn('font-bold', className)}>{price} грн</h2>
 
 						<Trash2Icon
+							size={16}
 							onClick={onClickRemove}
 							className="text-gray-400 cursor-pointer hover:text-gray-600"
-							size={16}
 						/>
 					</div>
 				</div>

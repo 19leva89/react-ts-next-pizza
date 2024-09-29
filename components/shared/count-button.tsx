@@ -4,7 +4,7 @@ import { cn } from '@/lib'
 import { CountIconButton } from '@/components/shared'
 
 export interface CountButtonProps {
-	value?: number
+	value: number
 	size?: 'sm' | 'lg'
 	onClick?: (type: 'plus' | 'minus') => void
 	className?: string

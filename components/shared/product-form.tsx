@@ -13,31 +13,31 @@ interface Props {
 }
 
 export const ProductForm: FC<Props> = ({ product, onSubmit: _onSubmit }) => {
-	// console.log('ProductForm rendered', { product })
+	console.log('ProductForm rendered', { product })
 
-	// const [addCartItem, loading] = useCartStore((state) => [state.addCartItem, state.loading])
-	// console.log('Loading state:', loading)
+	const [addCartItem, loading] = useCartStore((state) => [state.addCartItem, state.loading])
+	console.log('Loading state:', loading)
 
 	const firstItem = product.items[0]
 	const isPizzaForm = Boolean(firstItem.pizzaType)
 
-	// const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
-	// 	try {
-	// 		const itemId = productItemId ?? firstItem.id
+	const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
+		try {
+			const itemId = productItemId ?? firstItem.id
 
-	// 		await addCartItem({
-	// 			productItemId: itemId,
-	// 			ingredients,
-	// 		})
+			await addCartItem({
+				productItemId: itemId,
+				ingredients,
+			})
 
-	// 		toast.success(product.name + ' додано до кошику')
+			toast.success(product.name + ' додано до кошику')
 
-	// 		_onSubmit?.()
-	// 	} catch (err) {
-	// 		toast.error('Неможливо додати товар до кошика')
-	// 		console.error(err)
-	// 	}
-	// }
+			_onSubmit?.()
+		} catch (err) {
+			toast.error('Неможливо додати товар до кошика')
+			console.error(err)
+		}
+	}
 
 	if (isPizzaForm) {
 		return (
@@ -47,7 +47,7 @@ export const ProductForm: FC<Props> = ({ product, onSubmit: _onSubmit }) => {
 				imageUrl={product.imageUrl}
 				ingredients={product.ingredients}
 				loading={false}
-				onSubmit={() => {}}
+				onSubmit={onSubmit}
 			/>
 		)
 	}
@@ -58,7 +58,7 @@ export const ProductForm: FC<Props> = ({ product, onSubmit: _onSubmit }) => {
 			price={firstItem.price}
 			imageUrl={product.imageUrl}
 			loading={false}
-			onSubmit={() => {}}
+			onSubmit={onSubmit}
 		/>
 	)
 }

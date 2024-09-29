@@ -6,7 +6,7 @@ import { Button } from '@/components/ui'
 import { CountButtonProps } from '@/components/shared'
 
 interface IconButtonProps {
-	size?: CountButtonProps['size']
+	size: CountButtonProps['size']
 	disabled?: boolean
 	type?: 'plus' | 'minus'
 	onClick?: () => void

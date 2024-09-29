@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 
 import { CartStateItem } from '@/lib'
 import { useCartStore } from '@/store'
@@ -16,9 +16,9 @@ type ReturnProps = {
 export const useCart = (): ReturnProps => {
 	const cartState = useCartStore((state) => state)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		cartState.fetchCartItems()
-	}, [cartState])
+	}, [])
 
 	return cartState
 }
