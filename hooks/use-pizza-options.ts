@@ -2,9 +2,9 @@ import { useSet } from 'react-use'
 import { useEffect, useState } from 'react'
 import { ProductItem } from '@prisma/client'
 
-import { Variant } from '@/components/shared'
 import { getAvailablePizzaSizes } from '@/lib'
 import { PizzaSize, PizzaType } from '@/constants'
+import { Variant } from '@/components/shared/group-variants'
 
 interface ReturnProps {
 	size: PizzaSize
@@ -33,7 +33,7 @@ export const usePizzaOptions = (items: ProductItem[]): ReturnProps => {
 		if (!isSizeAvailable && firstAvailableSize) {
 			setSize(Number(firstAvailableSize.value) as PizzaSize)
 		}
-	}, [type])
+	}, [availableSizes, size, type])
 
 	return {
 		size,

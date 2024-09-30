@@ -6,7 +6,7 @@ import { ArrowRight, ShoppingCart } from 'lucide-react'
 import { cn } from '@/lib'
 import { useCartStore } from '@/store'
 import { Button } from '@/components/ui'
-import { CartDrawer } from './cart-drawer'
+import { CartDrawer } from '@/components/shared'
 
 interface Props {
 	className?: string

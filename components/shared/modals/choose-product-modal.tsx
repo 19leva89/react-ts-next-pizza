@@ -21,10 +21,11 @@ export const ChooseProductModal: FC<Props> = ({ product, className }) => {
 		<Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
 			<DialogContent
 				className={cn('p-0 w-[1060px] max-w-[1060px] min-h-[550px] bg-white overflow-hidden', className)}
+				aria-describedby="dialog-description"
 			>
 				<DialogTitle className="sr-only">Вибір продукту</DialogTitle>
 
-				<DialogDescription className="sr-only">
+				<DialogDescription id="dialog-description" className="sr-only">
 					Виберіть параметри продукту, щоб додати до кошика
 				</DialogDescription>
 

@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 
+import { getCartDetails } from '@/lib'
 import { Api } from '../services/api-client'
-import { getCartDetails } from '../lib'
-import { CartStateItem } from '../lib/get-cart-details'
+import { CartStateItem } from '@/lib/get-cart-details'
 import { CreateCartItemValues } from '../services/dto/cart.dto'
 
 export interface CartState {
@@ -31,8 +31,6 @@ export const useCartStore = create<CartState>((set) => ({
 	error: false,
 
 	fetchCartItems: async () => {
-		console.log('Fetching cart items...')
-
 		try {
 			set({ loading: true, error: false })
 			const data = await Api.cart.getCart()
@@ -42,13 +40,10 @@ export const useCartStore = create<CartState>((set) => ({
 			set({ error: true })
 		} finally {
 			set({ loading: false })
-			console.log('Finished fetching cart items.')
 		}
 	},
 
 	updateItemQuantity: async (id: number, quantity: number) => {
-		console.log('updateItemQuantity...')
-
 		try {
 			set({ loading: true, error: false })
 			const data = await Api.cart.updateItemQuantity(id, quantity)
@@ -58,7 +53,6 @@ export const useCartStore = create<CartState>((set) => ({
 			set({ error: true })
 		} finally {
 			set({ loading: false })
-			console.log('Finished updateItemQuantity.')
 		}
 	},
 
@@ -83,8 +77,6 @@ export const useCartStore = create<CartState>((set) => ({
 	},
 
 	addCartItem: async (values: CreateCartItemValues) => {
-		console.log('addCartItem...')
-
 		try {
 			set({ loading: true, error: false })
 			const data = await Api.cart.addCartItem(values)
@@ -94,7 +86,6 @@ export const useCartStore = create<CartState>((set) => ({
 			set({ error: true })
 		} finally {
 			set({ loading: false })
-			console.log('Finished addCartItem.')
 		}
 	},
 }))

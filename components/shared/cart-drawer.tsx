@@ -19,8 +19,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '@/components/ui'
-import { Title } from '@/components/shared'
-import { CartDrawerItem } from './cart-drawer-item'
+import { CartDrawerItem, Title } from '@/components/shared'
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 	const [redirecting, setRedirecting] = useState(false)

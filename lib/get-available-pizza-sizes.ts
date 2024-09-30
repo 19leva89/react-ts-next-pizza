@@ -1,7 +1,7 @@
 import { ProductItem } from '@prisma/client'
 
-import { Variant } from '@/components/shared'
 import { PizzaType, pizzaSizes } from '@/constants'
+import { Variant } from '@/components/shared/group-variants'
 
 /**
  * Retrieves the available pizza sizes for a specified pizza type from a list of product items.

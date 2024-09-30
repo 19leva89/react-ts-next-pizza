@@ -7,9 +7,7 @@ import { ProductWithRelations } from '@/@types/prisma'
 
 import { cn } from '@/lib'
 import { useCategoryStore } from '@/store'
-
-import { Title } from './title'
-import { ProductCard } from './product-card'
+import { ProductCard, Title } from '@/components/shared'
 
 interface Props {
 	title: string
@@ -31,7 +29,7 @@ export const ProductsGroupList: FC<Props> = ({ title, items, categoryId, classNa
 		if (intersection?.isIntersecting) {
 			setCategoryActiveId(categoryId)
 		}
-	}, [categoryId, intersection?.isIntersecting, title])
+	}, [categoryId, intersection?.isIntersecting, setCategoryActiveId, title])
 
 	return (
 		<div className={className} id={title} ref={intersectionRef}>

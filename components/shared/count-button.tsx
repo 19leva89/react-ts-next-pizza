@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { cn } from '@/lib'
-import { CountIconButton } from './count-icon-button'
+import { CountIconButton } from '@/components/shared'
 
 export interface CountButtonProps {
 	value: number
