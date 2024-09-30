@@ -13,9 +13,9 @@ export const getCartItemDetails = (
 		details.push(`${typeName} ${pizzaSize} см`)
 	}
 
-	if (ingredients) {
-		details.push(...ingredients.map((ingredient) => ingredient.name))
+	if (ingredients && ingredients.length > 0) {
+		details.push(ingredients.map((ingredient) => ingredient.name).join(', '))
 	}
 
-	return details.join(', ')
+	return details.join('<br />')
 }

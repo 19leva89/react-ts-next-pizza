@@ -17,10 +17,10 @@ export const CountIconButton: FC<IconButtonProps> = ({ size = 'sm', disabled, ty
 		<Button
 			variant="outline"
 			disabled={disabled}
-			onClick={onClick}
+			onClick={!disabled ? onClick : undefined}
 			type="button"
 			className={cn(
-				'p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400',
+				'p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400 disabled:pointer-events-auto disabled:cursor-not-allowed',
 				size === 'sm' ? 'w-[30px] h-[30px] rounded-[10px]' : 'w-[38px] h-[38px] rounded-md',
 			)}
 		>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Toaster } from 'react-hot-toast'
 import { siteConfig } from '@/config/site'
 
 import { Nunito } from 'next/font/google'
@@ -31,7 +32,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={nunito.variable}>{children}</body>
+			<body className={nunito.variable}>
+				{children}
+
+				<Toaster />
+			</body>
 		</html>
 	)
 }
