@@ -1,3 +1,5 @@
+'use server'
+
 import { prisma } from '@/prisma/db'
 
 export const findOrCreateCart = async (token: string) => {

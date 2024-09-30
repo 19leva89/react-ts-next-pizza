@@ -1,4 +1,4 @@
-import { CartStateItem } from '@/lib'
+import { CartStateItem } from './get-cart-details'
 import { PizzaSize, PizzaType, mapPizzaType } from '@/constants'
 
 export const getCartItemDetails = (

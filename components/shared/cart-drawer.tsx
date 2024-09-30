@@ -19,14 +19,16 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '@/components/ui'
-import { CartDrawerItem, Title } from '@/components/shared'
+import { Title } from '@/components/shared'
+import { CartDrawerItem } from './cart-drawer-item'
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 	const [redirecting, setRedirecting] = useState(false)
-	const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart()
+	const { items, totalAmount, removeCartItem, updateItemQuantity } = useCart()
 
 	const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
 		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
+
 		updateItemQuantity(id, newQuantity)
 	}
 
@@ -77,11 +79,11 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 												item.pizzaType as PizzaType,
 												item.pizzaSize as PizzaSize,
 											)}
-											disabled={item.disabled}
 											price={item.price}
 											quantity={item.quantity}
-											onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
+											disabled={item.disabled}
 											onClickRemove={() => removeCartItem(item.id)}
+											onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
 										/>
 									</div>
 								))}

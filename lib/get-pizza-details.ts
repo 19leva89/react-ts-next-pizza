@@ -1,6 +1,7 @@
+import { calcTotalPizzaPrice } from '@/lib'
 import { PizzaSize, PizzaType } from '@/constants'
 import { Ingredient, ProductItem } from '@prisma/client'
-import { calcTotalPizzaPrice, generatePizzaDescription } from '@/lib'
+import { generatePizzaDescription } from './generate-pizza-description'
 
 /**
  * Retrieves the total price and descriptive details of a pizza based on its type, size,

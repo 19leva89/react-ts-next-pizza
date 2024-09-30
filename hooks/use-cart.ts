@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-import { CartStateItem } from '@/lib'
 import { useCartStore } from '@/store'
+import { CartStateItem } from '@/lib/get-cart-details'
 import { CreateCartItemValues } from '@/services/dto/cart.dto'
 
 type ReturnProps = {
@@ -18,6 +18,7 @@ export const useCart = (): ReturnProps => {
 
 	useEffect(() => {
 		cartState.fetchCartItems()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return cartState

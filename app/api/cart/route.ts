@@ -2,8 +2,9 @@ import crypto from 'crypto'
 import { prisma } from '@/prisma/db'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { findOrCreateCart } from '@/lib/find-or-create-cart'
 import { CreateCartItemValues } from '@/services/dto/cart.dto'
-import { findOrCreateCart, updateCartTotalAmount } from '@/lib'
+import { updateCartTotalAmount } from '@/lib/update-cart-total-amount'
 
 export async function GET(req: NextRequest) {
 	try {
@@ -84,7 +85,6 @@ export async function POST(req: NextRequest) {
 				data: {
 					cartId: userCart.id,
 					productItemId: data.productItemId,
-					quantity: 1,
 					ingredients: { connect: data.ingredients?.map((id) => ({ id })) },
 				},
 			})

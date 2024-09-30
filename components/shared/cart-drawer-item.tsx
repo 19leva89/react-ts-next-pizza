@@ -3,7 +3,8 @@ import Image from 'next/image'
 import { Trash2Icon } from 'lucide-react'
 
 import { cn } from '@/lib'
-import { CartItemInfo, CountButton } from '@/components/shared'
+import { CountButton } from './count-button'
+import { CartItemInfo } from './cart-item-info'
 
 export interface CartItemProps {
 	id: number
@@ -27,8 +28,8 @@ export const CartDrawerItem: FC<Props> = ({
 	quantity,
 	details,
 	disabled,
-	onClickCountButton,
 	onClickRemove,
+	onClickCountButton,
 	className,
 }) => {
 	return (

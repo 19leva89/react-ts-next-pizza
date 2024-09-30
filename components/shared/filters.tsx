@@ -3,8 +3,9 @@
 import { FC } from 'react'
 
 import { Input } from '@/components/ui'
+import { Title, RangeSlider } from '@/components/shared'
+import { CheckboxFiltersGroup } from './checkbox-filters-group'
 import { useIngredients, useFilters, useQueryFilters } from '@/hooks'
-import { CheckboxFiltersGroup, Title, RangeSlider } from '@/components/shared'
 
 interface Props {
 	className?: string

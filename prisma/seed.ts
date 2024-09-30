@@ -134,7 +134,7 @@ async function up() {
 			productItemId: 1,
 			cartId: 1,
 			userId: 1,
-			quantity: 1,
+			// quantity: 1,
 			ingredients: {
 				connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
 			},
