@@ -39,37 +39,16 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 			<SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
 				<div className={cn('flex flex-col h-full', !totalAmount && 'justify-center')}>
 					{totalAmount > 0 && (
-						<SheetHeader>
-							<SheetTitle>
-								У корзині{' '}
-								<span className="font-bold">
-									{items.length} {getProductPluralize(items.length)}
-								</span>
-							</SheetTitle>
-						</SheetHeader>
-					)}
-
-					{!totalAmount && (
-						<div className="flex flex-col items-center justify-center w-72 mx-auto">
-							<Image src="/assets/img/empty-box.png" alt="empty cart" width={120} height={120} />
-
-							<Title size="sm" text="Корзина порожня" className="text-center font-bold my-2" />
-
-							<p className="text-center text-neutral-500 mb-5">
-								Додайте хоча б один товар, щоб зробити замовлення
-							</p>
-
-							<SheetClose>
-								<Button className="w-56 h-12 text-base" size="lg">
-									<ArrowLeft className="w-5 mr-2" />
-									Повернутись назад
-								</Button>
-							</SheetClose>
-						</div>
-					)}
-
-					{totalAmount > 0 && (
 						<>
+							<SheetHeader>
+								<SheetTitle>
+									У корзині{' '}
+									<span className="font-bold">
+										{items.length} {getProductPluralize(items.length)}
+									</span>
+								</SheetTitle>
+							</SheetHeader>
+
 							<div className="-mx-6 mt-5 overflow-auto flex-1">
 								{items.map((item) => (
 									<div key={item.id} className="mb-2">
@@ -117,6 +96,25 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 								</div>
 							</SheetFooter>
 						</>
+					)}
+
+					{!totalAmount && (
+						<div className="flex flex-col items-center justify-center w-72 mx-auto">
+							<Image src="/assets/img/empty-box.png" alt="empty cart" width={120} height={120} />
+
+							<Title size="sm" text="Корзина порожня" className="text-center font-bold my-2" />
+
+							<p className="text-center text-neutral-500 mb-5">
+								Додайте хоча б один товар, щоб зробити замовлення
+							</p>
+
+							<SheetClose>
+								<Button className="w-56 h-12 text-base" size="lg">
+									<ArrowLeft className="w-5 mr-2" />
+									Повернутись назад
+								</Button>
+							</SheetClose>
+						</div>
 					)}
 				</div>
 			</SheetContent>

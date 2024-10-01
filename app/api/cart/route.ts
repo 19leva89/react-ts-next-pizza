@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
 
 		const data = (await req.json()) as CreateCartItemValues
 
+		//TODO: я добавляю товар без ингредиентов, а затем тот же товар с ингредиентами, то они в корзине отображаются как 2шт товара без ингредиентов
 		const findCartItem = await prisma.cartItem.findFirst({
 			where: {
 				cartId: userCart.id,
@@ -66,7 +67,6 @@ export async function POST(req: NextRequest) {
 					every: {
 						id: { in: data.ingredients },
 					},
-					some: {},
 				},
 			},
 		})
