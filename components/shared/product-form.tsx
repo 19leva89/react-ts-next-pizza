@@ -12,13 +12,13 @@ interface Props {
 	onSubmit?: VoidFunction
 }
 
-export const ProductForm: FC<Props> = ({ product, onSubmit: _onSubmit }) => {
+export const ProductForm: FC<Props> = ({ product, onSubmit }) => {
 	const [addCartItem, loading] = useCartStore((state) => [state.addCartItem, state.loading])
 
 	const firstItem = product.items[0]
 	const isPizzaForm = Boolean(firstItem.pizzaType)
 
-	const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
+	const handleAddToCart = async (productItemId?: number, ingredients?: number[]) => {
 		try {
 			const itemId = productItemId ?? firstItem.id
 
@@ -29,9 +29,9 @@ export const ProductForm: FC<Props> = ({ product, onSubmit: _onSubmit }) => {
 
 			toast.success(product.name + ' додано до кошику')
 
-			_onSubmit?.()
+			onSubmit?.()
 		} catch (err) {
-			toast.error('Неможливо додати товар до кошика')
+			toast.error('Неможливо додати ' + product.name + ' до кошика')
 			console.error(err)
 		}
 	}
@@ -44,7 +44,7 @@ export const ProductForm: FC<Props> = ({ product, onSubmit: _onSubmit }) => {
 				imageUrl={product.imageUrl}
 				ingredients={product.ingredients}
 				loading={loading}
-				onSubmit={onSubmit}
+				onSubmit={handleAddToCart}
 			/>
 		)
 	}
@@ -55,7 +55,7 @@ export const ProductForm: FC<Props> = ({ product, onSubmit: _onSubmit }) => {
 			price={firstItem.price}
 			imageUrl={product.imageUrl}
 			loading={loading}
-			onSubmit={onSubmit}
+			onSubmit={handleAddToCart}
 		/>
 	)
 }

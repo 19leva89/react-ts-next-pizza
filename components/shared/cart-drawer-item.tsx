@@ -46,7 +46,7 @@ export const CartDrawerItem: FC<Props> = ({
 				src={imageUrl}
 				width={60}
 				height={60}
-				alt="cart details"
+				alt={name}
 			/>
 
 			<div className="flex-1">

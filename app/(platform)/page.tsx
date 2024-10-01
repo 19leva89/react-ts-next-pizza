@@ -6,6 +6,19 @@ import { findPizzas, GetSearchParams } from '@/lib/find-pizzas'
 export default async function Home({ searchParams }: { searchParams: GetSearchParams }) {
 	const categories = await findPizzas(searchParams)
 
+	const ingredientsIdArr = searchParams.ingredients?.split(',').map(Number) || []
+
+	const filteredCategories = categories
+		.map((category) => ({
+			...category,
+			products: category.products.filter((product) =>
+				ingredientsIdArr.every((ingredientId) =>
+					product.ingredients.some((ingredient) => ingredient.id === ingredientId),
+				),
+			),
+		}))
+		.filter((category) => category.products.length > 0)
+
 	return (
 		<>
 			<Container className="mt-10">
@@ -28,17 +41,14 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
 					{/* Product list */}
 					<div className="flex-1">
 						<div className="flex flex-col gap-16">
-							{categories.map(
-								(category) =>
-									category.products.length > 0 && (
-										<ProductsGroupList
-											key={category.id}
-											title={category.name}
-											categoryId={category.id}
-											items={category.products}
-										/>
-									),
-							)}
+							{filteredCategories.map((category) => (
+								<ProductsGroupList
+									key={category.id}
+									title={category.name}
+									categoryId={category.id}
+									items={category.products}
+								/>
+							))}
 						</div>
 					</div>
 				</div>

@@ -13,9 +13,9 @@ interface Props {
 }
 
 export const CartButton: FC<Props> = ({ className }) => {
-	const [totalAmount, items, loading] = useCartStore((state) => [
-		state.totalAmount,
+	const [items, totalAmount, loading] = useCartStore((state) => [
 		state.items,
+		state.totalAmount,
 		state.loading,
 	])
 
