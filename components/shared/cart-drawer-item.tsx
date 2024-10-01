@@ -5,7 +5,7 @@ import { Trash2Icon } from 'lucide-react'
 import { cn } from '@/lib'
 import { CartItemInfo, CountButton } from '@/components/shared'
 
-export interface CartItemProps {
+interface CartItemProps {
 	id: number
 	name: string
 	imageUrl: string

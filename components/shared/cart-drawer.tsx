@@ -19,6 +19,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '@/components/ui'
+import { getProductPluralize } from '@/lib'
 import { CartDrawerItem, Title } from '@/components/shared'
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
@@ -40,7 +41,10 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 					{totalAmount > 0 && (
 						<SheetHeader>
 							<SheetTitle>
-								У корзині <span className="font-bold">{items.length} товару</span>
+								У корзині{' '}
+								<span className="font-bold">
+									{items.length} {getProductPluralize(items.length)}
+								</span>
 							</SheetTitle>
 						</SheetHeader>
 					)}
