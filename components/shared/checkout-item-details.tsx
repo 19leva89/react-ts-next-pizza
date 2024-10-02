@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 import { cn } from '@/lib'
 
 interface Props {
-	title?: React.ReactNode
-	value?: React.ReactNode
+	title?: ReactNode
+	value?: ReactNode
 	className?: string
 }
 

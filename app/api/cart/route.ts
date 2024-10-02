@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json(userCart)
 	} catch (error) {
 		console.log('[CART_GET] Server error', error)
-		return NextResponse.json({ message: 'Не вдалося отримати корзину' }, { status: 500 })
+		return NextResponse.json({ message: 'Не вдалося отримати кошик' }, { status: 500 })
 	}
 }
 
@@ -98,6 +98,6 @@ export async function POST(req: NextRequest) {
 		return resp
 	} catch (error) {
 		console.log('[CART_POST] Server error', error)
-		return NextResponse.json({ message: 'Не вдалося створити корзину' }, { status: 500 })
+		return NextResponse.json({ message: 'Не вдалося створити кошик' }, { status: 500 })
 	}
 }

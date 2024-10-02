@@ -42,7 +42,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 						<>
 							<SheetHeader>
 								<SheetTitle>
-									У корзині{' '}
+									У кошику{' '}
 									<span className="font-bold">
 										{items.length} {getProductPluralize(items.length)}
 									</span>
@@ -102,11 +102,9 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 						<div className="flex flex-col items-center justify-center w-72 mx-auto">
 							<Image src="/assets/img/empty-box.png" alt="empty cart" width={120} height={120} />
 
-							<Title size="sm" text="Корзина порожня" className="text-center font-bold my-2" />
+							<Title size="sm" text="Кошик порожній" className="text-center font-bold my-2" />
 
-							<p className="text-center text-neutral-500 mb-5">
-								Додайте хоча б один товар, щоб зробити замовлення
-							</p>
+							<p className="text-center text-neutral-500 mb-5">Але це ніколи не пізно виправити :)</p>
 
 							<SheetClose>
 								<Button className="w-56 h-12 text-base" size="lg">

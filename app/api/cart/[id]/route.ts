@@ -37,7 +37,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 		return NextResponse.json(updatedUserCart)
 	} catch (error) {
 		console.log('[CART_PATCH] Server error', error)
-		return NextResponse.json({ message: 'Не вдалося оновити корзину' }, { status: 500 })
+		return NextResponse.json({ message: 'Не вдалося оновити кошик' }, { status: 500 })
 	}
 }
 
@@ -71,6 +71,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 		return NextResponse.json(updatedUserCart)
 	} catch (error) {
 		console.log('[CART_DELETE] Server error', error)
-		return NextResponse.json({ message: 'Не вдалося видалити корзину' }, { status: 500 })
+		return NextResponse.json({ message: 'Не вдалося видалити кошик' }, { status: 500 })
 	}
 }

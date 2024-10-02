@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import { prisma } from '@/prisma/db'
 
 export const generateMetadata = async ({ params: { id } }: { params: { id: string } }) => {
@@ -6,11 +8,11 @@ export const generateMetadata = async ({ params: { id } }: { params: { id: strin
 	})
 
 	return {
-		title: product?.name || 'Product',
+		title: product?.name || 'Товар',
 	}
 }
 
-const ModalProductIdLayout = async ({ children }: { children: React.ReactNode }) => {
+const ModalProductIdLayout = async ({ children }: { children: ReactNode }) => {
 	return <>{children}</>
 }
 

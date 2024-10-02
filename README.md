@@ -12,10 +12,14 @@ Core Technologies:
 Data Fetching and State Management:
 - Axios (sending request to backend)
 - Prisma 5 (ORM for DB)
+- React Hook Form (working with forms)
 - Zustand (state management)
 
 Database Management:
 - PostgreSQL (relational database)
+
+Email Services:
+- Resend (send email)
 
 Form and Validation:
 - Zod (first schema validation)

@@ -1,11 +1,11 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, ReactNode } from 'react'
 
 import { cn } from '@/lib'
 import { Title } from '@/components/shared'
 
 interface Props {
 	title?: string
-	endAdornment?: React.ReactNode
+	endAdornment?: ReactNode
 	className?: string
 	contentClassName?: string
 }
@@ -22,6 +22,7 @@ export const WhiteBlock: FC<PropsWithChildren<Props>> = ({
 			{title && (
 				<div className="flex items-center justify-between p-5 px-7 border-b border-gray-100">
 					<Title text={title} size="sm" className="font-bold" />
+
 					{endAdornment}
 				</div>
 			)}

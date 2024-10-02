@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { ReactNode, Suspense } from 'react'
 
 import { Header } from '@/components/shared'
 
@@ -6,8 +6,8 @@ export default function PlatformLayout({
 	children,
 	modal,
 }: Readonly<{
-	children: React.ReactNode
-	modal: React.ReactNode
+	children: ReactNode
+	modal: ReactNode
 }>) {
 	return (
 		<main className="min-h-screen">

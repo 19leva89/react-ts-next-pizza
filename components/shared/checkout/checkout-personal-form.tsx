@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 
 import { FormInput, WhiteBlock } from '@/components/shared'
 
@@ -6,7 +6,7 @@ interface Props {
 	className?: string
 }
 
-export const CheckoutPersonalForm: React.FC<Props> = ({ className }) => {
+export const CheckoutPersonalForm: FC<Props> = ({ className }) => {
 	return (
 		<WhiteBlock title="2. Персональні дані" className={className}>
 			<div className="grid grid-cols-2 gap-5">
