@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { X } from 'lucide-react'
+import { Delete } from 'lucide-react'
 
 import { cn } from '@/lib'
 
@@ -17,7 +17,7 @@ export const ClearButton: FC<Props> = ({ onClick, className }) => {
 				className,
 			)}
 		>
-			<X className="h-5 w-5" />
+			<Delete className="h-5 w-5" />
 		</button>
 	)
 }

@@ -1,31 +1,24 @@
 'use client'
 
 import { FC } from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
 
-import { AdressInput } from '@/components/shared/address-input'
-import { ErrorText, FormTextarea, WhiteBlock } from '@/components/shared'
+import { FormInput, FormTextarea, WhiteBlock } from '@/components/shared'
 
 interface Props {
 	className?: string
 }
 
 export const CheckoutAddressForm: FC<Props> = ({ className }) => {
-	const { control } = useFormContext()
-
 	return (
 		<WhiteBlock title="3. Адреса доставки" className={className}>
 			<div className="flex flex-col gap-5">
-				<Controller
-					control={control}
-					name="address"
-					render={({ field, fieldState }) => (
-						<>
-							<AdressInput onChange={field.onChange} />
-							{fieldState.error?.message && <ErrorText text={fieldState.error.message} />}
-						</>
-					)}
-				/>
+				<div className="grid grid-cols-2 gap-5">
+					<FormInput name="region" className="text-base" placeholder="Область" />
+
+					<FormInput name="city" className="text-base" placeholder="Місто" />
+				</div>
+
+				<FormInput name="address" className="text-base" placeholder="Адреса" />
 
 				<FormTextarea name="comment" className="text-base" placeholder="Коментар до замовлення" rows={5} />
 			</div>

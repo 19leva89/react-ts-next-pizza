@@ -25,7 +25,7 @@ export const FormInput: FC<Props> = ({ className, name, label, required, ...prop
 	const errorText = errors[name]?.message as string
 
 	const onClickClear = () => {
-		setValue(name, '', { shouldValidate: true })
+		setValue(name, '')
 	}
 
 	return (
