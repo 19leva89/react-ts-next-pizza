@@ -8,21 +8,21 @@ import * as CartItemDetails from '@/components/shared/cart-item-details'
 import { CartItemProps } from '@/components/shared/cart-item-details/cart-item-details.types'
 
 interface Props extends CartItemProps {
-	onClickCountButton?: (type: 'plus' | 'minus') => void
 	onClickRemove?: () => void
+	onClickCountButton?: (type: 'plus' | 'minus') => void
 	className?: string
 }
 
-export const CheckoutItem: FC<Props> = ({
+export const CheckoutDrawerItem: FC<Props> = ({
 	name,
-	price,
 	imageUrl,
-	quantity,
 	details,
-	className,
+	price,
+	quantity,
 	disabled,
-	onClickCountButton,
+	className,
 	onClickRemove,
+	onClickCountButton,
 }) => {
 	return (
 		<div
@@ -35,7 +35,8 @@ export const CheckoutItem: FC<Props> = ({
 			)}
 		>
 			<div className="flex items-center gap-5 flex-1">
-				<CartItemDetails.Image src={imageUrl} />
+				<CartItemDetails.Image src={imageUrl} name={name} />
+
 				<CartItemDetails.Info name={name} details={details} />
 			</div>
 
@@ -43,6 +44,7 @@ export const CheckoutItem: FC<Props> = ({
 
 			<div className="flex items-center gap-5 ml-20">
 				<CartItemDetails.CountButton onClick={onClickCountButton} value={quantity} />
+
 				<button type="button" onClick={onClickRemove}>
 					<X className="text-gray-400 cursor-pointer hover:text-gray-600" size={20} />
 				</button>

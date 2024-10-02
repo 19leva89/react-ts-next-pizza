@@ -57,7 +57,7 @@ export default function CheckoutPage() {
 
 			const url = await createOrder(data)
 
-			toast.error('Замовлення успішно оформлене! 📝 Перехід на оплату... ', {
+			toast.success('Замовлення успішно оформлене! 📝 Перехід на оплату... ', {
 				icon: '✅',
 			})
 
@@ -88,10 +88,10 @@ export default function CheckoutPage() {
 						{/* Left side */}
 						<div className="flex flex-col gap-10 flex-1 mb-20">
 							<CheckoutCart
-								onClickCountButton={onClickCountButton}
-								removeCartItem={removeCartItem}
 								items={items}
 								loading={loading}
+								removeCartItem={removeCartItem}
+								onClickCountButton={onClickCountButton}
 							/>
 
 							<CheckoutPersonalForm className={loading ? 'opacity-40 pointer-events-none' : ''} />

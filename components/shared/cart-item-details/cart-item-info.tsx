@@ -14,7 +14,10 @@ export const CartItemInfo: FC<Props> = ({ name, details, className }) => {
 			<div className={cn('flex items-center justify-between', className)}>
 				<h2 className="text-lg font-bold flex-1 leading-6">{name}</h2>
 			</div>
-			{details && <p className="text-xs text-gray-400 w-[90%]">{details}</p>}
+
+			{details && (
+				<p className="text-xs text-gray-400 w-[98%]" dangerouslySetInnerHTML={{ __html: details }}></p>
+			)}
 		</div>
 	)
 }

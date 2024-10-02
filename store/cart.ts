@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import toast from 'react-hot-toast'
 
 import { getCartDetails } from '@/lib'
 import { Api } from '../services/api-client'
@@ -75,11 +76,13 @@ export const useCartStore = create<CartState>((set) => ({
 		} catch (error) {
 			console.error(error)
 			set({ error: true })
+			toast.error('Неможливо видалити товар з кошика')
 		} finally {
 			set((state) => ({
 				loading: false,
 				items: state.items.map((item) => ({ ...item, disabled: false })),
 			}))
+			toast.success('Товар видалено з кошика')
 		}
 	},
 

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { ArrowRight, Package, TicketPercent, Truck } from 'lucide-react'
 
 import { cn } from '@/lib'

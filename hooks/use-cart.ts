@@ -8,9 +8,9 @@ type ReturnProps = {
 	items: CartStateItem[]
 	totalAmount: number
 	loading: boolean
+	addCartItem: (values: CreateCartItemValues) => void
 	updateItemQuantity: (id: number, quantity: number) => void
 	removeCartItem: (id: number) => void
-	addCartItem: (values: CreateCartItemValues) => void
 }
 
 export const useCart = (): ReturnProps => {

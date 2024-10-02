@@ -3,7 +3,8 @@ import Image from 'next/image'
 import { Trash2Icon } from 'lucide-react'
 
 import { cn } from '@/lib'
-import { CartItemInfo, CountButton } from '@/components/shared'
+import { CountButton } from '@/components/shared'
+import { CartItemInfo } from '@/components/shared/cart-item-details/cart-item-info'
 
 interface CartItemProps {
 	id: number
