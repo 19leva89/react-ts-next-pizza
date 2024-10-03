@@ -130,6 +130,8 @@ model Order {
   fullName    String
   email       String
   phone       String
+  region      String
+  city        String
   address     String
   comment     String?
   //

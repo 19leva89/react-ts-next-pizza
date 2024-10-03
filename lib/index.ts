@@ -1,5 +1,4 @@
 export { calcTotalPizzaPrice } from './calc-total-pizza-price'
-export { createPayment } from './creat-payment'
 export { getAvailablePizzaSizes } from './get-available-pizza-sizes'
 export { getPizzaDetails } from './get-pizza-details'
 export { getProductPluralize } from './get-pluralize'

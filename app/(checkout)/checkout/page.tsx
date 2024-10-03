@@ -27,10 +27,12 @@ export default function CheckoutPage() {
 	const form = useForm<CheckoutFormValues>({
 		resolver: zodResolver(checkoutFormSchema),
 		defaultValues: {
-			email: '',
 			firstName: '',
 			lastName: '',
+			email: '',
 			phone: '',
+			region: '',
+			city: '',
 			address: '',
 			comment: '',
 		},

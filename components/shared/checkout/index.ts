@@ -1,3 +1,6 @@
-export { CheckoutCart } from './checkout-cart'
-export { CheckoutPersonalForm } from './checkout-personal-form'
 export { CheckoutAddressForm } from './checkout-address-form'
+export { CheckoutCart } from './checkout-cart'
+export { CheckoutDrawerItem } from './checkout-drawer-item'
+export { CheckoutItemDetails } from './checkout-item-details'
+export { CheckoutPersonalForm } from './checkout-personal-form'
+export { CheckoutSidebar } from './checkout-sidebar'

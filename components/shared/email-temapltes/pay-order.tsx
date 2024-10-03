@@ -1,18 +1,61 @@
+/* eslint-disable @next/next/no-img-element */
 import { FC } from 'react'
+
+import { CartItemDTO } from '@/services/dto/cart.dto'
 
 interface Props {
 	orderId: number
 	totalAmount: number
 	paymentUrl: string
+	items: CartItemDTO[]
 }
 
-export const PayOrderTemplate: FC<Props> = ({ orderId, totalAmount, paymentUrl }) => (
-	<div>
-		<h1>Замовлення #{orderId}</h1>
+export const PayOrderTemplate: FC<Props> = ({ orderId, totalAmount, paymentUrl, items }) => (
+	<div style={{ fontFamily: 'Arial, sans-serif', color: '#333' }}>
+		<h1 style={{ textAlign: 'center', color: '#ff5e00' }}>Замовлення #{orderId}</h1>
 
-		<p>
+		<p style={{ fontSize: '16px' }}>
 			Оплатіть замовлення на суму <b>{totalAmount} грн</b>. Перейдіть{' '}
-			<a href={paymentUrl}>за цим посиланням</a> для оплати замовлення.
+			<a href={paymentUrl} style={{ color: '#174ab8', textDecoration: 'none' }}>
+				за цим посиланням
+			</a>{' '}
+			для оплати замовлення.
 		</p>
+
+		<hr style={{ border: '1px solid #ccc', margin: '20px 0' }} />
+
+		<p style={{ fontSize: '18px', marginBottom: '10px' }}>Список товарів:</p>
+		<ul style={{ padding: 0, listStyleType: 'none' }}>
+			{items.map((item) => (
+				<li key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
+					<img
+						src={item.productItem.product.imageUrl}
+						alt={item.productItem.product.name}
+						style={{
+							width: '60px',
+							height: '60px',
+							objectFit: 'cover',
+							borderRadius: '5px',
+							marginRight: '10px',
+							backgroundColor: 'transparent',
+						}}
+					/>
+
+					<div style={{ fontSize: '16px' }}>
+						<p style={{ margin: 0 }}>
+							<b>{item.productItem.product.name}</b>
+						</p>
+						<p style={{ margin: 0 }}>
+							{item.productItem.price} грн x {item.quantity} шт. ={' '}
+							<b>{item.productItem.price * item.quantity} грн</b>
+						</p>
+					</div>
+				</li>
+			))}
+		</ul>
+
+		<hr style={{ border: '1px solid #ccc', margin: '20px 0' }} />
+
+		<p style={{ fontSize: '14px', textAlign: 'center', color: '#999' }}>Дякуємо за Ваше замовлення!</p>
 	</div>
 )

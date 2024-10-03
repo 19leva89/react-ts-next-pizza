@@ -4,12 +4,13 @@ import { hashSync } from 'bcrypt'
 import { cookies } from 'next/headers'
 
 import { prisma } from '@/prisma/db'
-import { OrderStatus, Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
-import { PayOrderTemplate } from '@/components/shared/email-temapltes'
-import { createPayment, sendEmail } from '@/lib'
+import { sendEmail } from '@/lib'
+import { createPayment } from '@/lib/stripe'
 import { CheckoutFormValues } from '@/constants'
 import { getUserSession } from '@/lib/get-user-session'
+import { PayOrderTemplate } from '@/components/shared/email-temapltes'
 import { VerificationUserTemplate } from '@/components/shared/email-temapltes/verification-user'
 
 export async function createOrder(data: CheckoutFormValues) {
@@ -58,10 +59,11 @@ export async function createOrder(data: CheckoutFormValues) {
 				fullName: data.firstName + ' ' + data.lastName,
 				email: data.email,
 				phone: data.phone,
+				region: data.region,
+				city: data.city,
 				address: data.address,
 				comment: data.comment,
 				totalAmount: userCart.totalAmount,
-				status: OrderStatus.PENDING,
 				items: JSON.stringify(userCart.items),
 			},
 		})
@@ -82,6 +84,7 @@ export async function createOrder(data: CheckoutFormValues) {
 			},
 		})
 
+		/* Creating a payment link */
 		const paymentData = await createPayment({
 			amount: order.totalAmount,
 			orderId: order.id,
@@ -101,15 +104,17 @@ export async function createOrder(data: CheckoutFormValues) {
 			},
 		})
 
-		const paymentUrl = paymentData.confirmation.confirmation_url
+		const paymentUrl = paymentData.url
 
+		/* Send an email */
 		await sendEmail(
 			data.email,
 			'Next Pizza / Оплата замовлення #' + order.id,
 			PayOrderTemplate({
 				orderId: order.id,
 				totalAmount: order.totalAmount,
-				paymentUrl,
+				paymentUrl: paymentData.url ?? '',
+				items: userCart.items,
 			}),
 		)
 

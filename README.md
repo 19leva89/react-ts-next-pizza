@@ -33,6 +33,9 @@ Middleware and Server Utilities:
 Miscellaneous:
 - React hot toast (stylization message)
 
+Payment:
+- Stripe (payment service provider)
+
 Styling and UI Frameworks:
 - Lucide React (stylization)
 - shadcn/ui (stylization)
@@ -43,7 +46,6 @@ Utilities and Libraries:
 - React Use (custom React Hooks)
 - QueryString (Parse and stringify URL)
 
-//TODO: React Imask (для валидации телефона и email)
 
 To run the client and server via concurrently:
 - npm run all
