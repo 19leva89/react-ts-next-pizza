@@ -86,6 +86,8 @@ export async function createOrder(data: CheckoutFormValues) {
 
 		/* Creating a payment link */
 		const paymentData = await createPayment({
+			token: cartToken,
+			email: data.email,
 			amount: order.totalAmount,
 			orderId: order.id,
 			description: 'Оплата замовлення #' + order.id,
@@ -101,6 +103,7 @@ export async function createOrder(data: CheckoutFormValues) {
 			},
 			data: {
 				paymentId: paymentData.id,
+				status: 'PENDING',
 			},
 		})
 

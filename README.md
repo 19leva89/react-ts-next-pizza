@@ -48,10 +48,13 @@ Utilities and Libraries:
 
 
 To run the client and server via concurrently:
-- npm run all
+terminal powershell -> npm run all
 
-- npx prisma generate
-- npx prisma db push
-- npx prisma migrate reset
+terminal powershell -> npx prisma generate
+terminal powershell -> npx prisma db push
+terminal powershell -> npx prisma migrate reset
 
-- npx prisma db seed (loading test database)
+terminal powershell -> npx prisma db seed (loading test database)
+
+terminal CommandPrompt -> stripe login
+terminal CommandPrompt -> stripe listen --forward-to localhost:3000/api/webhook
