@@ -10,8 +10,7 @@ import { sendEmail } from '@/lib'
 import { createPayment } from '@/lib/stripe'
 import { CheckoutFormValues } from '@/constants'
 import { getUserSession } from '@/lib/get-user-session'
-import { PayOrderTemplate } from '@/components/shared/email-temapltes'
-import { VerificationUserTemplate } from '@/components/shared/email-temapltes/verification-user'
+import { PayOrderTemplate, VerificationUserTemplate } from '@/components/shared/email-temapltes'
 
 export async function createOrder(data: CheckoutFormValues) {
 	try {
@@ -103,11 +102,14 @@ export async function createOrder(data: CheckoutFormValues) {
 			},
 			data: {
 				paymentId: paymentData.id,
-				status: 'PENDING',
 			},
 		})
 
 		const paymentUrl = paymentData.url
+
+		if (!paymentUrl) {
+			throw new Error('Payment url not found')
+		}
 
 		/* Send an email */
 		await sendEmail(
@@ -116,7 +118,7 @@ export async function createOrder(data: CheckoutFormValues) {
 			PayOrderTemplate({
 				orderId: order.id,
 				totalAmount: order.totalAmount,
-				paymentUrl: paymentData.url ?? '',
+				paymentUrl: paymentUrl,
 				items: userCart.items,
 			}),
 		)

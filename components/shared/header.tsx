@@ -1,9 +1,11 @@
 'use client'
 
-import { FC } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import toast from 'react-hot-toast'
 import { User } from 'lucide-react'
+import { FC, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { cn } from '@/lib'
 import { Button } from '@/components/ui'
@@ -16,6 +18,31 @@ interface Props {
 }
 
 export const Header: FC<Props> = ({ hasSearch = true, hasCart = true, className }) => {
+	const router = useRouter()
+	const searchParams = useSearchParams()
+
+	useEffect(() => {
+		let toastMessage = ''
+
+		if (searchParams.has('paid')) {
+			toastMessage = 'Замовлення успішно сплачено! Інформація надіслана на пошту'
+		}
+
+		if (searchParams.has('verified')) {
+			toastMessage = 'Пошта успішно підтверджена!'
+		}
+
+		if (toastMessage) {
+			setTimeout(() => {
+				router.replace('/')
+				toast.success(toastMessage, {
+					duration: 3000,
+				})
+			}, 1000)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
 	return (
 		<header className={(cn('border-b'), className)}>
 			<Container className="flex items-center justify-between py-8">
