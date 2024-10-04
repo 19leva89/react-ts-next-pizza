@@ -38,6 +38,7 @@ Payment:
 
 Styling and UI Frameworks:
 - Lucide React (stylization)
+- Next Js TopLoader (using top progress bar)
 - shadcn/ui (stylization)
 - Tailwind CSS (stylization)
 

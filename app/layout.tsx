@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
-import { Toaster } from 'react-hot-toast'
 
 import { siteConfig } from '@/config/site'
+import { Providers } from '@/components/shared/providers'
 
 import { Nunito } from 'next/font/google'
 import './globals.css'
@@ -35,9 +35,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={nunito.variable}>
-				{children}
-
-				<Toaster />
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	)

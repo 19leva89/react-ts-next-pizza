@@ -30,8 +30,8 @@ export async function createPayment(details: Props) {
 			},
 		],
 		mode: 'payment',
-		success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/?paid`,
-		cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/cancel`,
+		success_url: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/?paid`,
+		cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN_URL}/cancel`,
 		customer_email: details.email,
 		metadata: {
 			order_id: details.orderId.toString(),
