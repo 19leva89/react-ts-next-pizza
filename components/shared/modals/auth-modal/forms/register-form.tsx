@@ -5,7 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui'
 import { registerUser } from '@/app/actions'
-import { FormInput } from '@/components/shared'
+import { FormInput, Title } from '@/components/shared'
 import { TFormRegisterValues, formRegisterSchema } from './schemas'
 
 interface Props {
@@ -42,6 +42,12 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
 	return (
 		<FormProvider {...form}>
 			<form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
+				<div className="mr-2">
+					<Title text="Реєстрація аккаунта" size="md" className="font-bold" />
+
+					<p className="text-gray-400">Введіть свої дані, щоб зареєструвати акаунт</p>
+				</div>
+
 				<FormInput name="email" label="Email" required />
 
 				<FormInput name="fullName" label="Повне ім'я" required />

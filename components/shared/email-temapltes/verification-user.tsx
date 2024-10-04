@@ -11,7 +11,11 @@ export const VerificationUserTemplate: FC<Props> = ({ code }) => (
 		</p>
 
 		<p>
-			<a href={`http://localhost:3000/api/auth/verify?code=${code}`}>Підтвердити реєстрацію</a>
+			<a
+				href={`${process.env.NEXT_PUBLIC_DOMAIN_URL}${process.env.NEXT_PUBLIC_API_URL}/auth/verify?code=${code}`}
+			>
+				Підтвердити реєстрацію
+			</a>
 		</p>
 	</div>
 )
