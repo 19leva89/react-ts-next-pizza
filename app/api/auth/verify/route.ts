@@ -4,8 +4,7 @@ import { prisma } from '@/prisma/db'
 
 export async function GET(req: NextRequest) {
 	try {
-		// const code = req.nextUrl.searchParams.get('code');
-		const code = ''
+		const code = req.nextUrl.searchParams.get('code')
 
 		if (!code) {
 			return NextResponse.json({ error: 'Невірний код' }, { status: 400 })

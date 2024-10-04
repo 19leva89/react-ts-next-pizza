@@ -1,5 +1,3 @@
-'use client'
-
 import { FC } from 'react'
 import toast from 'react-hot-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -12,10 +10,9 @@ import { TFormRegisterValues, formRegisterSchema } from './schemas'
 
 interface Props {
 	onClose?: VoidFunction
-	onClickLogin?: VoidFunction
 }
 
-export const RegisterForm: FC<Props> = ({ onClose, onClickLogin }) => {
+export const RegisterForm: FC<Props> = ({ onClose }) => {
 	const form = useForm<TFormRegisterValues>({
 		resolver: zodResolver(formRegisterSchema),
 		defaultValues: {

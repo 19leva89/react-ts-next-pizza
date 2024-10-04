@@ -71,10 +71,12 @@ export const authOptions: AuthOptions = {
 			},
 		}),
 	],
+
 	secret: process.env.NEXTAUTH_SECRET,
 	session: {
 		strategy: 'jwt',
 	},
+
 	callbacks: {
 		async signIn({ user, account }) {
 			try {
@@ -126,6 +128,7 @@ export const authOptions: AuthOptions = {
 				return false
 			}
 		},
+
 		async jwt({ token }) {
 			if (!token.email) {
 				return token
@@ -146,6 +149,7 @@ export const authOptions: AuthOptions = {
 
 			return token
 		},
+
 		session({ session, token }) {
 			if (session?.user) {
 				session.user.id = token.id

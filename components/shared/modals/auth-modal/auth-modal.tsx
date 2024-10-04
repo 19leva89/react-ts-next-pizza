@@ -16,12 +16,12 @@ interface Props {
 export const AuthModal: FC<Props> = ({ open, onClose }) => {
 	const [type, setType] = useState<'login' | 'register'>('login')
 
-	const onSwitchType = () => {
-		setType(type === 'login' ? 'register' : 'login')
-	}
-
 	const handleClose = () => {
 		onClose()
+	}
+
+	const onSwitchType = () => {
+		setType(type === 'login' ? 'register' : 'login')
 	}
 
 	return (
@@ -30,6 +30,7 @@ export const AuthModal: FC<Props> = ({ open, onClose }) => {
 				{type === 'login' ? <LoginForm onClose={handleClose} /> : <RegisterForm onClose={handleClose} />}
 
 				<hr />
+
 				<div className="flex gap-2">
 					<Button
 						variant="secondary"
@@ -42,12 +43,7 @@ export const AuthModal: FC<Props> = ({ open, onClose }) => {
 						type="button"
 						className="gap-2 h-12 p-2 flex-1"
 					>
-						<Image
-							width={24}
-							height={24}
-							alt="GitHub"
-							src="https://github.githubassets.com/favicons/favicon.svg"
-						/>
+						<Image width={24} height={24} alt="GitHub" src="/assets/img/github-icon.svg" />
 						GitHub
 					</Button>
 
@@ -62,12 +58,7 @@ export const AuthModal: FC<Props> = ({ open, onClose }) => {
 						type="button"
 						className="gap-2 h-12 p-2 flex-1"
 					>
-						<Image
-							width={24}
-							height={24}
-							alt="Google"
-							src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"
-						/>
+						<Image width={24} height={24} alt="Google" src="/assets/img/google-icon.svg" />
 						Google
 					</Button>
 				</div>
