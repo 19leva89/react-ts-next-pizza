@@ -33,91 +33,138 @@ export const categories = [
 
 export const ingredients = [
 	{
+		id: 1,
 		name: 'Сирний бортик',
-		price: 179,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/99f5cb91225b4875bd06a26d2e842106.png',
+		price: 89,
+		imageUrl: '/assets/img/ingredients/cheese-border.png',
 	},
 	{
-		name: 'Вершкова моцарела',
-		price: 79,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/cdea869ef287426386ed634e6099a5ba.png',
-	},
-	{
-		name: 'Сири чеддер і пармезан',
-		price: 79,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA69C1FE796',
-	},
-	{
-		name: 'Гострий перець халапеньо',
+		id: 2,
+		name: 'Пряна яловичина',
 		price: 59,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/11ee95b6bfdf98fb88a113db92d7b3df.png',
+		imageUrl: '/assets/img/ingredients/spicy-beef.png',
 	},
 	{
-		name: 'Ніжний курча',
-		price: 79,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA5B328D35A',
-	},
-	{
-		name: 'Шампіньйони',
-		price: 59,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA67259A324',
-	},
-	{
-		name: 'Шинка',
-		price: 79,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA61B9A8D61',
-	},
-	{
-		name: 'Пікантна пепероні',
-		price: 79,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA6258199C3',
-	},
-	{
-		name: 'Гостра чорізо',
-		price: 79,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA62D5D6027',
-	},
-	{
-		name: 'Мариновані огірочки',
-		price: 59,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9EA89958D782B',
-	},
-	{
-		name: 'Свіжі томати',
-		price: 59,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA7AC1A1D67',
-	},
-	{
-		name: 'Червона цибуля',
-		price: 59,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA60AE6464C',
-	},
-	{
-		name: 'Соковиті ананаси',
-		price: 59,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0',
-	},
-	{
-		name: 'Італійські трави',
+		id: 3,
+		name: 'Моцарелла',
 		price: 39,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/370dac9ed21e4bffaf9bc2618d258734.png',
+		imageUrl: '/assets/img/ingredients/mozzarella.png',
 	},
 	{
+		id: 4,
+		name: 'Сири чеддер та пармезан',
+		price: 39,
+		imageUrl: '/assets/img/ingredients/cheddar-and-parmesan-cheeses.png',
+	},
+	{
+		id: 5,
+		name: 'Гострий перець халапеньо',
+		price: 29,
+		imageUrl: '/assets/img/ingredients/hot-jalapeno-pepper.png',
+	},
+	{
+		id: 6,
+		name: 'Ніжне курча',
+		price: 39,
+		imageUrl: '/assets/img/ingredients/tender-chicken.png',
+	},
+	{
+		id: 7,
+		name: 'Печериці',
+		price: 29,
+		imageUrl: '/assets/img/ingredients/champignons.png',
+	},
+	{
+		id: 8,
+		name: 'Бекон',
+		price: 39,
+		imageUrl: '/assets/img/ingredients/bacon.png',
+	},
+	{
+		id: 9,
+		name: 'Шинка',
+		price: 39,
+		imageUrl: '/assets/img/ingredients/ham.png',
+	},
+	{
+		id: 10,
+		name: 'Пікантна пепероні',
+		price: 39,
+		imageUrl: '/assets/img/ingredients/spicy-pepperoni.png',
+	},
+	{
+		id: 11,
+		name: 'Гостра чорізо',
+		price: 39,
+		imageUrl: '/assets/img/ingredients/spicy-chorizo.png',
+	},
+	{
+		id: 12,
+		name: 'Мариновані огірочки',
+		price: 29,
+		imageUrl: '/assets/img/ingredients/pickled-cucumbers.png',
+	},
+	{
+		id: 13,
+		name: 'Свіжі томати',
+		price: 29,
+		imageUrl: '/assets/img/ingredients/fresh-tomatoes.png',
+	},
+	{
+		id: 14,
+		name: 'Червона цибуля',
+		price: 29,
+		imageUrl: '/assets/img/ingredients/red-onion.png',
+	},
+	{
+		id: 15,
+		name: 'Соковиті ананаси',
+		price: 29,
+		imageUrl: '/assets/img/ingredients/juicy-pineapples.png',
+	},
+	{
+		id: 16,
+		name: 'Італійські трави',
+		price: 19,
+		imageUrl: '/assets/img/ingredients/italian-herbs.png',
+	},
+	{
+		id: 17,
 		name: 'Солодкий перець',
-		price: 59,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A22FA54A81411E9AFA63F774C1B',
+		price: 29,
+		imageUrl: '/assets/img/ingredients/sweet-pepper.png',
 	},
 	{
+		id: 18,
 		name: 'Кубики бринзи',
-		price: 79,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA6B0FFC349',
+		price: 39,
+		imageUrl: '/assets/img/ingredients/feta-cheese-cubes.png',
 	},
 	{
+		id: 19,
 		name: 'Мітболи',
-		price: 79,
-		imageUrl: 'https://cdn.dodostatic.net/static/Img/Ingredients/b2f3a5d5afe44516a93cfc0d2ee60088.png',
+		price: 39,
+		imageUrl: '/assets/img/ingredients/meatballs.png',
 	},
-].map((obj, index) => ({ id: index + 1, ...obj }))
+	{
+		id: 20,
+		name: 'Баварські ковбаски',
+		price: 65,
+		imageUrl: '/assets/img/ingredients/bavarian-sausages.png',
+	},
+	{
+		id: 21,
+		name: 'Креветки',
+		price: 99,
+		imageUrl: '/assets/img/ingredients/shrimps.png',
+	},
+	{
+		id: 22,
+		name: 'Часник',
+		price: 29,
+		imageUrl: '/assets/img/ingredients/garlic.png',
+	},
+]
 
 export const products = [
 	{

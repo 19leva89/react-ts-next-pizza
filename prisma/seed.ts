@@ -42,56 +42,573 @@ async function up() {
 
 	const pizza1 = await prisma.product.create({
 		data: {
-			name: 'Пепероні фреш',
-			imageUrl: 'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
+			name: 'Бефстроганів',
+			imageUrl: '/assets/img/pizzas/beef-stroganoff.avif',
 			categoryId: 1,
 			ingredients: {
-				connect: ingredients.slice(0, 5),
+				connect: [ingredients[1], ingredients[6], ingredients[11], ingredients[2], ingredients[13]],
 			},
 		},
 	})
 
 	const pizza2 = await prisma.product.create({
 		data: {
-			name: 'Сирна',
-			imageUrl: 'https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
+			name: `М'ясна з аджикою 🌶🌶`,
+			imageUrl: '/assets/img/pizzas/meat-with-adjika.avif',
 			categoryId: 1,
 			ingredients: {
-				connect: ingredients.slice(5, 10),
+				connect: [ingredients[19], ingredients[10], ingredients[5], ingredients[9], ingredients[2]],
 			},
 		},
 	})
 
 	const pizza3 = await prisma.product.create({
 		data: {
-			name: 'Чорізо фреш',
-			imageUrl: 'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
+			name: 'Креветки із солодким чилі',
+			imageUrl: '/assets/img/pizzas/sweet-chili-shrimp.avif',
 			categoryId: 1,
 			ingredients: {
-				connect: ingredients.slice(10, 15),
+				connect: [ingredients[20], ingredients[14], ingredients[16], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza4 = await prisma.product.create({
+		data: {
+			name: 'Сирна 🌱👶',
+			imageUrl: '/assets/img/pizzas/cheese.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[2], ingredients[3]],
+			},
+		},
+	})
+
+	const pizza5 = await prisma.product.create({
+		data: {
+			name: 'Пепероні фреш',
+			imageUrl: '/assets/img/pizzas/pepperoni-fresh.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[9], ingredients[2], ingredients[12]],
+			},
+		},
+	})
+
+	const pizza6 = await prisma.product.create({
+		data: {
+			name: 'Подвійне курча 👶',
+			imageUrl: '/assets/img/pizzas/double-chicken.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[5], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza7 = await prisma.product.create({
+		data: {
+			name: 'Шинка та сир',
+			imageUrl: '/assets/img/pizzas/ham-and-cheese.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[8], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza8 = await prisma.product.create({
+		data: {
+			name: 'Чорізо фреш',
+			imageUrl: '/assets/img/pizzas/chorizo-fresh.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[10], ingredients[16], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza9 = await prisma.product.create({
+		data: {
+			name: 'Жюльєн',
+			imageUrl: '/assets/img/pizzas/julien.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [
+					ingredients[5],
+					ingredients[6],
+					ingredients[13],
+					ingredients[2],
+					ingredients[3],
+					ingredients[21],
+				],
+			},
+		},
+	})
+
+	const pizza10 = await prisma.product.create({
+		data: {
+			name: 'Песто',
+			imageUrl: '/assets/img/pizzas/pesto.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[5], ingredients[17], ingredients[12], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza11 = await prisma.product.create({
+		data: {
+			name: 'Карбонара',
+			imageUrl: '/assets/img/pizzas/carbonara.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [
+					ingredients[7],
+					ingredients[3],
+					ingredients[2],
+					ingredients[12],
+					ingredients[14],
+					ingredients[15],
+					ingredients[21],
+				],
+			},
+		},
+	})
+
+	const pizza12 = await prisma.product.create({
+		data: {
+			name: `М'ясна`,
+			imageUrl: '/assets/img/pizzas/meat.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[5], ingredients[8], ingredients[9], ingredients[10], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza13 = await prisma.product.create({
+		data: {
+			name: 'Арріва',
+			imageUrl: '/assets/img/pizzas/arriva.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [
+					ingredients[5],
+					ingredients[10],
+					ingredients[16],
+					ingredients[13],
+					ingredients[12],
+					ingredients[2],
+					ingredients[21],
+				],
+			},
+		},
+	})
+
+	const pizza14 = await prisma.product.create({
+		data: {
+			name: 'Бургер-піца',
+			imageUrl: '/assets/img/pizzas/burger-pizza.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [
+					ingredients[8],
+					ingredients[11],
+					ingredients[12],
+					ingredients[13],
+					ingredients[2],
+					ingredients[21],
+				],
+			},
+		},
+	})
+
+	const pizza15 = await prisma.product.create({
+		data: {
+			name: 'Сирне курча',
+			imageUrl: '/assets/img/pizzas/cheese-chicken.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[5], ingredients[2], ingredients[3], ingredients[12], ingredients[21]],
+			},
+		},
+	})
+
+	const pizza16 = await prisma.product.create({
+		data: {
+			name: 'Next',
+			imageUrl: '/assets/img/pizzas/next.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [
+					ingredients[7],
+					ingredients[18],
+					ingredients[9],
+					ingredients[2],
+					ingredients[12],
+					ingredients[8],
+					ingredients[18],
+					ingredients[13],
+					ingredients[21],
+				],
+			},
+		},
+	})
+
+	const pizza17 = await prisma.product.create({
+		data: {
+			name: 'Пепероні',
+			imageUrl: '/assets/img/pizzas/pepperoni.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[9], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza18 = await prisma.product.create({
+		data: {
+			name: 'Чотири сезони',
+			imageUrl: '/assets/img/pizzas/four-seasons.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [
+					ingredients[2],
+					ingredients[8],
+					ingredients[9],
+					ingredients[17],
+					ingredients[12],
+					ingredients[8],
+					ingredients[15],
+				],
+			},
+		},
+	})
+
+	const pizza19 = await prisma.product.create({
+		data: {
+			name: 'Гавайська',
+			imageUrl: '/assets/img/pizzas/hawaiian.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[5], ingredients[14], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza20 = await prisma.product.create({
+		data: {
+			name: 'Шинка та гриби',
+			imageUrl: '/assets/img/pizzas/ham-and-mushrooms.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[8], ingredients[6], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza21 = await prisma.product.create({
+		data: {
+			name: 'Курча барбекю',
+			imageUrl: '/assets/img/pizzas/chicken-bbq.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[5], ingredients[7], ingredients[13], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza22 = await prisma.product.create({
+		data: {
+			name: 'Курча ранч',
+			imageUrl: '/assets/img/pizzas/chicken-ranch.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[5], ingredients[8], ingredients[2], ingredients[12], ingredients[21]],
+			},
+		},
+	})
+
+	const pizza23 = await prisma.product.create({
+		data: {
+			name: 'Маргарита 🌱',
+			imageUrl: '/assets/img/pizzas/margarita.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[2], ingredients[12], ingredients[15]],
+			},
+		},
+	})
+
+	const pizza24 = await prisma.product.create({
+		data: {
+			name: 'Діабло 🌶🌶',
+			imageUrl: '/assets/img/pizzas/diablo.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [
+					ingredients[10],
+					ingredients[4],
+					ingredients[18],
+					ingredients[12],
+					ingredients[16],
+					ingredients[13],
+					ingredients[2],
+				],
+			},
+		},
+	})
+
+	const pizza25 = await prisma.product.create({
+		data: {
+			name: 'Ковбаски барбекю',
+			imageUrl: '/assets/img/pizzas/sausages-bbq.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[10], ingredients[12], ingredients[13], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza26 = await prisma.product.create({
+		data: {
+			name: 'Овочі та гриби 🌱',
+			imageUrl: '/assets/img/pizzas/vegetables-and-mushrooms.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [
+					ingredients[6],
+					ingredients[12],
+					ingredients[16],
+					ingredients[13],
+					ingredients[17],
+					ingredients[2],
+					ingredients[15],
+				],
+			},
+		},
+	})
+
+	const pizza27 = await prisma.product.create({
+		data: {
+			name: `М'ясний мікс із баварськими ковбасками`,
+			imageUrl: '/assets/img/pizzas/meat-mix-with-bavarian-sausages.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[19], ingredients[9], ingredients[10], ingredients[7], ingredients[2]],
+			},
+		},
+	})
+
+	const pizza28 = await prisma.product.create({
+		data: {
+			name: 'Подвійна пепероні',
+			imageUrl: '/assets/img/pizzas/double-pepperoni.avif',
+			categoryId: 1,
+			ingredients: {
+				connect: [ingredients[10], ingredients[2]],
 			},
 		},
 	})
 
 	await prisma.productItem.createMany({
 		data: [
-			// Пицца "Пепперони фреш"
+			// Бефстроганів
 			{ productId: pizza1.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza1.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza1.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
 			{ productId: pizza1.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
 			{ productId: pizza1.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
 
-			// Пицца "Сырная"
+			// М'ясна з аджикою 🌶🌶
 			{ productId: pizza2.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
 			{ productId: pizza2.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
 			{ productId: pizza2.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
-			{ productId: pizza2.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 20 },
 			{ productId: pizza2.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
 			{ productId: pizza2.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
 
-			// Пицца "Чоризо фреш"
+			// Креветки із солодким чилі
 			{ productId: pizza3.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza3.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza3.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
 			{ productId: pizza3.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
 			{ productId: pizza3.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Сирна 🌱👶
+			{ productId: pizza4.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza4.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza4.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza4.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza4.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Пепероні фреш
+			{ productId: pizza5.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza5.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza5.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza5.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza5.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Подвійне курча 👶
+			{ productId: pizza6.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza6.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza6.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza6.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza6.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Шинка та сир
+			{ productId: pizza7.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza7.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza7.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza7.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza7.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Чорізо фреш
+			{ productId: pizza8.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza8.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza8.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza8.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza8.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Жюльєн
+			{ productId: pizza9.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza9.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza9.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza9.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza9.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Песто
+			{ productId: pizza10.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza10.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza10.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza10.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza10.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Карбонара
+			{ productId: pizza11.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza11.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza11.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza11.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza11.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// М'ясна
+			{ productId: pizza12.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza12.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza12.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza12.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza12.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Арріва
+			{ productId: pizza13.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza13.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza13.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza13.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza13.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Бургер-піца
+			{ productId: pizza14.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza14.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza14.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza14.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza14.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Сирне курча
+			{ productId: pizza15.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza15.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza15.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza15.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza15.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Next
+			{ productId: pizza16.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza16.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza16.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza16.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza16.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Пепероні
+			{ productId: pizza17.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza17.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza17.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza17.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza17.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Чотири сезони
+			{ productId: pizza18.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza18.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza18.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza18.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza18.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Гавайська
+			{ productId: pizza19.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza19.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza19.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza19.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza19.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Шинка та гриби
+			{ productId: pizza20.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza20.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza20.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza20.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza20.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Курча барбекю
+			{ productId: pizza21.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza21.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza21.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza21.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza21.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Курча ранч
+			{ productId: pizza22.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza22.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza22.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza22.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza22.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Маргарита 🌱
+			{ productId: pizza23.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza23.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza23.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza23.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza23.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Діабло 🌶🌶
+			{ productId: pizza24.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza24.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza24.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza24.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza24.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Ковбаски барбекю
+			{ productId: pizza25.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza25.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza25.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza25.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza25.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Овочі та гриби 🌱
+			{ productId: pizza26.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza26.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza26.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza26.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza26.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// М'ясний мікс із баварськими ковбасками
+			{ productId: pizza27.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza27.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza27.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza27.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza27.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
+
+			// Подвійна пепероні
+			{ productId: pizza28.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 20 },
+			{ productId: pizza28.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 30 },
+			{ productId: pizza28.id, price: randomNumber(100, 180), pizzaType: 1, pizzaSize: 40 },
+			{ productId: pizza28.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 30 },
+			{ productId: pizza28.id, price: randomNumber(100, 180), pizzaType: 2, pizzaSize: 40 },
 
 			// Остальные продукты
 			{ productId: 1, price: randomNumber(100, 180) },
@@ -111,6 +628,77 @@ async function up() {
 			{ productId: 15, price: randomNumber(100, 180) },
 			{ productId: 16, price: randomNumber(100, 180) },
 			{ productId: 17, price: randomNumber(100, 180) },
+			{ productId: 18, price: randomNumber(100, 180) },
+			{ productId: 19, price: randomNumber(100, 180) },
+			{ productId: 20, price: randomNumber(100, 180) },
+			{ productId: 21, price: randomNumber(100, 180) },
+			{ productId: 22, price: randomNumber(100, 180) },
+			{ productId: 23, price: randomNumber(100, 180) },
+			{ productId: 24, price: randomNumber(100, 180) },
+			{ productId: 25, price: randomNumber(100, 180) },
+			{ productId: 26, price: randomNumber(100, 180) },
+			{ productId: 27, price: randomNumber(100, 180) },
+			{ productId: 28, price: randomNumber(100, 180) },
+			{ productId: 29, price: randomNumber(100, 180) },
+			{ productId: 30, price: randomNumber(100, 180) },
+			{ productId: 31, price: randomNumber(100, 180) },
+			{ productId: 32, price: randomNumber(100, 180) },
+			{ productId: 33, price: randomNumber(100, 180) },
+			{ productId: 34, price: randomNumber(100, 180) },
+			{ productId: 35, price: randomNumber(100, 180) },
+			{ productId: 36, price: randomNumber(100, 180) },
+			{ productId: 37, price: randomNumber(100, 180) },
+			{ productId: 38, price: randomNumber(100, 180) },
+			{ productId: 39, price: randomNumber(100, 180) },
+			{ productId: 40, price: randomNumber(100, 180) },
+			{ productId: 41, price: randomNumber(100, 180) },
+			{ productId: 42, price: randomNumber(100, 180) },
+			{ productId: 43, price: randomNumber(100, 180) },
+			{ productId: 44, price: randomNumber(100, 180) },
+			{ productId: 45, price: randomNumber(100, 180) },
+			{ productId: 46, price: randomNumber(100, 180) },
+			{ productId: 47, price: randomNumber(100, 180) },
+			{ productId: 48, price: randomNumber(100, 180) },
+			{ productId: 49, price: randomNumber(100, 180) },
+			{ productId: 50, price: randomNumber(100, 180) },
+			{ productId: 51, price: randomNumber(100, 180) },
+			{ productId: 52, price: randomNumber(100, 180) },
+			{ productId: 53, price: randomNumber(100, 180) },
+			{ productId: 54, price: randomNumber(100, 180) },
+			{ productId: 55, price: randomNumber(100, 180) },
+			{ productId: 56, price: randomNumber(100, 180) },
+			{ productId: 57, price: randomNumber(100, 180) },
+			{ productId: 58, price: randomNumber(100, 180) },
+			{ productId: 59, price: randomNumber(100, 180) },
+			{ productId: 60, price: randomNumber(100, 180) },
+			{ productId: 61, price: randomNumber(100, 180) },
+			{ productId: 62, price: randomNumber(100, 180) },
+			{ productId: 63, price: randomNumber(100, 180) },
+			{ productId: 64, price: randomNumber(100, 180) },
+			{ productId: 65, price: randomNumber(100, 180) },
+			{ productId: 66, price: randomNumber(100, 180) },
+			{ productId: 67, price: randomNumber(100, 180) },
+			{ productId: 68, price: randomNumber(100, 180) },
+			{ productId: 69, price: randomNumber(100, 180) },
+			{ productId: 70, price: randomNumber(100, 180) },
+			{ productId: 71, price: randomNumber(100, 180) },
+			{ productId: 72, price: randomNumber(100, 180) },
+			{ productId: 73, price: randomNumber(100, 180) },
+			{ productId: 74, price: randomNumber(100, 180) },
+			{ productId: 75, price: randomNumber(100, 180) },
+			{ productId: 76, price: randomNumber(100, 180) },
+			{ productId: 77, price: randomNumber(100, 180) },
+			{ productId: 78, price: randomNumber(100, 180) },
+			{ productId: 79, price: randomNumber(100, 180) },
+			{ productId: 80, price: randomNumber(100, 180) },
+			{ productId: 81, price: randomNumber(100, 180) },
+			{ productId: 82, price: randomNumber(100, 180) },
+			{ productId: 83, price: randomNumber(100, 180) },
+			{ productId: 84, price: randomNumber(100, 180) },
+			{ productId: 85, price: randomNumber(100, 180) },
+			{ productId: 86, price: randomNumber(100, 180) },
+			{ productId: 87, price: randomNumber(100, 180) },
+			{ productId: 88, price: randomNumber(100, 180) },
 		],
 	})
 
