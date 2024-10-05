@@ -6,7 +6,7 @@ import { signIn } from 'next-auth/react'
 
 import { LoginForm } from './forms/login-form'
 import { RegisterForm } from './forms/register-form'
-import { Button, Dialog, DialogContent } from '@/components/ui'
+import { Button, Dialog, DialogContent, DialogTitle } from '@/components/ui'
 
 interface Props {
 	open: boolean
@@ -26,8 +26,10 @@ export const AuthModal: FC<Props> = ({ open, onClose }) => {
 
 	return (
 		<Dialog open={open} onOpenChange={handleClose}>
-			<DialogContent className="w-[450px] bg-white p-10">
-				{type === 'login' ? <LoginForm onClose={handleClose} /> : <RegisterForm onClose={handleClose} />}
+			<DialogContent className="w-[450px] bg-white p-10" aria-describedby={undefined}>
+				<DialogTitle>
+					{type === 'login' ? <LoginForm onClose={handleClose} /> : <RegisterForm onClose={handleClose} />}
+				</DialogTitle>
 
 				<hr />
 

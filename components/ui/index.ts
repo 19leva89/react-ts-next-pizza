@@ -1,7 +1,7 @@
 export { Badge } from './badge'
 export { Button } from './button'
 export { Checkbox } from './checkbox'
-export { Dialog, DialogContent, DialogTitle, DialogDescription } from './dialog'
+export { Dialog, DialogContent, DialogTitle } from './dialog'
 export { Drawer } from './drawer'
 export { Input } from './input'
 export { InputOTP } from './input-otp'

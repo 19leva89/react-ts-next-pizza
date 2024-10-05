@@ -7,7 +7,7 @@ import { ProductWithRelations } from '@/@types/prisma'
 
 import { cn } from '@/lib'
 import { ProductForm } from '@/components/shared'
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui'
 
 interface Props {
 	product: ProductWithRelations
@@ -21,15 +21,11 @@ export const ChooseProductModal: FC<Props> = ({ product, className }) => {
 		<Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
 			<DialogContent
 				className={cn('p-0 w-[1060px] max-w-[1060px] min-h-[550px] bg-white overflow-hidden', className)}
-				aria-describedby="dialog-description"
+				aria-describedby={undefined}
 			>
-				<DialogTitle className="sr-only">Вибір продукту</DialogTitle>
-
-				<DialogDescription id="dialog-description" className="sr-only">
-					Виберіть параметри продукту, щоб додати до кошика
-				</DialogDescription>
-
-				<ProductForm product={product} onSubmit={() => router.back()} />
+				<DialogTitle>
+					<ProductForm product={product} onSubmit={() => router.back()} />
+				</DialogTitle>
 			</DialogContent>
 		</Dialog>
 	)
