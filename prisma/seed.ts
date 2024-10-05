@@ -2,7 +2,7 @@ import { hashSync } from 'bcrypt'
 
 import { prisma } from './../prisma/db'
 
-import { categories, ingredients, products, storyItems, storys } from './constants'
+import { categories, ingredients, products, storyItems, stories } from './constants'
 
 const randomNumber = (min: number, max: number) => {
 	return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10
@@ -730,7 +730,7 @@ async function up() {
 	})
 
 	await prisma.story.createMany({
-		data: storys,
+		data: stories,
 	})
 
 	await prisma.storyItem.createMany({

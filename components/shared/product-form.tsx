@@ -3,16 +3,19 @@
 import { FC } from 'react'
 import toast from 'react-hot-toast'
 
-import { useCartStore } from '@/store'
+import { Ingredient } from '@prisma/client'
 import { ProductWithRelations } from '@/@types/prisma'
+
+import { useCartStore } from '@/store'
 import { ChoosePizzaForm, ChooseProductForm } from '@/components/shared'
 
 interface Props {
 	product: ProductWithRelations
+	ingredients: Ingredient[]
 	onSubmit?: VoidFunction
 }
 
-export const ProductForm: FC<Props> = ({ product, onSubmit }) => {
+export const ProductForm: FC<Props> = ({ product, ingredients, onSubmit }) => {
 	const [addCartItem, loading] = useCartStore((state) => [state.addCartItem, state.loading])
 
 	const firstItem = product.items[0]
@@ -42,7 +45,7 @@ export const ProductForm: FC<Props> = ({ product, onSubmit }) => {
 				name={product.name}
 				items={product.items}
 				imageUrl={product.imageUrl}
-				ingredients={product.ingredients}
+				ingredients={ingredients}
 				loading={loading}
 				onSubmit={handleAddToCart}
 			/>

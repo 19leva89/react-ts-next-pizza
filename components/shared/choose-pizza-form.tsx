@@ -4,8 +4,8 @@ import { FC } from 'react'
 import { Ingredient, ProductItem } from '@prisma/client'
 
 import { usePizzaOptions } from '@/hooks'
-import { cn, getPizzaDetails } from '@/lib'
 import { PizzaSize, PizzaType, pizzaTypes } from '@/constants'
+import { calcTotalPizzaPrice, cn, getPizzaDetails } from '@/lib'
 
 import { Button } from '@/components/ui'
 import { GroupVariants, IngredientItem, PizzaImage, Title } from '@/components/shared'
@@ -43,13 +43,9 @@ export const ChoosePizzaForm: FC<Props> = ({
 		addIngredient,
 	} = usePizzaOptions(items)
 
-	const { totalPrice, details, additionalIngredients } = getPizzaDetails(
-		type,
-		size,
-		items,
-		ingredients,
-		selectedIngredientIds,
-	)
+	const { details, additionalIngredients } = getPizzaDetails(type, size, ingredients, selectedIngredientIds)
+
+	const totalPrice = calcTotalPizzaPrice(type, size, items, ingredients, selectedIngredientIds)
 
 	const handleClickAdd = () => {
 		if (currentItemId) {
@@ -84,14 +80,14 @@ export const ChoosePizzaForm: FC<Props> = ({
 
 				<div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar mt-5">
 					<div className="grid grid-cols-3 gap-3">
-						{ingredients.map((ingredient) => (
+						{ingredients.map((item) => (
 							<IngredientItem
-								key={ingredient.id}
-								name={ingredient.name}
-								price={ingredient.price}
-								imageUrl={ingredient.imageUrl}
-								onClick={() => addIngredient(ingredient.id)}
-								active={selectedIngredientIds.has(ingredient.id)}
+								key={item.id}
+								name={item.name}
+								price={item.price}
+								imageUrl={item.imageUrl}
+								onClick={() => addIngredient(item.id)}
+								active={selectedIngredientIds.has(item.id)}
 							/>
 						))}
 					</div>

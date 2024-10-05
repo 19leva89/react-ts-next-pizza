@@ -25,9 +25,15 @@ export default async function ProductPage({ params: { id } }: { params: { id: st
 		return notFound()
 	}
 
+	const ingredients = await prisma.ingredient.findMany()
+
+	if (!ingredients) {
+		return notFound()
+	}
+
 	return (
 		<Container className="flex flex-col my-10">
-			<ProductForm product={product} />
+			<ProductForm product={product} ingredients={ingredients} />
 		</Container>
 	)
 }

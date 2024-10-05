@@ -3,6 +3,7 @@
 import { FC } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { Ingredient } from '@prisma/client'
 import { ProductWithRelations } from '@/@types/prisma'
 
 import { cn } from '@/lib'
@@ -11,10 +12,11 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui'
 
 interface Props {
 	product: ProductWithRelations
+	ingredients: Ingredient[]
 	className?: string
 }
 
-export const ChooseProductModal: FC<Props> = ({ product, className }) => {
+export const ChooseProductModal: FC<Props> = ({ product, ingredients, className }) => {
 	const router = useRouter()
 
 	return (
@@ -24,7 +26,7 @@ export const ChooseProductModal: FC<Props> = ({ product, className }) => {
 				aria-describedby={undefined}
 			>
 				<DialogTitle>
-					<ProductForm product={product} onSubmit={() => router.back()} />
+					<ProductForm product={product} ingredients={ingredients} onSubmit={() => router.back()} />
 				</DialogTitle>
 			</DialogContent>
 		</Dialog>

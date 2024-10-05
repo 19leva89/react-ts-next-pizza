@@ -1,6 +1,5 @@
-import { calcTotalPizzaPrice } from '@/lib'
 import { PizzaSize, PizzaType } from '@/constants'
-import { Ingredient, ProductItem } from '@prisma/client'
+import { Ingredient } from '@prisma/client'
 import { generatePizzaDescription } from './generate-pizza-description'
 
 /**
@@ -20,12 +19,9 @@ import { generatePizzaDescription } from './generate-pizza-description'
 export const getPizzaDetails = (
 	type: PizzaType,
 	size: PizzaSize,
-	items: ProductItem[],
 	ingredients: Ingredient[],
 	selectedIngredientIds: Set<number>,
 ) => {
-	const totalPrice = calcTotalPizzaPrice(type, size, items, ingredients, selectedIngredientIds)
-
 	const { details, additionalIngredients } = generatePizzaDescription(
 		type,
 		size,
@@ -33,5 +29,5 @@ export const getPizzaDetails = (
 		selectedIngredientIds,
 	)
 
-	return { totalPrice, details, additionalIngredients }
+	return { details, additionalIngredients }
 }
