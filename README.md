@@ -47,6 +47,8 @@ Utilities and Libraries:
 - React Use (custom React Hooks)
 - QueryString (Parse and stringify URL)
 
+react-insta-stories
+
 
 To run the client and server via concurrently:
 terminal powershell -> npm run all

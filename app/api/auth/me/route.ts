@@ -6,9 +6,9 @@ import { authOptions } from '@/constants/auth-options'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET(req: any, res: any) {
+export async function GET() {
 	try {
-		const user = await getServerSession(req, res, authOptions)
+		const user = await getServerSession(authOptions)
 
 		if (!user) {
 			return NextResponse.json({ message: 'Ви не авторизовані' }, { status: 401 })

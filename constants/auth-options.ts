@@ -1,7 +1,7 @@
 import { AuthOptions } from 'next-auth'
 import { compare, hashSync } from 'bcrypt'
-import GitHubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
+import GitHubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 import { prisma } from '@/prisma/db'

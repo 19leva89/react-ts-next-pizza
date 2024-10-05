@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { prisma } from '@/prisma/db'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: NextRequest) {
 	try {
 		const code = req.nextUrl.searchParams.get('code')
@@ -37,7 +39,7 @@ export async function GET(req: NextRequest) {
 
 		return NextResponse.redirect(new URL('/?verified', req.url))
 	} catch (error) {
-		console.error(error)
-		console.log('[VERIFY_GET] Server error', error)
+		console.log(error)
+		return NextResponse.json({ message: '[VERIFY_GET] Server error' }, { status: 500 })
 	}
 }

@@ -3,7 +3,8 @@
 import { ChangeEvent, FC, useState } from 'react'
 
 import { Input, Skeleton } from '@/components/ui'
-import { CheckboxFilter, FilterChecboxProps } from './checkbox-filter'
+import { CheckboxFilter } from '@/components/shared'
+import { FilterChecboxProps } from '@/components/shared/checkbox-filter'
 
 interface Props {
 	title: string
