@@ -7,7 +7,7 @@ export async function GET(req: Request) {
 	const widthParam = searchParams.get('width')
 	const heightParam = searchParams.get('height')
 
-	// Проверяем наличие параметров ширины и высоты и парсим их
+	// Check presence of the width and height parameters and parse them
 	const width = widthParam ? parseInt(widthParam, 10) : undefined
 	const height = heightParam ? parseInt(heightParam, 10) : undefined
 
@@ -15,17 +15,22 @@ export async function GET(req: Request) {
 		return NextResponse.json({ error: 'Image URL is required' }, { status: 400 })
 	}
 
-	// Добавляем .png, если в imageUrl его нет
-	const imageUrlWithExtension = imageUrl.endsWith('.png') ? imageUrl : `${imageUrl}.png`
+	// Construct an absolute URL
+	const absoluteImageUrl = new URL(imageUrl, `${process.env.NEXT_PUBLIC_DOMAIN_URL}/`).toString()
 
 	try {
-		const response = await fetch(imageUrlWithExtension)
-		const blob = await response.blob()
-		const buffer = Buffer.from(await blob.arrayBuffer())
+		const response = await fetch(absoluteImageUrl)
+
+		if (!response.ok) {
+			throw new Error(`Failed to fetch image: ${response.statusText}`)
+		}
+
+		const arrayBuffer = await response.arrayBuffer()
+		const buffer = Buffer.from(arrayBuffer)
 
 		const sharpInstance = sharp(buffer)
 
-		// Условное изменение размера
+		// Conditional resizing
 		if (width && height) {
 			sharpInstance.resize(width, height)
 		} else if (width) {

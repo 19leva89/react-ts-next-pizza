@@ -28,7 +28,7 @@ export const PayOrderTemplate: FC<Props> = ({ orderId, totalAmount, paymentUrl, 
 		<ul style={{ padding: 0, listStyleType: 'none' }}>
 			{items.map((item) => {
 				const bdImagePath = item.productItem.product.imageUrl
-				const imageUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/image?url=${encodeURIComponent(bdImagePath)}&width=60&height=60`
+				const imageUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/image?url=${encodeURIComponent(bdImagePath + '.png')}&width=60&height=60`
 
 				return (
 					<li key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
