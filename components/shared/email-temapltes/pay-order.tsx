@@ -26,32 +26,37 @@ export const PayOrderTemplate: FC<Props> = ({ orderId, totalAmount, paymentUrl, 
 
 		<p style={{ fontSize: '18px', marginBottom: '10px' }}>Список товарів:</p>
 		<ul style={{ padding: 0, listStyleType: 'none' }}>
-			{items.map((item) => (
-				<li key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
-					<img
-						src={item.productItem.product.imageUrl}
-						alt={item.productItem.product.name}
-						style={{
-							width: '60px',
-							height: '60px',
-							objectFit: 'cover',
-							borderRadius: '5px',
-							marginRight: '10px',
-							backgroundColor: 'transparent',
-						}}
-					/>
+			{items.map((item) => {
+				const bdImagePath = item.productItem.product.imageUrl
+				const imageUrl = `${bdImagePath}.png`
 
-					<div style={{ fontSize: '16px' }}>
-						<p style={{ margin: 0 }}>
-							<b>{item.productItem.product.name}</b>
-						</p>
-						<p style={{ margin: 0 }}>
-							{item.productItem.price} грн x {item.quantity} шт. ={' '}
-							<b>{item.productItem.price * item.quantity} грн</b>
-						</p>
-					</div>
-				</li>
-			))}
+				return (
+					<li key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
+						<img
+							src={imageUrl}
+							alt={item.productItem.product.name}
+							style={{
+								width: '60px',
+								height: '60px',
+								objectFit: 'cover',
+								borderRadius: '5px',
+								marginRight: '10px',
+								backgroundColor: 'transparent',
+							}}
+						/>
+
+						<div style={{ fontSize: '16px' }}>
+							<p style={{ margin: 0 }}>
+								<b>{item.productItem.product.name}</b>
+							</p>
+							<p style={{ margin: 0 }}>
+								{item.productItem.price} грн x {item.quantity} шт. ={' '}
+								<b>{item.productItem.price * item.quantity} грн</b>
+							</p>
+						</div>
+					</li>
+				)
+			})}
 		</ul>
 
 		<hr style={{ border: '1px solid #ccc', margin: '20px 0' }} />

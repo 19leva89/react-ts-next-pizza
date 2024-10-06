@@ -4,17 +4,18 @@ import Image from 'next/image'
 import { cn } from '@/lib'
 
 interface Props {
+	name: string
 	size: 20 | 30 | 40
 	imageUrl: string
 	className?: string
 }
 
-export const PizzaImage: FC<Props> = ({ imageUrl, size, className }) => {
+export const PizzaImage: FC<Props> = ({ name, size, imageUrl, className }) => {
 	return (
 		<div className={cn('flex items-center justify-center flex-1 relative w-full', className)}>
 			<Image
 				src={imageUrl}
-				alt="logo"
+				alt={name}
 				width={size === 20 ? 300 : size === 30 ? 400 : 500}
 				height={size === 20 ? 300 : size === 30 ? 400 : 500}
 				className={cn('relative left-2 top-2 transition-all z-10 duration-300')}

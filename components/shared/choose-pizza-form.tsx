@@ -55,7 +55,7 @@ export const ChoosePizzaForm: FC<Props> = ({
 
 	return (
 		<div className={cn(className, 'flex flex-1')}>
-			<PizzaImage imageUrl={imageUrl} size={size} />
+			<PizzaImage name={name} size={size} imageUrl={imageUrl} />
 
 			<div className="w-[490px] h-[800px] bg-[#f7f6f5] p-7">
 				<Title text={name} size="md" className="font-extrabold mb-1" />
@@ -80,16 +80,21 @@ export const ChoosePizzaForm: FC<Props> = ({
 
 				<div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar mt-5">
 					<div className="grid grid-cols-3 gap-3">
-						{ingredients.map((item) => (
-							<IngredientItem
-								key={item.id}
-								name={item.name}
-								price={item.price}
-								imageUrl={item.imageUrl}
-								onClick={() => addIngredient(item.id)}
-								active={selectedIngredientIds.has(item.id)}
-							/>
-						))}
+						{ingredients.map((item) => {
+							const bdImagePath = item.imageUrl
+							const imageUrl = `${bdImagePath}.png`
+
+							return (
+								<IngredientItem
+									key={item.id}
+									name={item.name}
+									price={item.price}
+									imageUrl={imageUrl}
+									onClick={() => addIngredient(item.id)}
+									active={selectedIngredientIds.has(item.id)}
+								/>
+							)
+						})}
 					</div>
 				</div>
 

@@ -25,7 +25,7 @@ export const IngredientItem: FC<Props> = ({ name, price, imageUrl, active, onCli
 		>
 			{active && <CircleCheck className="absolute top-2 right-2 text-primary" />}
 
-			<Image width={110} height={110} src={imageUrl} alt="ingredient" />
+			<Image width={110} height={110} src={imageUrl} alt={name} />
 
 			<span className="text-xs mb-1">{name}</span>
 

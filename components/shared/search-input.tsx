@@ -67,24 +67,23 @@ export const SearchInput: FC<Props> = ({ className }) => {
 							focused && 'visible opacity-100 top-12',
 						)}
 					>
-						{products.map((product) => (
-							<Link
-								key={product.id}
-								href={`/product/${product.id}`}
-								onClick={onClickItem}
-								className="flex items-center gap-3 w-full px-3 py-2 hover:bg-primary/10"
-							>
-								<Image
-									className="rounded-sm"
-									src={product.imageUrl}
-									alt={product.name}
-									width={32}
-									height={32}
-								/>
+						{products.map((product) => {
+							const bdImagePath = product.imageUrl
+							const imageUrl = `${bdImagePath}.avif`
 
-								<span>{product.name}</span>
-							</Link>
-						))}
+							return (
+								<Link
+									key={product.id}
+									href={`/product/${product.id}`}
+									onClick={onClickItem}
+									className="flex items-center gap-3 w-full px-3 py-2 hover:bg-primary/10"
+								>
+									<Image className="rounded-sm" src={imageUrl} alt={product.name} width={32} height={32} />
+
+									<span>{product.name}</span>
+								</Link>
+							)
+						})}
 					</div>
 				)}
 			</div>

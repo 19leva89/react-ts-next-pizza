@@ -50,25 +50,30 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 							</SheetHeader>
 
 							<div className="-mx-6 mt-5 overflow-auto flex-1">
-								{items.map((item) => (
-									<div key={item.id} className="mb-2">
-										<CartDrawerItem
-											id={item.id}
-											name={item.name}
-											imageUrl={item.imageUrl}
-											details={getCartItemDetails(
-												item.ingredients,
-												item.pizzaType as PizzaType,
-												item.pizzaSize as PizzaSize,
-											)}
-											price={item.price}
-											quantity={item.quantity}
-											disabled={item.disabled}
-											onClickRemove={() => removeCartItem(item.id)}
-											onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
-										/>
-									</div>
-								))}
+								{items.map((item) => {
+									const bdImagePath = item.imageUrl
+									const imageUrl = `${bdImagePath}.avif`
+
+									return (
+										<div key={item.id} className="mb-2">
+											<CartDrawerItem
+												id={item.id}
+												name={item.name}
+												imageUrl={imageUrl}
+												details={getCartItemDetails(
+													item.ingredients,
+													item.pizzaType as PizzaType,
+													item.pizzaSize as PizzaSize,
+												)}
+												price={item.price}
+												quantity={item.quantity}
+												disabled={item.disabled}
+												onClickRemove={() => removeCartItem(item.id)}
+												onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
+											/>
+										</div>
+									)
+								})}
 							</div>
 
 							<SheetFooter className="-mx-6 bg-white p-8">

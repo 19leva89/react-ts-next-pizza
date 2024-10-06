@@ -163,12 +163,12 @@ model VerificationCode {
 }
 
 model Story {
-  id              Int         @id @default(autoincrement())
-  previewImageUrl String
+  id        Int         @id @default(autoincrement())
+  imageUrl  String
   //
-  items           StoryItem[]
+  items     StoryItem[]
   //
-  createdAt       DateTime    @default(now())
+  createdAt DateTime    @default(now())
 }
 
 model StoryItem {

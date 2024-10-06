@@ -21,6 +21,9 @@ export const ProductForm: FC<Props> = ({ product, ingredients, onSubmit }) => {
 	const firstItem = product.items[0]
 	const isPizzaForm = Boolean(firstItem.pizzaType)
 
+	const bdImagePath = product.imageUrl
+	const imageUrl = `${bdImagePath}.avif`
+
 	const handleAddToCart = async (productItemId?: number, ingredients?: number[]) => {
 		try {
 			const itemId = productItemId ?? firstItem.id
@@ -44,7 +47,7 @@ export const ProductForm: FC<Props> = ({ product, ingredients, onSubmit }) => {
 			<ChoosePizzaForm
 				name={product.name}
 				items={product.items}
-				imageUrl={product.imageUrl}
+				imageUrl={imageUrl}
 				ingredients={ingredients}
 				loading={loading}
 				onSubmit={handleAddToCart}
@@ -56,7 +59,7 @@ export const ProductForm: FC<Props> = ({ product, ingredients, onSubmit }) => {
 		<ChooseProductForm
 			name={product.name}
 			price={firstItem.price}
-			imageUrl={product.imageUrl}
+			imageUrl={imageUrl}
 			loading={loading}
 			onSubmit={handleAddToCart}
 		/>

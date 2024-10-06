@@ -44,17 +44,22 @@ export const Stories: FC<Props> = ({ className }) => {
 						<div key={index} className="w-[200px] h-[250px] bg-gray-200 rounded-md animate-pulse" />
 					))}
 
-				{stories.map((story) => (
-					<Image
-						key={story.id}
-						onClick={() => onClickStory(story)}
-						className="rounded-md cursor-pointer"
-						height={250}
-						width={200}
-						src={story.previewImageUrl}
-						alt="story"
-					/>
-				))}
+				{stories.map((story) => {
+					const bdImagePath = story.imageUrl
+					const imageUrl = `${bdImagePath}.webp`
+
+					return (
+						<Image
+							key={story.id}
+							onClick={() => onClickStory(story)}
+							className="rounded-md cursor-pointer"
+							height={250}
+							width={200}
+							src={imageUrl}
+							alt="story"
+						/>
+					)
+				})}
 
 				{open && (
 					<div className="absolute left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
@@ -65,7 +70,14 @@ export const Stories: FC<Props> = ({ className }) => {
 
 							<ReactStories
 								onAllStoriesEnd={() => setOpen(false)}
-								stories={selectedStory?.items.map((item) => ({ url: item.sourceUrl })) || []}
+								stories={
+									selectedStory?.items.map((item) => {
+										const bdImagePath = item.sourceUrl
+										const storyImageUrl = `${bdImagePath}.webp`
+
+										return { url: storyImageUrl }
+									}) || []
+								}
 								defaultInterval={3000}
 								width={520}
 								height={800}

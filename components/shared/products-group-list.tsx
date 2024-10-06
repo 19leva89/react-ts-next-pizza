@@ -39,16 +39,21 @@ export const ProductsGroupList: FC<Props> = ({ title, items, categoryId, classNa
 				ref={intersectionRef}
 				className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8', listClassName)}
 			>
-				{items.map((product) => (
-					<ProductCard
-						key={product.id}
-						id={product.id}
-						name={product.name}
-						price={product.items[0].price}
-						imageUrl={product.imageUrl}
-						ingredients={product.ingredients}
-					/>
-				))}
+				{items.map((product) => {
+					const bdImagePath = product.imageUrl
+					const imageUrl = `${bdImagePath}.avif`
+
+					return (
+						<ProductCard
+							key={product.id}
+							id={product.id}
+							name={product.name}
+							price={product.items[0].price}
+							imageUrl={imageUrl}
+							ingredients={product.ingredients}
+						/>
+					)
+				})}
 			</div>
 		</div>
 	)

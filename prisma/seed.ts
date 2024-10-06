@@ -43,7 +43,7 @@ async function up() {
 	const pizza1 = await prisma.product.create({
 		data: {
 			name: 'Бефстроганів',
-			imageUrl: '/assets/img/pizzas/beef-stroganoff.avif',
+			imageUrl: '/assets/img/pizzas/beef-stroganoff',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[1], ingredients[6], ingredients[11], ingredients[2], ingredients[13]],
@@ -54,7 +54,7 @@ async function up() {
 	const pizza2 = await prisma.product.create({
 		data: {
 			name: `М'ясна з аджикою 🌶🌶`,
-			imageUrl: '/assets/img/pizzas/meat-with-adjika.avif',
+			imageUrl: '/assets/img/pizzas/meat-with-adjika',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[19], ingredients[10], ingredients[5], ingredients[9], ingredients[2]],
@@ -65,7 +65,7 @@ async function up() {
 	const pizza3 = await prisma.product.create({
 		data: {
 			name: 'Креветки із солодким чилі',
-			imageUrl: '/assets/img/pizzas/sweet-chili-shrimp.avif',
+			imageUrl: '/assets/img/pizzas/sweet-chili-shrimp',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[20], ingredients[14], ingredients[16], ingredients[2]],
@@ -76,7 +76,7 @@ async function up() {
 	const pizza4 = await prisma.product.create({
 		data: {
 			name: 'Сирна 🌱👶',
-			imageUrl: '/assets/img/pizzas/cheese.avif',
+			imageUrl: '/assets/img/pizzas/cheese',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[2], ingredients[3]],
@@ -87,7 +87,7 @@ async function up() {
 	const pizza5 = await prisma.product.create({
 		data: {
 			name: 'Пепероні фреш',
-			imageUrl: '/assets/img/pizzas/pepperoni-fresh.avif',
+			imageUrl: '/assets/img/pizzas/pepperoni-fresh',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[9], ingredients[2], ingredients[12]],
@@ -98,7 +98,7 @@ async function up() {
 	const pizza6 = await prisma.product.create({
 		data: {
 			name: 'Подвійне курча 👶',
-			imageUrl: '/assets/img/pizzas/double-chicken.avif',
+			imageUrl: '/assets/img/pizzas/double-chicken',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[5], ingredients[2]],
@@ -109,7 +109,7 @@ async function up() {
 	const pizza7 = await prisma.product.create({
 		data: {
 			name: 'Шинка та сир',
-			imageUrl: '/assets/img/pizzas/ham-and-cheese.avif',
+			imageUrl: '/assets/img/pizzas/ham-and-cheese',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[8], ingredients[2]],
@@ -120,7 +120,7 @@ async function up() {
 	const pizza8 = await prisma.product.create({
 		data: {
 			name: 'Чорізо фреш',
-			imageUrl: '/assets/img/pizzas/chorizo-fresh.avif',
+			imageUrl: '/assets/img/pizzas/chorizo-fresh',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[10], ingredients[16], ingredients[2]],
@@ -131,7 +131,7 @@ async function up() {
 	const pizza9 = await prisma.product.create({
 		data: {
 			name: 'Жюльєн',
-			imageUrl: '/assets/img/pizzas/julien.avif',
+			imageUrl: '/assets/img/pizzas/julien',
 			categoryId: 1,
 			ingredients: {
 				connect: [
@@ -149,7 +149,7 @@ async function up() {
 	const pizza10 = await prisma.product.create({
 		data: {
 			name: 'Песто',
-			imageUrl: '/assets/img/pizzas/pesto.avif',
+			imageUrl: '/assets/img/pizzas/pesto',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[5], ingredients[17], ingredients[12], ingredients[2]],
@@ -160,7 +160,7 @@ async function up() {
 	const pizza11 = await prisma.product.create({
 		data: {
 			name: 'Карбонара',
-			imageUrl: '/assets/img/pizzas/carbonara.avif',
+			imageUrl: '/assets/img/pizzas/carbonara',
 			categoryId: 1,
 			ingredients: {
 				connect: [
@@ -179,7 +179,7 @@ async function up() {
 	const pizza12 = await prisma.product.create({
 		data: {
 			name: `М'ясна`,
-			imageUrl: '/assets/img/pizzas/meat.avif',
+			imageUrl: '/assets/img/pizzas/meat',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[5], ingredients[8], ingredients[9], ingredients[10], ingredients[2]],
@@ -190,7 +190,7 @@ async function up() {
 	const pizza13 = await prisma.product.create({
 		data: {
 			name: 'Арріва',
-			imageUrl: '/assets/img/pizzas/arriva.avif',
+			imageUrl: '/assets/img/pizzas/arriva',
 			categoryId: 1,
 			ingredients: {
 				connect: [
@@ -209,7 +209,7 @@ async function up() {
 	const pizza14 = await prisma.product.create({
 		data: {
 			name: 'Бургер-піца',
-			imageUrl: '/assets/img/pizzas/burger-pizza.avif',
+			imageUrl: '/assets/img/pizzas/burger-pizza',
 			categoryId: 1,
 			ingredients: {
 				connect: [
@@ -227,7 +227,7 @@ async function up() {
 	const pizza15 = await prisma.product.create({
 		data: {
 			name: 'Сирне курча',
-			imageUrl: '/assets/img/pizzas/cheese-chicken.avif',
+			imageUrl: '/assets/img/pizzas/cheese-chicken',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[5], ingredients[2], ingredients[3], ingredients[12], ingredients[21]],
@@ -238,7 +238,7 @@ async function up() {
 	const pizza16 = await prisma.product.create({
 		data: {
 			name: 'Next',
-			imageUrl: '/assets/img/pizzas/next.avif',
+			imageUrl: '/assets/img/pizzas/next',
 			categoryId: 1,
 			ingredients: {
 				connect: [
@@ -259,7 +259,7 @@ async function up() {
 	const pizza17 = await prisma.product.create({
 		data: {
 			name: 'Пепероні',
-			imageUrl: '/assets/img/pizzas/pepperoni.avif',
+			imageUrl: '/assets/img/pizzas/pepperoni',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[9], ingredients[2]],
@@ -270,7 +270,7 @@ async function up() {
 	const pizza18 = await prisma.product.create({
 		data: {
 			name: 'Чотири сезони',
-			imageUrl: '/assets/img/pizzas/four-seasons.avif',
+			imageUrl: '/assets/img/pizzas/four-seasons',
 			categoryId: 1,
 			ingredients: {
 				connect: [
@@ -289,7 +289,7 @@ async function up() {
 	const pizza19 = await prisma.product.create({
 		data: {
 			name: 'Гавайська',
-			imageUrl: '/assets/img/pizzas/hawaiian.avif',
+			imageUrl: '/assets/img/pizzas/hawaiian',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[5], ingredients[14], ingredients[2]],
@@ -300,7 +300,7 @@ async function up() {
 	const pizza20 = await prisma.product.create({
 		data: {
 			name: 'Шинка та гриби',
-			imageUrl: '/assets/img/pizzas/ham-and-mushrooms.avif',
+			imageUrl: '/assets/img/pizzas/ham-and-mushrooms',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[8], ingredients[6], ingredients[2]],
@@ -311,7 +311,7 @@ async function up() {
 	const pizza21 = await prisma.product.create({
 		data: {
 			name: 'Курча барбекю',
-			imageUrl: '/assets/img/pizzas/chicken-bbq.avif',
+			imageUrl: '/assets/img/pizzas/chicken-bbq',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[5], ingredients[7], ingredients[13], ingredients[2]],
@@ -322,7 +322,7 @@ async function up() {
 	const pizza22 = await prisma.product.create({
 		data: {
 			name: 'Курча ранч',
-			imageUrl: '/assets/img/pizzas/chicken-ranch.avif',
+			imageUrl: '/assets/img/pizzas/chicken-ranch',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[5], ingredients[8], ingredients[2], ingredients[12], ingredients[21]],
@@ -333,7 +333,7 @@ async function up() {
 	const pizza23 = await prisma.product.create({
 		data: {
 			name: 'Маргарита 🌱',
-			imageUrl: '/assets/img/pizzas/margarita.avif',
+			imageUrl: '/assets/img/pizzas/margarita',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[2], ingredients[12], ingredients[15]],
@@ -344,7 +344,7 @@ async function up() {
 	const pizza24 = await prisma.product.create({
 		data: {
 			name: 'Діабло 🌶🌶',
-			imageUrl: '/assets/img/pizzas/diablo.avif',
+			imageUrl: '/assets/img/pizzas/diablo',
 			categoryId: 1,
 			ingredients: {
 				connect: [
@@ -363,7 +363,7 @@ async function up() {
 	const pizza25 = await prisma.product.create({
 		data: {
 			name: 'Ковбаски барбекю',
-			imageUrl: '/assets/img/pizzas/sausages-bbq.avif',
+			imageUrl: '/assets/img/pizzas/sausages-bbq',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[10], ingredients[12], ingredients[13], ingredients[2]],
@@ -374,7 +374,7 @@ async function up() {
 	const pizza26 = await prisma.product.create({
 		data: {
 			name: 'Овочі та гриби 🌱',
-			imageUrl: '/assets/img/pizzas/vegetables-and-mushrooms.avif',
+			imageUrl: '/assets/img/pizzas/vegetables-and-mushrooms',
 			categoryId: 1,
 			ingredients: {
 				connect: [
@@ -393,7 +393,7 @@ async function up() {
 	const pizza27 = await prisma.product.create({
 		data: {
 			name: `М'ясний мікс із баварськими ковбасками`,
-			imageUrl: '/assets/img/pizzas/meat-mix-with-bavarian-sausages.avif',
+			imageUrl: '/assets/img/pizzas/meat-mix-with-bavarian-sausages',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[19], ingredients[9], ingredients[10], ingredients[7], ingredients[2]],
@@ -404,7 +404,7 @@ async function up() {
 	const pizza28 = await prisma.product.create({
 		data: {
 			name: 'Подвійна пепероні',
-			imageUrl: '/assets/img/pizzas/double-pepperoni.avif',
+			imageUrl: '/assets/img/pizzas/double-pepperoni',
 			categoryId: 1,
 			ingredients: {
 				connect: [ingredients[10], ingredients[2]],

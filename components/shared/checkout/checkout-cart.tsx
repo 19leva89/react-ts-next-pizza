@@ -39,24 +39,29 @@ export const CheckoutCart: FC<Props> = ({
 					))
 				) : items.length > 0 ? (
 					// Show items in the cart if they exist
-					items.map((item) => (
-						<CheckoutDrawerItem
-							key={item.id}
-							id={item.id}
-							name={item.name}
-							imageUrl={item.imageUrl}
-							details={getCartItemDetails(
-								item.ingredients,
-								item.pizzaType as PizzaType,
-								item.pizzaSize as PizzaSize,
-							)}
-							price={item.price}
-							quantity={item.quantity}
-							disabled={item.disabled}
-							onClickRemove={() => removeCartItem(item.id)}
-							onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
-						/>
-					))
+					items.map((item) => {
+						const bdImagePath = item.imageUrl
+						const imageUrl = `${bdImagePath}.avif`
+
+						return (
+							<CheckoutDrawerItem
+								key={item.id}
+								id={item.id}
+								name={item.name}
+								imageUrl={imageUrl}
+								details={getCartItemDetails(
+									item.ingredients,
+									item.pizzaType as PizzaType,
+									item.pizzaSize as PizzaSize,
+								)}
+								price={item.price}
+								quantity={item.quantity}
+								disabled={item.disabled}
+								onClickRemove={() => removeCartItem(item.id)}
+								onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
+							/>
+						)
+					})
 				) : (
 					// Show text if cart is empty
 					<>
