@@ -4,7 +4,8 @@ import { cn } from '@/lib'
 
 interface Props {
 	name: string
-	details: string
+	details?: string
+
 	className?: string
 }
 

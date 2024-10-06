@@ -1,33 +1,43 @@
 export const categories = [
 	{
 		name: 'Піци',
+		slug: 'pizza',
 	},
 	{
 		name: 'Сніданок',
+		slug: 'breakfast',
 	},
 	{
 		name: 'Закуски',
+		slug: 'snack',
 	},
 	{
 		name: 'Коктейлі',
+		slug: 'cocktail',
 	},
 	{
 		name: 'Напої',
+		slug: 'drinks',
 	},
 	{
 		name: 'Кава',
+		slug: 'coffee',
 	},
 	{
 		name: 'Комбо',
+		slug: 'combo',
 	},
 	{
 		name: 'Десерти',
+		slug: 'dessert',
 	},
 	{
 		name: 'Люблять діти',
+		slug: 'for-kids',
 	},
 	{
 		name: 'Соуси',
+		slug: 'sauces',
 	},
 ]
 

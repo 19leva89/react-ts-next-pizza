@@ -22,7 +22,7 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
 	return (
 		<>
 			<Container className="mt-10">
-				<Title text="Усі піци" size="lg" className="font-extrabold" />
+				<Title text="Усі товари" size="lg" className="font-extrabold" />
 			</Container>
 
 			<TopBar categories={categories.filter((category) => category.products.length > 0)} />
@@ -45,6 +45,7 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
 								<ProductsGroupList
 									key={category.id}
 									title={category.name}
+									slug={category.slug}
 									categoryId={category.id}
 									items={category.products}
 								/>

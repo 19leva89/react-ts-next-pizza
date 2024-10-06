@@ -11,34 +11,39 @@ import { ProductCard, Title } from '@/components/shared'
 
 interface Props {
 	title: string
+	slug: string
 	items: ProductWithRelations[]
 	categoryId: number
 	className?: string
 	listClassName?: string
 }
 
-export const ProductsGroupList: FC<Props> = ({ title, items, categoryId, className, listClassName }) => {
+export const ProductsGroupList: FC<Props> = ({
+	title,
+	slug,
+	items,
+	categoryId,
+	className,
+	listClassName,
+}) => {
 	const intersectionRef = useRef(null)
 	const setCategoryActiveId = useCategoryStore((state) => state.setActiveId)
 
 	const intersection = useIntersection(intersectionRef, {
-		threshold: 0.4,
+		threshold: 0.1,
 	})
 
 	useEffect(() => {
 		if (intersection?.isIntersecting) {
 			setCategoryActiveId(categoryId)
 		}
-	}, [categoryId, intersection?.isIntersecting, setCategoryActiveId, title])
+	}, [categoryId, intersection?.isIntersecting, setCategoryActiveId, slug])
 
 	return (
-		<div className={className} id={title} ref={intersectionRef}>
+		<div className={className} id={slug} ref={intersectionRef}>
 			<Title text={title} size="lg" className="font-extrabold mb-5" />
 
-			<div
-				ref={intersectionRef}
-				className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8', listClassName)}
-			>
+			<div className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8', listClassName)}>
 				{items.map((product) => {
 					const bdImagePath = product.imageUrl
 					const imageUrl = `${bdImagePath}.avif`
