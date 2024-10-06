@@ -4,7 +4,7 @@ import { Trash2Icon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { CountButton } from '@/components/shared'
-import { CartItemInfo } from '@/components/shared/cart-item-details/cart-item-info'
+import * as CartItemDetails from '@/components/shared/cart-item-details'
 
 interface CartItemProps {
 	id: number
@@ -22,11 +22,11 @@ interface Props extends CartItemProps {
 }
 
 export const CartDrawerItem: FC<Props> = ({
-	imageUrl,
 	name,
+	imageUrl,
+	details,
 	price,
 	quantity,
-	details,
 	disabled,
 	onClickRemove,
 	onClickCountButton,
@@ -51,7 +51,7 @@ export const CartDrawerItem: FC<Props> = ({
 			/>
 
 			<div className="flex-1">
-				<CartItemInfo name={name} details={details} />
+				<CartItemDetails.Info name={name} details={details} />
 
 				<hr className="my-3" />
 

@@ -60,9 +60,9 @@ export const ChoosePizzaForm: FC<Props> = ({
 			<div className="w-[490px] h-[800px] bg-[#f7f6f5] p-7">
 				<Title text={name} size="md" className="font-extrabold mb-1" />
 
-				<p className="text-gray-400">{details}</p>
+				<p className="text-gray-400 text-sm">{details}</p>
 
-				<p className="text-gray-400">{additionalIngredients}</p>
+				<p className="text-gray-400 text-sm">{additionalIngredients}</p>
 
 				<div className="flex flex-col gap-4 mt-5">
 					<GroupVariants
