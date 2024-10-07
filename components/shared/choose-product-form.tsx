@@ -7,6 +7,7 @@ import { Title } from '@/components/shared'
 
 interface Props {
 	name: string
+	description?: string
 	price: number
 	imageUrl: string
 	loading?: boolean
@@ -17,7 +18,15 @@ interface Props {
 /**
  * PRODUCT selection form
  */
-export const ChooseProductForm: FC<Props> = ({ name, price, imageUrl, loading, onSubmit, className }) => {
+export const ChooseProductForm: FC<Props> = ({
+	name,
+	description,
+	price,
+	imageUrl,
+	loading,
+	onSubmit,
+	className,
+}) => {
 	return (
 		<div className={cn(className, 'flex flex-1')}>
 			<div className="flex items-center justify-center flex-1 relative w-full">
@@ -32,6 +41,8 @@ export const ChooseProductForm: FC<Props> = ({ name, price, imageUrl, loading, o
 
 			<div className="w-[490px] bg-[#f7f6f5] p-7">
 				<Title text={name} size="md" className="font-extrabold mb-1" />
+
+				<p className="text-sm text-gray-400">{description}</p>
 
 				<Button
 					loading={loading}

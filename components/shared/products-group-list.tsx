@@ -53,6 +53,7 @@ export const ProductsGroupList: FC<Props> = ({
 							key={product.id}
 							id={product.id}
 							name={product.name}
+							description={product.description || ''}
 							price={product.items[0].price}
 							imageUrl={imageUrl}
 							ingredients={product.ingredients}

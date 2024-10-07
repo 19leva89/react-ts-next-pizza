@@ -12,13 +12,22 @@ import { Title } from '@/components/shared'
 interface Props {
 	id: number
 	name: string
+	description?: string
 	price: number
 	imageUrl: string
 	ingredients: Ingredient[]
 	className?: string
 }
 
-export const ProductCard: FC<Props> = ({ id, name, price, imageUrl, ingredients, className }) => {
+export const ProductCard: FC<Props> = ({
+	id,
+	name,
+	description,
+	price,
+	imageUrl,
+	ingredients,
+	className,
+}) => {
 	return (
 		<div className={cn('bg-gray-50 p-2 rounded-lg', className)}>
 			<Link href={`/product/${id}`} className="flex flex-col h-full">
@@ -37,6 +46,7 @@ export const ProductCard: FC<Props> = ({ id, name, price, imageUrl, ingredients,
 
 					<p className="text-sm text-gray-400">
 						{ingredients.map((ingredient) => ingredient.name).join(', ')}
+						{description}
 					</p>
 				</div>
 

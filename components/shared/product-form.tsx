@@ -58,6 +58,7 @@ export const ProductForm: FC<Props> = ({ product, ingredients, onSubmit }) => {
 	return (
 		<ChooseProductForm
 			name={product.name}
+			description={product.description || ''}
 			price={firstItem.price}
 			imageUrl={imageUrl}
 			loading={loading}
