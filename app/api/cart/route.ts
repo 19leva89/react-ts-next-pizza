@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getUserSession } from '@/lib/get-user-session'
 import { findOrCreateCart } from '@/lib/find-or-create-cart'
 import { CreateCartItemValues } from '@/services/dto/cart.dto'
+import { updateCartWithUserId } from '@/lib/update-cart-with-user-id'
 import { updateCartTotalAmount } from '@/lib/update-cart-total-amount'
 
 export async function GET(req: NextRequest) {
@@ -18,16 +19,7 @@ export async function GET(req: NextRequest) {
 		}
 
 		const userCart = await prisma.cart.findFirst({
-			where: {
-				OR: [
-					{
-						userId,
-					},
-					{
-						token,
-					},
-				],
-			},
+			where: { token },
 			include: {
 				items: {
 					orderBy: {
@@ -44,6 +36,10 @@ export async function GET(req: NextRequest) {
 				},
 			},
 		})
+
+		if (userId) {
+			await updateCartWithUserId(token, userId)
+		}
 
 		return NextResponse.json(userCart)
 	} catch (error) {
@@ -63,7 +59,7 @@ export async function POST(req: NextRequest) {
 			token = crypto.randomUUID()
 		}
 
-		const userCart = await findOrCreateCart(userId, token)
+		const userCart = await findOrCreateCart(token)
 
 		const findCartItem = await prisma.cartItem.findMany({
 			where: {
@@ -112,7 +108,11 @@ export async function POST(req: NextRequest) {
 			})
 		}
 
-		const updatedUserCart = await updateCartTotalAmount(userCart.id, token)
+		// if (userId) {
+		// 	await updateCartWithUserId(token, userId)
+		// }
+
+		const updatedUserCart = await updateCartTotalAmount(token)
 
 		const resp = NextResponse.json(updatedUserCart)
 		resp.cookies.set('cartToken', token)

@@ -34,7 +34,7 @@ model User {
   verified         DateTime?
   verificationCode VerificationCode?
   //
-  cart             Cart?
+  cart             Cart[]            @relation("UserCart")
   cartItems        CartItem[]
   orders           Order[]
   //
@@ -104,8 +104,8 @@ model Ingredient {
 model Cart {
   id          Int        @id @default(autoincrement())
   //
-  user        User?      @relation(fields: [userId], references: [id])
-  userId      Int?       @unique
+  user        User?      @relation("UserCart", fields: [userId], references: [id])
+  userId      Int?
   //
   token       String     @unique
   //

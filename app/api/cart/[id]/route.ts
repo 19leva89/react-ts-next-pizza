@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 import { prisma } from '@/prisma/db'
-import { getUserSession } from '@/lib/get-user-session'
 import { updateCartTotalAmount } from '@/lib/update-cart-total-amount'
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
@@ -9,8 +8,6 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 		const id = Number(params.id)
 		const data = (await req.json()) as { quantity: number }
 		const token = req.cookies.get('cartToken')?.value
-		const currentUser = await getUserSession()
-		const userId = Number(currentUser?.id)
 
 		if (!token) {
 			return NextResponse.json({ error: 'Cart token not found' })
@@ -35,7 +32,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 			},
 		})
 
-		const updatedUserCart = await updateCartTotalAmount(userId, token)
+		const updatedUserCart = await updateCartTotalAmount(token)
 
 		return NextResponse.json(updatedUserCart)
 	} catch (error) {
@@ -48,8 +45,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 	try {
 		const id = Number(params.id)
 		const token = req.cookies.get('cartToken')?.value
-		const currentUser = await getUserSession()
-		const userId = Number(currentUser?.id)
 
 		if (!token) {
 			return NextResponse.json({ error: 'Cart token not found' })
@@ -71,7 +66,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 			},
 		})
 
-		const updatedUserCart = await updateCartTotalAmount(userId, token)
+		const updatedUserCart = await updateCartTotalAmount(token)
 
 		return NextResponse.json(updatedUserCart)
 	} catch (error) {
