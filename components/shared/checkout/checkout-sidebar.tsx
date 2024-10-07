@@ -2,11 +2,10 @@ import { FC } from 'react'
 import { ArrowRight, Package, TicketPercent, Truck } from 'lucide-react'
 
 import { cn } from '@/lib'
+import { DISCOUNT } from '@/constants/discount'
 import { Button, Skeleton } from '@/components/ui'
+import { DELIVERY_PRICE } from '@/constants/delivery'
 import { CheckoutItemDetails, WhiteBlock } from '@/components/shared'
-
-const DISCOUNT = 15
-const DELIVERY_PRICE = 250
 
 interface Props {
 	totalAmount: number
@@ -16,7 +15,7 @@ interface Props {
 
 export const CheckoutSidebar: FC<Props> = ({ totalAmount, loading, className }) => {
 	const discountPrice = (totalAmount * DISCOUNT) / 100
-	const totalPrice = totalAmount + DELIVERY_PRICE - discountPrice
+	const totalPrice = totalAmount - discountPrice + DELIVERY_PRICE
 
 	return (
 		<WhiteBlock className={cn('p-6 sticky top-4', className)}>

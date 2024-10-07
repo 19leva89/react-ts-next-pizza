@@ -19,6 +19,11 @@ enum OrderStatus {
   CANCELLED
 }
 
+enum DiscountType {
+  PERCENT
+  FIXED
+}
+
 model User {
   id               Int               @id @default(autoincrement())
   fullName         String
@@ -51,19 +56,21 @@ model Category {
 }
 
 model Product {
-  id          Int           @id @default(autoincrement())
-  name        String
-  description String?
-  imageUrl    String
+  id           Int           @id @default(autoincrement())
+  name         String
+  description  String?
+  imageUrl     String
+  discount     Int           @default(0)
+  discountType DiscountType?
   //
-  items       ProductItem[]
-  ingredients Ingredient[]
+  items        ProductItem[]
+  ingredients  Ingredient[]
   //
-  category    Category      @relation(fields: [categoryId], references: [id])
-  categoryId  Int
+  category     Category      @relation(fields: [categoryId], references: [id])
+  categoryId   Int
   //
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 model ProductItem {
@@ -129,27 +136,29 @@ model CartItem {
 }
 
 model Order {
-  id          Int         @id @default(autoincrement())
-  fullName    String
-  email       String
-  phone       String
-  region      String
-  city        String
-  address     String
-  comment     String?
+  id            Int         @id @default(autoincrement())
+  fullName      String
+  email         String
+  phone         String
+  region        String
+  city          String
+  address       String
+  comment       String?
   //
-  user        User?       @relation(fields: [userId], references: [id])
-  userId      Int?
+  user          User?       @relation(fields: [userId], references: [id])
+  userId        Int?
   //
-  token       String
+  token         String
   //
-  items       Json
-  totalAmount Int
-  paymentId   String?
-  status      OrderStatus @default(PENDING)
+  items         Json
+  discount      Int         @default(0)
+  deliveryPrice Int         @default(0)
+  totalAmount   Int
+  paymentId     String?
+  status        OrderStatus @default(PENDING)
   //
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 }
 
 model VerificationCode {

@@ -8,16 +8,18 @@ import { Prisma } from '@prisma/client'
 
 import { sendEmail } from '@/lib'
 import { createPayment } from '@/lib/stripe'
+import { DISCOUNT } from '@/constants/discount'
 import { CheckoutFormValues } from '@/constants'
+import { DELIVERY_PRICE } from '@/constants/delivery'
 import { getUserSession } from '@/lib/get-user-session'
 import { PayOrderTemplate, VerificationUserTemplate } from '@/components/shared/email-temapltes'
 
 export async function createOrder(data: CheckoutFormValues) {
 	try {
 		const cookieStore = cookies()
-		const cartToken = cookieStore.get('cartToken')?.value
+		const token = cookieStore.get('cartToken')?.value
 
-		if (!cartToken) {
+		if (!token) {
 			throw new Error('Cart token not found')
 		}
 
@@ -37,7 +39,7 @@ export async function createOrder(data: CheckoutFormValues) {
 				},
 			},
 			where: {
-				token: cartToken,
+				token,
 			},
 		})
 
@@ -51,10 +53,13 @@ export async function createOrder(data: CheckoutFormValues) {
 			throw new Error('Cart is empty')
 		}
 
+		const discount = (userCart?.totalAmount * DISCOUNT) / 100
+		const totalPrice = userCart.totalAmount - discount + DELIVERY_PRICE
+
 		/* Create an order */
 		const order = await prisma.order.create({
 			data: {
-				token: cartToken,
+				token,
 				fullName: data.firstName + ' ' + data.lastName,
 				email: data.email,
 				phone: data.phone,
@@ -62,8 +67,11 @@ export async function createOrder(data: CheckoutFormValues) {
 				city: data.city,
 				address: data.address,
 				comment: data.comment,
-				totalAmount: userCart.totalAmount,
 				items: JSON.stringify(userCart.items),
+				discount: discount,
+				deliveryPrice: DELIVERY_PRICE,
+				totalAmount: totalPrice,
+				userId: userCart.user?.id || null,
 			},
 		})
 
@@ -85,7 +93,7 @@ export async function createOrder(data: CheckoutFormValues) {
 
 		/* Creating a payment link */
 		const paymentData = await createPayment({
-			token: cartToken,
+			token,
 			email: data.email,
 			amount: order.totalAmount,
 			orderId: order.id,

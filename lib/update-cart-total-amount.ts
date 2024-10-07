@@ -3,10 +3,17 @@
 import { prisma } from '@/prisma/db'
 import { calcCartItemTotalPrice } from '@/lib'
 
-export const updateCartTotalAmount = async (token: string) => {
+export const updateCartTotalAmount = async (userId: number, token: string) => {
 	const userCart = await prisma.cart.findFirst({
 		where: {
-			token,
+			OR: [
+				{
+					userId,
+				},
+				{
+					token,
+				},
+			],
 		},
 		include: {
 			items: {

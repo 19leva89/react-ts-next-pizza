@@ -2,6 +2,7 @@ import crypto from 'crypto'
 import { prisma } from '@/prisma/db'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { getUserSession } from '@/lib/get-user-session'
 import { findOrCreateCart } from '@/lib/find-or-create-cart'
 import { CreateCartItemValues } from '@/services/dto/cart.dto'
 import { updateCartTotalAmount } from '@/lib/update-cart-total-amount'
@@ -9,6 +10,8 @@ import { updateCartTotalAmount } from '@/lib/update-cart-total-amount'
 export async function GET(req: NextRequest) {
 	try {
 		const token = req.cookies.get('cartToken')?.value
+		const currentUser = await getUserSession()
+		const userId = Number(currentUser?.id)
 
 		if (!token) {
 			return NextResponse.json({ totalAmount: 0, items: [] })
@@ -17,6 +20,9 @@ export async function GET(req: NextRequest) {
 		const userCart = await prisma.cart.findFirst({
 			where: {
 				OR: [
+					{
+						userId,
+					},
 					{
 						token,
 					},
@@ -49,41 +55,56 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
 	try {
 		let token = req.cookies.get('cartToken')?.value
+		const currentUser = await getUserSession()
+		const userId = Number(currentUser?.id)
+		const data = (await req.json()) as CreateCartItemValues
 
 		if (!token) {
 			token = crypto.randomUUID()
 		}
 
-		const userCart = await findOrCreateCart(token)
+		const userCart = await findOrCreateCart(userId, token)
 
-		const data = (await req.json()) as CreateCartItemValues
-
-		//TODO: я добавляю товар без ингредиентов, а затем тот же товар с ингредиентами, то они в корзине отображаются как 2шт товара без ингредиентов
-		const findCartItem = await prisma.cartItem.findFirst({
+		const findCartItem = await prisma.cartItem.findMany({
 			where: {
 				cartId: userCart.id,
 				productItemId: data.productItemId,
-				ingredients: {
-					every: {
-						id: { in: data.ingredients },
-					},
-				},
+				// Checking the availability of ingredients
+				ingredients:
+					data.ingredients && data.ingredients.length > 0
+						? { every: { id: { in: data.ingredients } } }
+						: { none: {} }, // if no ingredients
+			},
+			include: {
+				ingredients: true,
 			},
 		})
 
-		// If the product was found, we do +1
-		if (findCartItem) {
+		// Check the uniqueness of the set of ingredients
+		const exactMatchCartItem = findCartItem.find((cartItem) => {
+			const ingredientIds = cartItem.ingredients.map((ingredient) => ingredient.id)
+			// Check that the amount of ingredients matches and the sets are identical
+			return (
+				ingredientIds.length === (data.ingredients?.length || 0) &&
+				ingredientIds.every((id) => data.ingredients?.includes(id))
+			)
+		})
+
+		// If a product with the exact set of ingredients is found, we increase the quantity
+		if (exactMatchCartItem) {
 			await prisma.cartItem.update({
 				where: {
-					id: findCartItem.id,
+					id: exactMatchCartItem.id,
 				},
 				data: {
-					quantity: findCartItem.quantity + 1,
+					quantity: exactMatchCartItem.quantity + 1,
 				},
 			})
 		} else {
+			// Otherwise, create a new product in the cart
 			await prisma.cartItem.create({
 				data: {
+					userId: userId || null,
 					cartId: userCart.id,
 					productItemId: data.productItemId,
 					ingredients: { connect: data.ingredients?.map((id) => ({ id })) },
@@ -91,7 +112,7 @@ export async function POST(req: NextRequest) {
 			})
 		}
 
-		const updatedUserCart = await updateCartTotalAmount(token)
+		const updatedUserCart = await updateCartTotalAmount(userCart.id, token)
 
 		const resp = NextResponse.json(updatedUserCart)
 		resp.cookies.set('cartToken', token)
