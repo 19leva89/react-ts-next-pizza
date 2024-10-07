@@ -30,11 +30,11 @@ export async function POST(req: NextRequest) {
 		return new NextResponse('Webhook error', { status: 400 })
 	}
 
-	/* Get the Stripe Checkout session object */
-	const session = event.data.object as Stripe.Checkout.Session
-
 	/* Handle the event when the session is completed */
 	if (event.type === 'checkout.session.completed') {
+		/* Get the Stripe Checkout session object */
+		const session = event.data.object as Stripe.Checkout.Session
+
 		/* Receive paymentIntent and payment status */
 		const paymentIntentId = session.payment_intent as string
 		const isSucceeded = session.payment_status === 'paid'
@@ -86,6 +86,49 @@ export async function POST(req: NextRequest) {
 			}
 		} catch (error) {
 			console.error('Error updating order:', error)
+			return new NextResponse('Error updating order', { status: 500 })
+		}
+	}
+
+	/* Handle the event when the payment intent is canceled */
+	if (event.type === 'payment_intent.canceled') {
+		/* Get the payment intent object */
+		const paymentIntent = event.data.object as Stripe.PaymentIntent
+
+		/* Get orderId from payment intent metadata */
+		const orderId = paymentIntent.metadata?.order_id
+
+		if (!orderId) {
+			console.error('Order ID not found in payment intent metadata')
+			return new NextResponse('Order ID not found', { status: 400 })
+		}
+
+		/* Search for an order in the database by orderId */
+		const order = await prisma.order.findFirst({
+			where: {
+				id: Number(orderId),
+			},
+		})
+
+		if (!order) {
+			console.error('Order not found')
+			return new NextResponse('Order not found', { status: 400 })
+		}
+
+		try {
+			/* Updating the order: set status to CANCELLED */
+			await prisma.order.update({
+				where: {
+					id: order.id,
+				},
+				data: {
+					status: OrderStatus.CANCELLED,
+				},
+			})
+
+			//TODO: Optional email about cancelled payment
+		} catch (error) {
+			console.error('Error updating order to cancelled:', error)
 			return new NextResponse('Error updating order', { status: 500 })
 		}
 	}

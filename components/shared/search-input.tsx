@@ -53,7 +53,7 @@ export const SearchInput: FC<Props> = ({ className }) => {
 
 				<input
 					type="text"
-					placeholder="Знайти піцу..."
+					placeholder="Знайти товар..."
 					className="rounded-2xl outline-none w-full bg-gray-100 pl-11"
 					value={searchQuery}
 					onFocus={() => setFocused(true)}
