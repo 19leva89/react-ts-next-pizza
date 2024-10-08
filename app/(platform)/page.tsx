@@ -1,7 +1,15 @@
 import { Suspense } from 'react'
 
+import {
+	Container,
+	Filters,
+	ProductsGroupList,
+	ScrollToTop,
+	Stories,
+	Title,
+	TopBar,
+} from '@/components/shared'
 import { findPizzas, GetSearchParams } from '@/lib/find-pizzas'
-import { Container, Filters, ProductsGroupList, Stories, Title, TopBar } from '@/components/shared'
 
 export default async function Home({ searchParams }: { searchParams: GetSearchParams }) {
 	const categories = await findPizzas(searchParams)
@@ -53,6 +61,8 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
 						</div>
 					</div>
 				</div>
+
+				<ScrollToTop className="font-bold bg-[#ffe4d5] w-12 h-12" />
 			</Container>
 		</>
 	)

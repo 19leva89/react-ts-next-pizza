@@ -10,7 +10,7 @@ import { User } from '@prisma/client'
 import { Button } from '@/components/ui'
 import { updateUserInfo } from '@/app/actions'
 import { Container, FormInput, Title } from '@/components/shared'
-import { TFormRegisterValues, formRegisterSchema } from '@/components/shared/modals/auth-modal/forms/schemas'
+import { updateUserInfoSchema, UserFormValues } from '@/constants/update-user-info-schema'
 
 interface Props {
 	data: User
@@ -18,26 +18,34 @@ interface Props {
 
 export const ProfileForm: FC<Props> = ({ data }) => {
 	const form = useForm({
-		resolver: zodResolver(formRegisterSchema),
+		resolver: zodResolver(updateUserInfoSchema),
 		defaultValues: {
-			fullName: data.fullName,
 			email: data.email,
+			fullName: data.fullName,
 			password: '',
 			confirmPassword: '',
 		},
 	})
 
-	const onSubmit = async (data: TFormRegisterValues) => {
+	const onSubmit = async (formData: UserFormValues) => {
 		try {
-			await updateUserInfo({
-				email: data.email,
-				fullName: data.fullName,
-				password: data.password,
-			})
+			const updateData = {
+				email: formData.email,
+				fullName: formData.fullName,
+				...(formData.password ? { password: formData.password } : {}),
+			}
+
+			await updateUserInfo(updateData)
 
 			toast.success('Дані оновлені 📝')
 		} catch (error) {
-			return toast.error('Помилка під час оновлення даних')
+			console.error('Error updating user info:', error)
+
+			if (error instanceof Error) {
+				toast.error(error.message)
+			} else {
+				toast.error('Помилка під час оновлення даних')
+			}
 		}
 	}
 
@@ -57,9 +65,9 @@ export const ProfileForm: FC<Props> = ({ data }) => {
 
 					<FormInput name="fullName" label="Повне ім'я" type="text" required />
 
-					<FormInput name="password" label="Новий пароль" type="password" required />
+					<FormInput name="password" label="Новий пароль" type="password" />
 
-					<FormInput name="confirmPassword" label="Повторіть пароль" type="password" required />
+					<FormInput name="confirmPassword" label="Повторіть пароль" type="password" />
 
 					<Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
 						Зберегти

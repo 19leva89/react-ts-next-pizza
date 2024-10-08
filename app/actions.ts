@@ -145,22 +145,42 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
 			throw new Error('Користувача не знайдено')
 		}
 
-		const findUser = await prisma.user.findFirst({
+		const existingUser = await prisma.user.findFirst({
 			where: {
 				id: Number(currentUser.id),
 			},
 		})
 
-		await prisma.user.update({
+		if (!existingUser) {
+			throw new Error('Користувача не знайдено')
+		}
+
+		// Валидация на уникальность email
+		if (body.email && body.email !== existingUser.email) {
+			const emailExists = await prisma.user.findUnique({
+				where: {
+					email: body.email as string,
+				},
+			})
+			if (emailExists) {
+				throw new Error('Email вже використовується')
+			}
+		}
+
+		const updatedData: Prisma.UserUpdateInput = {
+			fullName: body.fullName,
+			email: body.email ? body.email : existingUser.email, // Условное присваивание
+			password: body.password ? hashSync(body.password as string, 10) : existingUser.password,
+		}
+
+		const updatedUser = await prisma.user.update({
 			where: {
 				id: Number(currentUser.id),
 			},
-			data: {
-				fullName: body.fullName,
-				email: body.email,
-				password: body.password ? hashSync(body.password as string, 10) : findUser?.password,
-			},
+			data: updatedData,
 		})
+
+		return updatedUser
 	} catch (err) {
 		console.log('Error [UPDATE_USER]', err)
 		throw err
