@@ -55,7 +55,7 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
 					<Image src="/assets/img/phone-icon.png" alt="phone icon" width={60} height={60} />
 				</div>
 
-				<FormInput name="email" label="Email" required />
+				<FormInput name="email" label="Email" type="email" required />
 
 				<FormInput name="password" label="Пароль" type="password" required />
 

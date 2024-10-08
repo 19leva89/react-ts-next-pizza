@@ -1,9 +1,9 @@
 import { FC } from 'react'
 
-import { getCartItemDetails } from '@/lib'
 import { Skeleton } from '@/components/ui'
-import { CartStateItem } from '@/lib/cart/get-cart-details'
+import { getCartItemDetails } from '@/lib'
 import { PizzaSize, PizzaType } from '@/constants/pizza'
+import { CartStateItem } from '@/lib/cart/get-cart-details'
 import { CheckoutDrawerItem, Title, WhiteBlock } from '@/components/shared'
 
 interface Props {

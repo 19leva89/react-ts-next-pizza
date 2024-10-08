@@ -11,12 +11,12 @@ export const CheckoutAddressForm: FC<Props> = ({ className }) => {
 		<WhiteBlock title="3. Адреса доставки" className={className}>
 			<div className="flex flex-col gap-5">
 				<div className="grid grid-cols-2 gap-5">
-					<FormInput name="region" className="text-base" placeholder="Область" />
+					<FormInput name="region" type="text" className="text-base" placeholder="Область" />
 
-					<FormInput name="city" className="text-base" placeholder="Місто" />
+					<FormInput name="city" type="text" className="text-base" placeholder="Місто" />
 				</div>
 
-				<FormInput name="address" className="text-base" placeholder="Адреса" />
+				<FormInput name="address" type="text" className="text-base" placeholder="Адреса" />
 
 				<FormTextarea name="comment" className="text-base" placeholder="Коментар до замовлення" rows={5} />
 			</div>

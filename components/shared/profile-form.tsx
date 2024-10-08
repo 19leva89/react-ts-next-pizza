@@ -53,13 +53,13 @@ export const ProfileForm: FC<Props> = ({ data }) => {
 
 			<FormProvider {...form}>
 				<form className="flex flex-col gap-5 w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
-					<FormInput name="email" label="Email" required />
+					<FormInput name="email" label="Email" type="email" required />
 
-					<FormInput name="fullName" label="Повне ім'я" required />
+					<FormInput name="fullName" label="Повне ім'я" type="text" required />
 
-					<FormInput type="password" name="password" label="Новий пароль" required />
+					<FormInput name="password" label="Новий пароль" type="password" required />
 
-					<FormInput type="password" name="confirmPassword" label="Повторіть пароль" required />
+					<FormInput name="confirmPassword" label="Повторіть пароль" type="password" required />
 
 					<Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
 						Зберегти

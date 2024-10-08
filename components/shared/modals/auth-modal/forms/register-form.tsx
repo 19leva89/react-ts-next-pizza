@@ -48,9 +48,9 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
 					<p className="text-gray-400 text-sm">Введіть свої дані, щоб зареєструвати акаунт</p>
 				</div>
 
-				<FormInput name="email" label="Email" required />
+				<FormInput name="email" label="Email" type="email" required />
 
-				<FormInput name="fullName" label="Повне ім'я" required />
+				<FormInput name="fullName" label="Повне ім'я" type="text" required />
 
 				<FormInput name="password" label="Пароль" type="password" required />
 
