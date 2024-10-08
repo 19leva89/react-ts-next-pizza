@@ -736,6 +736,24 @@ async function up() {
 	await prisma.storyItem.createMany({
 		data: storyItems,
 	})
+
+	await prisma.region.create({
+		data: {
+			name: 'Запорізька',
+			cities: {
+				create: [{ name: 'Запоріжжя' }, { name: 'Мелітополь' }, { name: 'Бердянськ' }],
+			},
+		},
+	})
+
+	await prisma.region.create({
+		data: {
+			name: 'Київська',
+			cities: {
+				create: [{ name: 'Київ' }, { name: 'Боярка' }, { name: 'Софіївська борщагівка' }],
+			},
+		},
+	})
 }
 
 async function down() {

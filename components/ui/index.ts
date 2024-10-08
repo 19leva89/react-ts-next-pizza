@@ -1,6 +1,7 @@
 export { Badge } from './badge'
 export { Button } from './button'
 export { Checkbox } from './checkbox'
+export { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './command'
 export { Dialog, DialogContent, DialogTitle } from './dialog'
 export { Drawer } from './drawer'
 export { Input } from './input'
