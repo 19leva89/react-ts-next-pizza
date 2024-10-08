@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { getCartItemDetails } from '@/lib'
 import { Skeleton } from '@/components/ui'
-import { CartStateItem } from '@/lib/get-cart-details'
+import { CartStateItem } from '@/lib/cart/get-cart-details'
 import { PizzaSize, PizzaType } from '@/constants/pizza'
 import { CheckoutDrawerItem, Title, WhiteBlock } from '@/components/shared'
 

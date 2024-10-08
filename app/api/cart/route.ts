@@ -3,10 +3,11 @@ import { prisma } from '@/prisma/db'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { getUserSession } from '@/lib/get-user-session'
-import { findOrCreateCart } from '@/lib/find-or-create-cart'
 import { CreateCartItemValues } from '@/services/dto/cart.dto'
-import { updateCartWithUserId } from '@/lib/update-cart-with-user-id'
-import { updateCartTotalAmount } from '@/lib/update-cart-total-amount'
+import { addUserIdToCart } from '@/lib/cart/add-user-id-to-cart'
+import { findOrCreateCart } from '@/lib/cart/find-or-create-cart'
+import { removeUserIdFromCart } from '@/lib/cart/remove-user-id-from-cart'
+import { updateCartTotalAmount } from '@/lib/cart/update-cart-total-amount'
 
 export async function GET(req: NextRequest) {
 	try {
@@ -38,7 +39,9 @@ export async function GET(req: NextRequest) {
 		})
 
 		if (userId) {
-			await updateCartWithUserId(token, userId)
+			await addUserIdToCart(token, userId)
+		} else {
+			await removeUserIdFromCart(token)
 		}
 
 		return NextResponse.json(userCart)
@@ -108,9 +111,11 @@ export async function POST(req: NextRequest) {
 			})
 		}
 
-		// if (userId) {
-		// 	await updateCartWithUserId(token, userId)
-		// }
+		if (userId) {
+			await addUserIdToCart(token, userId)
+		} else {
+			await removeUserIdFromCart(token)
+		}
 
 		const updatedUserCart = await updateCartTotalAmount(token)
 

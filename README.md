@@ -1,5 +1,8 @@
 This project contains the following technologies
 
+Animation and Interaction:
+- React Insta Stories (stories like Instagram)
+
 Authentication and User Management:
 - Bcrypt (password hashing)
 - NextAuth (authentication)
@@ -29,6 +32,7 @@ Image Handling and Optimization:
 
 Middleware and Server Utilities:
 - Concurrently (all projects are running in tandem)
+- Node Cron (scheduling background tasks)
 
 Miscellaneous:
 - React hot toast (stylization message)
@@ -46,8 +50,6 @@ Utilities and Libraries:
 - PostCSS (transforms CSS code to AST)
 - React Use (custom React Hooks)
 - QueryString (Parse and stringify URL)
-
-react-insta-stories
 
 
 To run the client and server via concurrently:

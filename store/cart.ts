@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 
 import { getCartDetails } from '@/lib'
 import { Api } from '../services/api-client'
-import { CartStateItem } from '@/lib/get-cart-details'
+import { CartStateItem } from '@/lib/cart/get-cart-details'
 import { CreateCartItemValues } from '../services/dto/cart.dto'
 
 export interface CartState {

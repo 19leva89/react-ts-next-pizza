@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/site'
 import { Providers } from '@/components/shared/providers'
 
 import { Nunito } from 'next/font/google'
+import './lib/cron'
 import './globals.css'
 
 const nunito = Nunito({
