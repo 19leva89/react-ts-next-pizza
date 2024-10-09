@@ -3,7 +3,7 @@
 import { FC, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 
-import { OrderStatus } from './order-status'
+import { OrderStatus } from '../../../../../components/shared/order-status'
 import { cn, getCartItemDetails } from '@/lib'
 import { CartItemDTO } from '@/services/dto/cart.dto'
 import { PizzaSize, PizzaType } from '@/constants/pizza'
@@ -40,10 +40,10 @@ export const OrderItem: FC<Props> = ({
 		<div className={cn('bg-white rounded-3xl select-none', className)}>
 			<div
 				onClick={() => setIsExpanded(!isExpanded)}
-				className="flex  cursor-pointer justify-between items-center p-7 border-b border-gray-100"
+				className="flex cursor-pointer justify-between items-center gap-2 p-7 border-b border-gray-100"
 			>
 				<div className="flex items-center gap-6">
-					<Title text={`Замовлення #${id}`} size="md" className="font-extrabold" />
+					<Title text={`Замовлення #${id}`} size="sm" className="font-bold" />
 
 					<span className="text-gray-400">{createdAt}</span>
 				</div>
@@ -64,6 +64,7 @@ export const OrderItem: FC<Props> = ({
 						return (
 							<OrderCartItem
 								key={item.id}
+								id={item.productItem.product.id}
 								name={item.productItem.product.name}
 								imageUrl={imageUrl}
 								details={getCartItemDetails(

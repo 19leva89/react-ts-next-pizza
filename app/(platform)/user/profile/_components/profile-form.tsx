@@ -2,7 +2,7 @@
 
 import { FC } from 'react'
 import toast from 'react-hot-toast'
-import { signOut } from 'next-auth/react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -49,15 +49,9 @@ export const ProfileForm: FC<Props> = ({ data }) => {
 		}
 	}
 
-	const onClickSignOut = () => {
-		signOut({
-			callbackUrl: '/',
-		})
-	}
-
 	return (
-		<Container className="my-10">
-			<Title text="Особисті дані" size="md" className="font-bold" />
+		<Container>
+			<Title text="Персональна інформація" size="md" className="font-bold" />
 
 			<FormProvider {...form}>
 				<form className="flex flex-col gap-5 w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
@@ -71,16 +65,6 @@ export const ProfileForm: FC<Props> = ({ data }) => {
 
 					<Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
 						Зберегти
-					</Button>
-
-					<Button
-						onClick={onClickSignOut}
-						variant="secondary"
-						disabled={form.formState.isSubmitting}
-						className="text-base"
-						type="button"
-					>
-						Вийти
 					</Button>
 				</form>
 			</FormProvider>

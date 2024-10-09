@@ -1,9 +1,11 @@
 import { FC } from 'react'
+import Link from 'next/link'
 
 import { cn } from '@/lib'
 import * as CartItemDetails from '@/components/shared/cart-item-details'
 
 interface Props {
+	id: number
 	name: string
 	count: number
 	imageUrl: string
@@ -12,14 +14,19 @@ interface Props {
 	className?: string
 }
 
-export const OrderCartItem: FC<Props> = ({ name, count, imageUrl, details, price, className }) => {
+export const OrderCartItem: FC<Props> = ({ id, name, count, imageUrl, details, price, className }) => {
 	return (
-		<div className={cn('flex justify-between items-center p-4 px-7', className)}>
-			<div className="flex items-center gap-3">
-				<CartItemDetails.Image src={imageUrl} name={name} />
+		<div className={cn('flex justify-between items-center p-4 px-7 overflow-hidden group', className)}>
+			<Link
+				href={`/product/${id}`}
+				className="transform transition-transform duration-300 ease-in-out group-hover:translate-y-1"
+			>
+				<div className="flex items-center gap-3">
+					<CartItemDetails.Image src={imageUrl} name={name} />
 
-				<CartItemDetails.Info name={name} details={details} />
-			</div>
+					<CartItemDetails.Info name={name} details={details} />
+				</div>
+			</Link>
 
 			<div>
 				<CartItemDetails.Price value={price} />

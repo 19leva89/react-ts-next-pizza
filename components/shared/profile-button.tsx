@@ -21,7 +21,7 @@ export const ProfileButton: FC<Props> = ({ className, onClickLogin }) => {
 					Увійти
 				</Button>
 			) : (
-				<Link href="/profile">
+				<Link href="/user/profile">
 					<Button variant="outline" className="flex items-center gap-2">
 						<CircleUser size={18} />
 						Профіль
