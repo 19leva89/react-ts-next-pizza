@@ -1,7 +1,10 @@
-import { FC, useState } from 'react'
+'use client'
 
-import { STATES } from '@/constants/delivery'
+import { FC, useEffect, useState } from 'react'
+
+import { Api } from '@/services/api-client'
 import { FormCombobox } from '@/components/shared/form'
+import { CityDTO, StateDTO } from '@/services/dto/delivery.dto'
 import { FormInput, FormTextarea, WhiteBlock } from '@/components/shared'
 
 interface Props {
@@ -9,17 +12,31 @@ interface Props {
 }
 
 export const CheckoutAddressForm: FC<Props> = ({ className }) => {
-	const [selectedState, setSelectedState] = useState<string>('')
+	const [states, setStates] = useState<StateDTO[]>([])
+	const [selectedState, setSelectedState] = useState<number | null>(null)
+	const [filteredCities, setFilteredCities] = useState<CityDTO[]>([])
 
-	const filteredCities = CITIES.filter((city) => {
-		if (selectedState === 'Запорізька') {
-			return city.value === 'Запоріжжя' || city.value === 'Бердянськ'
+	useEffect(() => {
+		async function fetchStates() {
+			const data = await Api.delivery.getStates()
+
+			setStates(data)
 		}
-		if (selectedState === 'Київська') {
-			return city.value === 'Київ' || city.value === 'Боярка'
+
+		fetchStates()
+	}, [])
+
+	useEffect(() => {
+		async function fetchCities() {
+			if (selectedState) {
+				const data = await Api.delivery.getCitiesByStateId(selectedState) // Используйте новую функцию
+
+				setFilteredCities(data) // Установите отфильтрованные города
+			}
 		}
-		return false
-	})
+
+		fetchCities()
+	}, [selectedState])
 
 	return (
 		<WhiteBlock title="3. Адреса доставки" className={className}>
@@ -30,9 +47,12 @@ export const CheckoutAddressForm: FC<Props> = ({ className }) => {
 						placeholder="Область"
 						noResultsText="Область не знайдена"
 						selectPlaceholder="Знайти область..."
-						mapTable={STATES}
+						mapTable={states}
 						className="w-full justify-between h-12 text-md"
-						onSelect={(state) => setSelectedState(state)}
+						onSelect={(state) => {
+							setSelectedState(state.id)
+							setFilteredCities([])
+						}}
 					/>
 
 					<FormCombobox

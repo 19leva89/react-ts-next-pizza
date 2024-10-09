@@ -20,8 +20,9 @@ import { useFormContext } from 'react-hook-form'
 import { ErrorText } from '@/components/shared'
 
 interface Item {
-	value: string
-	label?: string
+	id: number
+	name: string
+	communityId?: number
 }
 
 interface Props {
@@ -30,6 +31,7 @@ interface Props {
 	noResultsText: string
 	selectPlaceholder: string
 	mapTable: Item[]
+	onSelect?: (item: Item) => void
 	className?: string
 }
 
@@ -39,6 +41,7 @@ export function FormCombobox({
 	noResultsText,
 	selectPlaceholder,
 	mapTable,
+	onSelect,
 	className,
 }: Props) {
 	const {
@@ -52,8 +55,19 @@ export function FormCombobox({
 	const value = watch(name)
 	const errorText = errors[name]?.message as string
 
-	const handleSelect = (currentValue: string) => {
-		setValue(name, currentValue, { shouldValidate: true })
+	const selectedItem = mapTable.find((item) => item.name === value)
+
+	const handleSelect = (currentValue: number) => {
+		const selectedItem = mapTable.find((item) => item.id === currentValue)
+
+		if (selectedItem) {
+			setValue(name, selectedItem.name, { shouldValidate: true })
+
+			if (onSelect) {
+				onSelect(selectedItem)
+			}
+		}
+
 		setOpen(false)
 	}
 
@@ -69,9 +83,8 @@ export function FormCombobox({
 						className={cn('border-[##e5e7eb] text-[#78716c] hover:bg-transparent', className)}
 						{...register(name)}
 					>
-						{value
-							? mapTable.find((item) => item.value.toLowerCase() === value.toLowerCase())?.label || value
-							: placeholder}
+						{selectedItem ? selectedItem.name : placeholder}
+
 						<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
 					</Button>
 				</PopoverTrigger>
@@ -88,9 +101,9 @@ export function FormCombobox({
 
 						<CommandGroup>
 							{mapTable.map((item) => (
-								<CommandItem key={item.value} value={item.value} onSelect={handleSelect}>
-									<Check className={cn('mr-2 h-4 w-4', value === item.value ? 'opacity-100' : 'opacity-0')} />
-									{item.label || item.value}
+								<CommandItem key={item.id} value={item.name} onSelect={() => handleSelect(item.id)}>
+									<Check className={cn('mr-2 h-4 w-4', value === item.name ? 'opacity-100' : 'opacity-0')} />
+									{item.name}
 								</CommandItem>
 							))}
 						</CommandGroup>

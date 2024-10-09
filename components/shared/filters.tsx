@@ -36,8 +36,8 @@ export const Filters: FC<Props> = ({ className }) => {
 				name="pizzaTypes"
 				className="mb-5"
 				items={[
-					{ text: 'Тонке', value: '1' },
-					{ text: 'Традиційне', value: '2' },
+					{ text: 'Традиційне', value: '1' },
+					{ text: 'Тонке', value: '2' },
 				]}
 				onClickCheckbox={filters.setPizzaTypes}
 				selected={filters.pizzaTypes}

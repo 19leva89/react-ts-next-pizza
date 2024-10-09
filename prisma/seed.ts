@@ -11,11 +11,11 @@ const randomNumber = (min: number, max: number) => {
 async function up() {
 	const data = JSON.parse(fs.readFileSync('./prisma/ua_locations_10_11_2021.json', 'utf8'))
 
-	const states = []
-	const districts = []
-	const communities = []
-	const cities = []
-	const villages = []
+	const states = [] // Области
+	const districts = [] // Районы
+	const communities = [] // Громады
+	const cities = [] // Города
+	const villages = [] // Села
 
 	for (const item of data) {
 		switch (item.type) {
