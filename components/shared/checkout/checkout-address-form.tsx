@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { REGIONS } from '@/constants/delivery'
+import { STATES } from '@/constants/delivery'
 import { FormCombobox } from '@/components/shared/form'
 import { FormInput, FormTextarea, WhiteBlock } from '@/components/shared'
 
@@ -9,13 +9,13 @@ interface Props {
 }
 
 export const CheckoutAddressForm: FC<Props> = ({ className }) => {
-	const [selectedRegion, setSelectedRegion] = useState<string>('')
+	const [selectedState, setSelectedState] = useState<string>('')
 
 	const filteredCities = CITIES.filter((city) => {
-		if (selectedRegion === 'Запорізька') {
+		if (selectedState === 'Запорізька') {
 			return city.value === 'Запоріжжя' || city.value === 'Бердянськ'
 		}
-		if (selectedRegion === 'Київська') {
+		if (selectedState === 'Київська') {
 			return city.value === 'Київ' || city.value === 'Боярка'
 		}
 		return false
@@ -26,13 +26,13 @@ export const CheckoutAddressForm: FC<Props> = ({ className }) => {
 			<div className="flex flex-col gap-5">
 				<div className="grid grid-cols-2 gap-5">
 					<FormCombobox
-						name="region"
+						name="state"
 						placeholder="Область"
 						noResultsText="Область не знайдена"
 						selectPlaceholder="Знайти область..."
-						mapTable={REGIONS}
+						mapTable={STATES}
 						className="w-full justify-between h-12 text-md"
-						onSelect={(region) => setSelectedRegion(region)}
+						onSelect={(state) => setSelectedState(state)}
 					/>
 
 					<FormCombobox

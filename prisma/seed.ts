@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import fs from 'fs'
 import { hashSync } from 'bcrypt'
-
 import { prisma } from './../prisma/db'
-
 import { categories, ingredients, products, storyItems, stories } from './constants'
 
 const randomNumber = (min: number, max: number) => {
@@ -9,6 +9,83 @@ const randomNumber = (min: number, max: number) => {
 }
 
 async function up() {
+	const data = JSON.parse(fs.readFileSync('./prisma/ua_locations_10_11_2021.json', 'utf8'))
+
+	const states = []
+	const districts = []
+	const communities = []
+	const cities = []
+	const villages = []
+
+	for (const item of data) {
+		switch (item.type) {
+			case 'STATE':
+				states.push(item)
+				break
+			case 'DISTRICT':
+				districts.push(item)
+				break
+			case 'COMMUNITY':
+				communities.push(item)
+				break
+			case 'CITY':
+				cities.push(item)
+				break
+			case 'VILLAGE':
+				villages.push(item)
+				break
+		}
+	}
+
+	// Создание записей для областей
+	for (const state of states) {
+		const createdState = await prisma.state.create({
+			data: {
+				name: state.name.uk,
+			},
+		})
+
+		// Создание записей для районов, связанных с областями
+		const relatedDistricts = districts.filter((district) => district.parent_id === state.id)
+		for (const district of relatedDistricts) {
+			const createdDistrict = await prisma.district.create({
+				data: {
+					name: district.name.uk,
+					stateId: createdState.id, // Связь с областью
+				},
+			})
+
+			// Создание записей для громад, связанных с районами
+			const relatedCommunities = communities.filter((community) => community.parent_id === district.id)
+			for (const community of relatedCommunities) {
+				const createdCommunity = await prisma.community.create({
+					data: {
+						name: community.name.uk,
+						districtId: createdDistrict.id, // Связь с районом
+					},
+				})
+
+				// Создание записей для городов, связанных с громадами
+				const relatedCities = cities.filter((city) => city.parent_id === community.id)
+				await prisma.city.createMany({
+					data: relatedCities.map((city) => ({
+						name: city.name.uk,
+						communityId: createdCommunity.id, // Связь с громадой
+					})),
+				})
+
+				// Создание записей для сел, связанных с громадами
+				const relatedVillages = villages.filter((village) => village.parent_id === community.id)
+				await prisma.village.createMany({
+					data: relatedVillages.map((village) => ({
+						name: village.name.uk,
+						communityId: createdCommunity.id, // Связь с громадой
+					})),
+				})
+			}
+		}
+	}
+
 	await prisma.user.createMany({
 		data: [
 			{
@@ -722,7 +799,6 @@ async function up() {
 			productItemId: 1,
 			cartId: 1,
 			userId: 1,
-			// quantity: 1,
 			ingredients: {
 				connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
 			},
@@ -736,24 +812,6 @@ async function up() {
 	await prisma.storyItem.createMany({
 		data: storyItems,
 	})
-
-	await prisma.region.create({
-		data: {
-			name: 'Запорізька',
-			cities: {
-				create: [{ name: 'Запоріжжя' }, { name: 'Мелітополь' }, { name: 'Бердянськ' }],
-			},
-		},
-	})
-
-	await prisma.region.create({
-		data: {
-			name: 'Київська',
-			cities: {
-				create: [{ name: 'Київ' }, { name: 'Боярка' }, { name: 'Софіївська борщагівка' }],
-			},
-		},
-	})
 }
 
 async function down() {
@@ -765,6 +823,11 @@ async function down() {
 	await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE;`
 	await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE;`
 	await prisma.$executeRaw`TRUNCATE TABLE "Order" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "State" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "District" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "Community" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "City" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "Village" RESTART IDENTITY CASCADE;`
 	await prisma.$executeRaw`TRUNCATE TABLE "VerificationCode" RESTART IDENTITY CASCADE;`
 	await prisma.$executeRaw`TRUNCATE TABLE "Story" RESTART IDENTITY CASCADE;`
 	await prisma.$executeRaw`TRUNCATE TABLE "StoryItem" RESTART IDENTITY CASCADE;`

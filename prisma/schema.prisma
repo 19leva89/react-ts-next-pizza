@@ -140,13 +140,8 @@ model Order {
   fullName      String
   email         String
   phone         String
-  //
-  region        Region      @relation(fields: [regionId], references: [id])
-  regionId      Int
-  //
-  city          City        @relation(fields: [cityId], references: [id])
-  cityId        Int
-  //
+  state         String // Область
+  city          String // Місто
   address       String
   comment       String?
   //
@@ -166,22 +161,48 @@ model Order {
   updatedAt     DateTime    @updatedAt
 }
 
-model Region {
-  id     Int     @id @default(autoincrement())
-  name   String  @unique
+model State {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
   //
-  cities City[]
-  orders Order[]
+  districts District[]
+}
+
+model District {
+  id          Int         @id @default(autoincrement())
+  name        String
+  //
+  state       State       @relation(fields: [stateId], references: [id])
+  stateId     Int
+  //
+  communities Community[]
+}
+
+model Community {
+  id         Int       @id @default(autoincrement())
+  name       String
+  //
+  district   District  @relation(fields: [districtId], references: [id])
+  districtId Int
+  //
+  cities     City[]
+  villages   Village[]
 }
 
 model City {
-  id       Int     @id @default(autoincrement())
-  name     String  @unique
+  id          Int       @id @default(autoincrement())
+  name        String
   //
-  region   Region  @relation(fields: [regionId], references: [id])
-  regionId Int
+  community   Community @relation(fields: [communityId], references: [id])
+  communityId Int
+}
+
+model Village {
+  id          Int       @id @default(autoincrement())
+  name        String
   //
-  orders   Order[]
+  community   Community @relation(fields: [communityId], references: [id])
+  communityId Int
 }
 
 model VerificationCode {

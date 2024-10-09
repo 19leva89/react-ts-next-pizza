@@ -31,7 +31,7 @@ export default function CheckoutPage() {
 			lastName: '',
 			email: '',
 			phone: '',
-			region: '',
+			state: '',
 			city: '',
 			address: '',
 			comment: '',

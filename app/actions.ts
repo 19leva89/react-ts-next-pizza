@@ -63,7 +63,7 @@ export async function createOrder(data: CheckoutFormValues) {
 				fullName: data.firstName + ' ' + data.lastName,
 				email: data.email,
 				phone: data.phone,
-				region: data.region,
+				state: data.state,
 				city: data.city,
 				address: data.address,
 				comment: data.comment,
