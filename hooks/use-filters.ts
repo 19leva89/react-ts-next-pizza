@@ -1,6 +1,6 @@
 import { useSet } from 'react-use'
-import { useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
+import { useMemo, useState, useEffect, useCallback } from 'react'
 
 interface PriceProps {
 	priceFrom?: number
@@ -12,6 +12,7 @@ export interface Filters {
 	pizzaSizes: Set<string>
 	prices: PriceProps
 	ingredients: Set<string>
+	sort: string
 }
 
 interface ReturnProps extends Filters {
@@ -19,10 +20,21 @@ interface ReturnProps extends Filters {
 	setPizzaSizes: (value: string) => void
 	setPrices: (name: keyof PriceProps, value: number) => void
 	setIngredients: (value: string) => void
+	setSort: (value: string) => void
 }
 
 const getSetFromParam = (searchParams: URLSearchParams, key: string) =>
 	new Set<string>(searchParams.has(key) ? searchParams.get(key)?.split(',') : [])
+
+const compareSets = (setA: Set<string>, setB: Set<string>): boolean => {
+	if (setA.size !== setB.size) return false
+	const arrayA = Array.from(setA)
+	const arrayB = Array.from(setB)
+	for (const item of arrayA) {
+		if (!arrayB.includes(item)) return false
+	}
+	return true
+}
 
 export const useFilters = (): ReturnProps => {
 	const searchParams = useSearchParams()
@@ -30,6 +42,7 @@ export const useFilters = (): ReturnProps => {
 	const [pizzaSizes, { toggle: togglePizzaSizes }] = useSet(getSetFromParam(searchParams, 'pizzaSizes'))
 	const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(getSetFromParam(searchParams, 'pizzaTypes'))
 	const [ingredients, { toggle: toggleIngredients }] = useSet(getSetFromParam(searchParams, 'ingredients'))
+	const [sort, setSort] = useState<string>(searchParams.get('sort') || 'rating')
 
 	const [prices, setPrices] = useState<PriceProps>({
 		priceFrom: Number(searchParams.get('priceFrom')) || undefined,
@@ -43,17 +56,71 @@ export const useFilters = (): ReturnProps => {
 		}))
 	}
 
+	const onSortChange = useCallback(
+		(newSort: string) => {
+			if (newSort !== sort) {
+				setSort(newSort)
+			}
+		},
+		[sort],
+	)
+
+	useEffect(() => {
+		const updatedPizzaTypes = getSetFromParam(searchParams, 'pizzaTypes')
+		const updatedPizzaSizes = getSetFromParam(searchParams, 'pizzaSizes')
+		const updatedIngredients = getSetFromParam(searchParams, 'ingredients')
+		const updatedSort = searchParams.get('sort') || 'rating'
+
+		// Сравниваем с текущими параметрами
+		if (!compareSets(updatedPizzaTypes, pizzaTypes)) {
+			pizzaTypes.clear()
+			updatedPizzaTypes.forEach((type) => togglePizzaTypes(type))
+		}
+
+		if (!compareSets(updatedPizzaSizes, pizzaSizes)) {
+			pizzaSizes.clear()
+			updatedPizzaSizes.forEach((size) => togglePizzaSizes(size))
+		}
+
+		if (!compareSets(updatedIngredients, ingredients)) {
+			ingredients.clear()
+			updatedIngredients.forEach((ingredient) => toggleIngredients(ingredient))
+		}
+
+		if (updatedSort !== sort) {
+			setSort(updatedSort)
+		}
+
+		setPrices({
+			priceFrom: Number(searchParams.get('priceFrom')) || undefined,
+			priceTo: Number(searchParams.get('priceTo')) || undefined,
+		})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchParams])
+
 	return useMemo(
 		() => ({
 			pizzaTypes,
 			pizzaSizes,
 			prices,
 			ingredients,
+			sort,
 			setPizzaTypes: togglePizzaTypes,
 			setPizzaSizes: togglePizzaSizes,
 			setPrices: onPriceChange,
 			setIngredients: toggleIngredients,
+			setSort: onSortChange,
 		}),
-		[pizzaTypes, pizzaSizes, prices, ingredients, togglePizzaTypes, togglePizzaSizes, toggleIngredients],
+		[
+			pizzaTypes,
+			pizzaSizes,
+			prices,
+			ingredients,
+			sort,
+			togglePizzaTypes,
+			togglePizzaSizes,
+			toggleIngredients,
+			onSortChange,
+		],
 	)
 }

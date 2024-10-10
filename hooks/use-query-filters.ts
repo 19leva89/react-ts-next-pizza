@@ -15,6 +15,7 @@ export const useQueryFilters = (filters: Filters) => {
 				pizzaSizes: Array.from(filters.pizzaSizes),
 				pizzaTypes: Array.from(filters.pizzaTypes),
 				ingredients: Array.from(filters.ingredients),
+				sort: filters.sort,
 			}
 
 			const query = QueryString.stringify(params, {

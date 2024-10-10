@@ -5,6 +5,7 @@ import {
 	Filters,
 	ProductsGroupList,
 	ScrollToTop,
+	SortPopup,
 	Stories,
 	Title,
 	TopBar,
@@ -29,8 +30,12 @@ export default async function Home({ searchParams }: { searchParams: GetSearchPa
 
 	return (
 		<>
-			<Container className="mt-10">
+			<Container className="flex justify-between gap-10 mt-10 rounded-2xl">
 				<Title text="Усі товари" size="lg" className="font-extrabold" />
+
+				<div className="flex items-center">
+					<SortPopup />
+				</div>
 			</Container>
 
 			<TopBar categories={categories.filter((category) => category.products.length > 0)} />
