@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { cn } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@/components/ui'
 import { OrderStatus as IOrderStatus } from '@prisma/client'
 
 interface Props {
@@ -16,6 +16,7 @@ export const OrderStatus: FC<Props> = ({ className, variant, text }) => {
 		CANCELLED: 'Скасовано',
 		PENDING: 'В обробці',
 	}
+
 	return (
 		<Badge
 			className={cn(

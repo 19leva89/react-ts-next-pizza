@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { FC, TextareaHTMLAttributes } from 'react'
 
 import { Textarea } from '@/components/ui'
-import { ClearButton } from '@/components/shared'
+import { ClearButton, ErrorText, RequiredSymbol } from '@/components/shared'
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	name: string
@@ -31,7 +31,7 @@ export const FormTextarea: FC<Props> = ({ className, name, label, required, ...p
 	return (
 		<div className={className}>
 			<p className="font-medium mb-2">
-				{label} {required && <span className="text-red-500">*</span>}
+				{label} {required && <RequiredSymbol />}
 			</p>
 
 			<div className="relative">
@@ -40,7 +40,7 @@ export const FormTextarea: FC<Props> = ({ className, name, label, required, ...p
 				{value && <ClearButton onClick={onClickClear} />}
 			</div>
 
-			{errorText && <p className="text-red-500 text-sm mt-2">{errorText}</p>}
+			{errorText && <ErrorText text={errorText} className="mt-2 ml-4" />}
 		</div>
 	)
 }

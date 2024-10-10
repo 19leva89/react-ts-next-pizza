@@ -89,7 +89,7 @@ export function FormCombobox({
 					</Button>
 				</PopoverTrigger>
 
-				{errorText && <ErrorText text={errorText} className="mt-2" />}
+				{errorText && <ErrorText text={errorText} className="mt-2 ml-4" />}
 			</div>
 
 			<PopoverContent className="w-[200px] p-0">

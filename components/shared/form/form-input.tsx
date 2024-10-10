@@ -64,7 +64,7 @@ export const FormInput: FC<Props> = ({ className, name, label, type, required, .
 				{value && type !== 'password' && <ClearButton onClick={onClickClear} />}
 			</div>
 
-			{errorText && <ErrorText text={errorText} className="mt-2" />}
+			{errorText && <ErrorText text={errorText} className="mt-2 ml-4" />}
 		</div>
 	)
 }

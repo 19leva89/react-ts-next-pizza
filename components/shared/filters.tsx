@@ -2,7 +2,7 @@
 
 import { FC } from 'react'
 
-import { Input } from '@/components/ui'
+import { Input, Separator } from '@/components/ui'
 import { useIngredients, useFilters, useQueryFilters } from '@/hooks'
 import { Title, RangeSlider, CheckboxFiltersGroup } from '@/components/shared'
 
@@ -57,8 +57,10 @@ export const Filters: FC<Props> = ({ className }) => {
 				selected={filters.pizzaSizes}
 			/>
 
+			<Separator />
+
 			{/* Price filter */}
-			<div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
+			<div className="py-6 pb-7">
 				<p className="font-bold mb-3">Ціна від і до:</p>
 
 				<div className="flex gap-3 mb-5">
@@ -89,6 +91,8 @@ export const Filters: FC<Props> = ({ className }) => {
 					onValueChange={updatePrices}
 				/>
 			</div>
+
+			<Separator />
 
 			{/* Ingredient filter */}
 			<CheckboxFiltersGroup

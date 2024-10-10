@@ -53,8 +53,14 @@ export const RangeSlider = forwardRef(
 						<div
 							className="absolute text-center"
 							style={{
-								left: `calc(${((value - min) / (max - min)) * 100}% + 0px)`,
-								top: `10px`,
+								left:
+									value === min
+										? '1.3%'
+										: value === max
+											? 'calc(100% - 25px)'
+											: `calc(${((value - min) / (max - min)) * 100}% - 8px)`,
+								top: '10px',
+								position: 'absolute',
 							}}
 						>
 							<span className="text-sm">{formatLabel ? formatLabel(value) : value}</span>

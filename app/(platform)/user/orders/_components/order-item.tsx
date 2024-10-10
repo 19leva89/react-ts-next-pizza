@@ -3,12 +3,12 @@
 import { FC, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 
-import { OrderStatus } from '../../../../../components/shared/order-status'
 import { cn, getCartItemDetails } from '@/lib'
 import { CartItemDTO } from '@/services/dto/cart.dto'
 import { PizzaSize, PizzaType } from '@/constants/pizza'
 import { OrderCartItem, Title } from '@/components/shared'
 import { OrderStatus as IOrderStatus } from '@prisma/client'
+import { OrderStatus } from '@/components/shared/order-status'
 
 interface Props {
 	id: number
