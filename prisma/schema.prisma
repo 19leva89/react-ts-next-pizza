@@ -59,6 +59,8 @@ model Product {
   id           Int           @id @default(autoincrement())
   name         String
   description  String?
+  weight       Int           @default(0)
+  rating       Int           @default(0)
   imageUrl     String
   discount     Int           @default(0)
   discountType DiscountType?

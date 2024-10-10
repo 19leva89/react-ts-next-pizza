@@ -2,6 +2,8 @@ import { useSet } from 'react-use'
 import { useSearchParams } from 'next/navigation'
 import { useMemo, useState, useEffect, useCallback } from 'react'
 
+import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE, DEFAULT_SORT } from '@/constants/filter'
+
 interface PriceProps {
 	priceFrom?: number
 	priceTo?: number
@@ -42,11 +44,11 @@ export const useFilters = (): ReturnProps => {
 	const [pizzaSizes, { toggle: togglePizzaSizes }] = useSet(getSetFromParam(searchParams, 'pizzaSizes'))
 	const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(getSetFromParam(searchParams, 'pizzaTypes'))
 	const [ingredients, { toggle: toggleIngredients }] = useSet(getSetFromParam(searchParams, 'ingredients'))
-	const [sort, setSort] = useState<string>(searchParams.get('sort') || 'rating')
+	const [sort, setSort] = useState<string>(searchParams.get('sort') || DEFAULT_SORT)
 
 	const [prices, setPrices] = useState<PriceProps>({
-		priceFrom: Number(searchParams.get('priceFrom')) || undefined,
-		priceTo: Number(searchParams.get('priceTo')) || undefined,
+		priceFrom: Number(searchParams.get('priceFrom')) || DEFAULT_MIN_PRICE,
+		priceTo: Number(searchParams.get('priceTo')) || DEFAULT_MAX_PRICE,
 	})
 
 	const onPriceChange = (name: keyof PriceProps, value: number) => {
@@ -69,7 +71,7 @@ export const useFilters = (): ReturnProps => {
 		const updatedPizzaTypes = getSetFromParam(searchParams, 'pizzaTypes')
 		const updatedPizzaSizes = getSetFromParam(searchParams, 'pizzaSizes')
 		const updatedIngredients = getSetFromParam(searchParams, 'ingredients')
-		const updatedSort = searchParams.get('sort') || 'rating'
+		const updatedSort = searchParams.get('sort') || DEFAULT_SORT
 
 		// Сравниваем с текущими параметрами
 		if (!compareSets(updatedPizzaTypes, pizzaTypes)) {
@@ -92,8 +94,8 @@ export const useFilters = (): ReturnProps => {
 		}
 
 		setPrices({
-			priceFrom: Number(searchParams.get('priceFrom')) || undefined,
-			priceTo: Number(searchParams.get('priceTo')) || undefined,
+			priceFrom: Number(searchParams.get('priceFrom')) || DEFAULT_MIN_PRICE,
+			priceTo: Number(searchParams.get('priceTo')) || DEFAULT_MAX_PRICE,
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchParams])

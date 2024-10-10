@@ -10,10 +10,10 @@ import {
 	Title,
 	TopBar,
 } from '@/components/shared'
-import { findPizzas, GetSearchParams } from '@/lib/find-pizzas'
+import { sortProducts, GetSearchParams } from '@/lib/sort-products'
 
 export default async function Home({ searchParams }: { searchParams: GetSearchParams }) {
-	const categories = await findPizzas(searchParams)
+	const categories = await sortProducts(searchParams)
 
 	const ingredientsIdArr = searchParams.ingredients?.split(',').map(Number) || []
 

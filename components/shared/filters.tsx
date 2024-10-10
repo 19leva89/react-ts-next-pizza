@@ -4,6 +4,7 @@ import { FC } from 'react'
 
 import { Input, Separator } from '@/components/ui'
 import { useIngredients, useFilters, useQueryFilters } from '@/hooks'
+import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE } from '@/constants/filter'
 import { Title, RangeSlider, CheckboxFiltersGroup } from '@/components/shared'
 
 interface Props {
@@ -68,26 +69,26 @@ export const Filters: FC<Props> = ({ className }) => {
 						type="number"
 						placeholder="0"
 						min={0}
-						max={1000}
-						value={String(filters.prices.priceFrom)}
+						max={DEFAULT_MAX_PRICE}
+						value={filters.prices.priceFrom || DEFAULT_MIN_PRICE}
 						onChange={(e) => filters.setPrices('priceFrom', Number(e.target.value))}
 					/>
 
 					<Input
 						type="number"
 						min={100}
-						max={1000}
-						placeholder="1000"
-						value={String(filters.prices.priceTo)}
+						max={DEFAULT_MAX_PRICE}
+						placeholder={String(DEFAULT_MAX_PRICE)}
+						value={filters.prices.priceTo || DEFAULT_MAX_PRICE}
 						onChange={(e) => filters.setPrices('priceTo', Number(e.target.value))}
 					/>
 				</div>
 
 				<RangeSlider
-					min={0}
-					max={1000}
+					min={DEFAULT_MIN_PRICE}
+					max={DEFAULT_MAX_PRICE}
 					step={10}
-					value={[filters.prices.priceFrom || 0, filters.prices.priceTo || 1000]}
+					value={[filters.prices.priceFrom || DEFAULT_MIN_PRICE, filters.prices.priceTo || DEFAULT_MAX_PRICE]}
 					onValueChange={updatePrices}
 				/>
 			</div>
