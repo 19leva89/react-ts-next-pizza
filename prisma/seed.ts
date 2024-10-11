@@ -1,12 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from 'fs'
 import { hashSync } from 'bcrypt'
 import { prisma } from './../prisma/db'
 import { categories, ingredients, products, storyItems, stories } from './constants'
-
-const randomNumber = (min: number, max: number) => {
-	return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10
-}
 
 async function up() {
 	const data = JSON.parse(fs.readFileSync('./prisma/ua_locations_10_11_2021.json', 'utf8'))
@@ -688,267 +683,268 @@ async function up() {
 			{ productId: pizza28.id, price: 343, pizzaType: 2, pizzaSize: 40, weight: 660 },
 
 			// Омлет з шинкою і грибами
-			{ productId: 1, price: randomNumber(100, 180), weight: 110 },
+			{ productId: 1, price: 67, weight: 110 },
 
 			// Омлет з пепероні
-			{ productId: 2, price: randomNumber(100, 180), weight: 110 },
+			{ productId: 2, price: 67, weight: 110 },
 
 			// Омлет із беконом
-			{ productId: 3, price: randomNumber(100, 180), weight: 130 },
+			{ productId: 3, price: 67, weight: 130 },
 
 			// Омлет сирний
-			{ productId: 4, price: randomNumber(100, 180), weight: 100 },
+			{ productId: 4, price: 69, weight: 100 },
 
 			// Додстер із шинкою
-			{ productId: 5, price: randomNumber(100, 180), weight: 160 },
+			{ productId: 5, price: 73, weight: 160 },
 
 			// Сирники зі згущеним молоком
-			{ productId: 6, price: randomNumber(100, 180), weight: 140 },
+			{ productId: 6, price: 55, weight: 140 },
 
 			// Сирники з малиновим варенням 👶
-			{ productId: 7, price: randomNumber(100, 180), weight: 150 },
+			{ productId: 7, price: 53, weight: 150 },
 
 			// Сирники
-			{ productId: 8, price: randomNumber(100, 180), weight: 130 },
+			{ productId: 8, price: 48, weight: 130 },
 
 			// Кава Американо
-			{ productId: 9, price: randomNumber(100, 180), weight: 380 },
+			{ productId: 9, price: 36, weight: 380 },
 
 			// Кава Капучіно
-			{ productId: 10, price: randomNumber(100, 180), weight: 250 },
+			{ productId: 10, price: 56, weight: 250 },
 
 			// Кава Латте
-			{ productId: 11, price: randomNumber(100, 180), weight: 330 },
+			{ productId: 11, price: 58, weight: 330 },
 
 			// Комбо Сніданок на двох
-			{ productId: 12, price: randomNumber(100, 180) },
+			{ productId: 12, price: 183 },
 
 			// Паста з креветками
-			{ productId: 13, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 13, price: 123, weight: 300 },
 
 			// Денвіч шинка та сир
-			{ productId: 14, price: randomNumber(100, 180), weight: 210 },
+			{ productId: 14, price: 93, weight: 210 },
 
 			// Денвіч чоризо барбекю
-			{ productId: 15, price: randomNumber(100, 180), weight: 210 },
+			{ productId: 15, price: 93, weight: 210 },
 
 			// Паста Карбонара
-			{ productId: 16, price: randomNumber(100, 180), weight: 350 },
+			{ productId: 16, price: 123, weight: 350 },
 
 			// Паста М'ясна
-			{ productId: 17, price: randomNumber(100, 180), weight: 330 },
+			{ productId: 17, price: 123, weight: 330 },
 
 			// Паста Песто
-			{ productId: 18, price: randomNumber(100, 180), weight: 330 },
+			{ productId: 18, price: 123, weight: 330 },
 
 			// Супермясной Додстер
-			{ productId: 19, price: randomNumber(100, 180), weight: 160 },
+			{ productId: 19, price: 89, weight: 160 },
 
 			// Додстер із шинкою
-			{ productId: 20, price: randomNumber(100, 180), weight: 160 },
+			{ productId: 20, price: 73, weight: 160 },
 
 			// Додстер
-			{ productId: 21, price: randomNumber(100, 180), weight: 210 },
+			{ productId: 21, price: 73, weight: 210 },
 
 			// Острый Додстер 🌶🌶
-			{ productId: 22, price: randomNumber(100, 180), weight: 190 },
+			{ productId: 22, price: 86, weight: 190 },
 
 			// Грибний Стартер 🌱
-			{ productId: 23, price: randomNumber(100, 180), weight: 160 },
+			{ productId: 23, price: 73, weight: 160 },
+
+			// Сирний Стартер 🌱
+			{ productId: 24, price: 76, weight: 150 },
 
 			// Курячі нагетси
-			{ productId: 24, price: randomNumber(100, 180), weight: 110 },
+			{ productId: 25, price: 49, weight: 110 },
 
 			// Картопля з печі з соусом 🌱👶
-			{ productId: 25, price: randomNumber(100, 180), weight: 100 },
+			{ productId: 26, price: 60, weight: 100 },
 
 			// Картопля з печі 🌱👶
-			{ productId: 26, price: randomNumber(100, 180), weight: 80 },
+			{ productId: 27, price: 46, weight: 80 },
 
 			// Курячі шматочки 👶
-			{ productId: 27, price: randomNumber(100, 180), weight: 120 },
+			{ productId: 28, price: 89, weight: 120 },
 
 			// Курячі крила барбекю
-			{ productId: 28, price: randomNumber(100, 180), weight: 140 },
+			{ productId: 29, price: 89, weight: 140 },
 
 			// Ланчбокс з курячими крилами
-			{ productId: 29, price: randomNumber(100, 180), weight: 210 },
+			{ productId: 30, price: 128, weight: 210 },
 
 			// Ланчбокс із курячими шматочками
-			{ productId: 30, price: randomNumber(100, 180), weight: 200 },
+			{ productId: 31, price: 135, weight: 200 },
 
 			// Салат Цезар
-			{ productId: 31, price: randomNumber(100, 180), weight: 170 },
+			{ productId: 32, price: 101, weight: 170 },
 
 			// Молочний коктейль Ожина-малина
-			{ productId: 32, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 33, price: 73, weight: 300 },
 
 			// Молочний коктейль Піна Колада
-			{ productId: 33, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 34, price: 73, weight: 300 },
 
 			// Молочний коктейль із печивом Oreo
-			{ productId: 34, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 35, price: 80, weight: 300 },
 
 			// Класичний молочний коктейль
-			{ productId: 35, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 36, price: 68, weight: 300 },
 
 			// Полуничний молочний коктейль
-			{ productId: 36, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 37, price: 80, weight: 300 },
 
 			// Шоколадний молочний коктейль
-			{ productId: 37, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 38, price: 76, weight: 300 },
 
 			// Какао
-			{ productId: 38, price: randomNumber(100, 180), weight: 240 },
+			{ productId: 39, price: 46, weight: 240 },
 
 			// Rich Tea Чорний з лимоном
-			{ productId: 39, price: randomNumber(100, 180), weight: 500 },
+			{ productId: 40, price: 49, weight: 500 },
 
 			// Rich Tea Зелений
-			{ productId: 40, price: randomNumber(100, 180), weight: 500 },
+			{ productId: 41, price: 49, weight: 500 },
 
 			// Rich Tea Зелений з манго
-			{ productId: 41, price: randomNumber(100, 180), weight: 500 },
+			{ productId: 42, price: 49, weight: 500 },
 
 			// Rich сік Апельсиновий
-			{ productId: 42, price: randomNumber(100, 180), weight: 1000 },
+			{ productId: 43, price: 86, weight: 1000 },
 
 			// Rich сік Яблучний
-			{ productId: 43, price: randomNumber(100, 180), weight: 1000 },
+			{ productId: 44, price: 86, weight: 1000 },
 
 			// Rich нектар Вишневий
-			{ productId: 44, price: randomNumber(100, 180), weight: 1000 },
+			{ productId: 45, price: 86, weight: 1000 },
 
 			// Кава Карамельна капучино
-			{ productId: 45, price: randomNumber(100, 180), weight: 230 },
+			{ productId: 46, price: 56, weight: 230 },
 
 			// Кава Кокосовий латте
-			{ productId: 46, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 47, price: 56, weight: 300 },
 
 			// Кава Горіховий латте
-			{ productId: 47, price: randomNumber(100, 180), weight: 300 },
+			{ productId: 48, price: 56, weight: 300 },
 
 			// Айс капучіно
-			{ productId: 48, price: randomNumber(100, 180), weight: 280 },
+			{ productId: 49, price: 80, weight: 280 },
 
 			// Кава Американо
-			{ productId: 49, price: randomNumber(100, 180), weight: 280 },
+			{ productId: 50, price: 36, weight: 280 },
 
 			// Кава Капучіно
-			{ productId: 50, price: randomNumber(100, 180), weight: 250 },
+			{ productId: 51, price: 56, weight: 250 },
 
 			// Кава Латте
-			{ productId: 51, price: randomNumber(100, 180), weight: 330 },
+			{ productId: 52, price: 58, weight: 330 },
 
 			// Чікен бокс
-			{ productId: 52, price: randomNumber(100, 180) },
+			{ productId: 53, price: 86 },
 
 			// Комбо Сніданок на двох
-			{ productId: 53, price: randomNumber(100, 180) },
+			{ productId: 54, price: 183 },
 
 			// 3 піци 25 см
-			{ productId: 54, price: randomNumber(100, 180) },
+			{ productId: 55, price: 283 },
 
 			// 2 піци
-			{ productId: 55, price: randomNumber(100, 180) },
+			{ productId: 56, price: 386 },
 
 			// 3 піци
-			{ productId: 56, price: randomNumber(100, 180) },
+			{ productId: 57, price: 433 },
 
 			// 4 Закуски
-			{ productId: 57, price: randomNumber(100, 180) },
+			{ productId: 58, price: 229 },
 
 			// 2 фірмові закуски
-			{ productId: 58, price: randomNumber(100, 180) },
+			{ productId: 59, price: 109 },
 
 			// 2 десерти
-			{ productId: 59, price: randomNumber(100, 180) },
+			{ productId: 60, price: 65 },
 
 			// 2 кави: Латте або Капучіно
-			{ productId: 60, price: randomNumber(100, 180) },
+			{ productId: 61, price: 106 },
 
 			// 2 соуси
-			{ productId: 61, price: randomNumber(100, 180) },
+			{ productId: 62, price: 25 },
 
 			// Чізкейк Нью-Йорк з кокосом
-			{ productId: 62, price: randomNumber(100, 180), weight: 100 },
+			{ productId: 63, price: 56, weight: 100 },
 
 			// Бони
-			{ productId: 63, price: randomNumber(100, 180), weight: 120 },
+			{ productId: 64, price: 38, weight: 120 },
 
 			// Листкові палички з ананасами та брусницею
-			{ productId: 64, price: randomNumber(100, 180), weight: 260 },
+			{ productId: 65, price: 99, weight: 260 },
 
 			// Макарон манго-маракуйя
-			{ productId: 65, price: randomNumber(100, 180), weight: 24 },
+			{ productId: 66, price: 43, weight: 24 },
 
 			// Чізкейк Нью-Йорк
-			{ productId: 66, price: randomNumber(100, 180), weight: 100 },
+			{ productId: 67, price: 63, weight: 100 },
 
 			// Чізкейк Банановий із шоколадним печивом
-			{ productId: 67, price: randomNumber(100, 180), weight: 100 },
+			{ productId: 68, price: 56, weight: 100 },
 
 			// Еклери-міні із заварним кремом
-			{ productId: 68, price: randomNumber(100, 180), weight: 45 },
+			{ productId: 69, price: 56, weight: 45 },
 
 			// Шоколадний кукіс
-			{ productId: 69, price: randomNumber(100, 180), weight: 70 },
+			{ productId: 70, price: 31, weight: 70 },
 
 			// Фондан
-			{ productId: 70, price: randomNumber(100, 180), weight: 160 },
+			{ productId: 71, price: 129, weight: 160 },
 
 			// Мафін Солена карамель
-			{ productId: 71, price: randomNumber(100, 180), weight: 120 },
+			{ productId: 72, price: 33, weight: 120 },
 
 			// Маффін Три шоколади
-			{ productId: 72, price: randomNumber(100, 180), weight: 120 },
+			{ productId: 73, price: 33, weight: 120 },
 
 			// Бруслетики
-			{ productId: 73, price: randomNumber(100, 180), weight: 260 },
+			{ productId: 74, price: 93, weight: 260 },
 
 			// Сирники зі згущеним молоком
-			{ productId: 74, price: randomNumber(100, 180), weight: 150 },
+			{ productId: 75, price: 55, weight: 150 },
 
 			// Сирники з малиновим варенням 👶
-			{ productId: 75, price: randomNumber(100, 180), weight: 140 },
+			{ productId: 76, price: 53, weight: 140 },
 
 			// Сирники
-			{ productId: 76, price: randomNumber(100, 180), weight: 130 },
+			{ productId: 77, price: 48, weight: 130 },
 
 			// Курячі шматочки 👶
-			{ productId: 77, price: randomNumber(100, 180), weight: 120 },
+			{ productId: 78, price: 89, weight: 120 },
 
 			// Курячі нагетси
-			{ productId: 78, price: randomNumber(100, 180), weight: 110 },
+			{ productId: 79, price: 49, weight: 110 },
 
 			// Картопля з печі 🌱👶
-			{ productId: 79, price: randomNumber(100, 180), weight: 80 },
+			{ productId: 80, price: 46, weight: 80 },
 
 			// Сирники з малиновим варенням 👶
-			{ productId: 80, price: randomNumber(100, 180), weight: 150 },
+			{ productId: 81, price: 53, weight: 150 },
 
 			// Сирники зі згущеним молоком
-			{ productId: 81, price: randomNumber(100, 180), weight: 140 },
+			{ productId: 82, price: 55, weight: 140 },
 
 			// Медово-гірчичний
-			{ productId: 82, price: randomNumber(100, 180), weight: 25 },
+			{ productId: 83, price: 15, weight: 25 },
 
 			// Солодкий чилі
-			{ productId: 83, price: randomNumber(100, 180), weight: 25 },
+			{ productId: 84, price: 15, weight: 25 },
 
 			// Сирний
-			{ productId: 84, price: randomNumber(100, 180), weight: 25 },
+			{ productId: 85, price: 15, weight: 25 },
 
 			// Часниковий
-			{ productId: 85, price: randomNumber(100, 180), weight: 25 },
+			{ productId: 86, price: 15, weight: 25 },
 
 			// Барбекю
-			{ productId: 86, price: randomNumber(100, 180), weight: 25 },
+			{ productId: 87, price: 15, weight: 25 },
 
 			// Малинове варення
-			{ productId: 87, price: randomNumber(100, 180), weight: 25 },
-
-			{ productId: 88, price: randomNumber(100, 180) },
+			{ productId: 88, price: 15, weight: 25 },
 		],
 	})
 
