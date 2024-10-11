@@ -11,11 +11,12 @@ export const useQueryFilters = (filters: Filters) => {
 	useEffect(() => {
 		if (isMounted.current) {
 			const params = {
-				...filters.prices,
+				sort: filters.sort,
 				pizzaSizes: Array.from(filters.pizzaSizes),
 				pizzaTypes: Array.from(filters.pizzaTypes),
 				ingredients: Array.from(filters.ingredients),
-				sort: filters.sort,
+				priceFrom: filters.prices.priceFrom,
+				priceTo: filters.prices.priceTo,
 			}
 
 			const query = QueryString.stringify(params, {

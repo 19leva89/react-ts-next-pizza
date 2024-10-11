@@ -72,9 +72,9 @@ export const CheckboxFiltersGroup: FC<Props> = ({
 			)}
 
 			<div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
-				{list.map((item, index) => (
+				{list.map((item) => (
 					<CheckboxFilter
-						key={index}
+						key={item.value}
 						value={item.value}
 						text={item.text}
 						name={name}

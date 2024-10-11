@@ -1,7 +1,6 @@
 'use server'
 
 import { prisma } from '@/prisma/db'
-import { Prisma } from '@prisma/client'
 import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE, DEFAULT_SORT } from '@/constants/filter'
 
 /**
@@ -35,21 +34,9 @@ export const sortProducts = async (params: GetSearchParams) => {
 	const pizzaTypes = params.pizzaTypes?.split(',').map(Number)
 	const ingredientsIdArr = params.ingredients?.split(',').map(Number)
 
+	const sort = String(params.sort) || DEFAULT_SORT
 	const minPrice = Number(params.priceFrom) || DEFAULT_MIN_PRICE
 	const maxPrice = Number(params.priceTo) || DEFAULT_MAX_PRICE
-	const sort = String(params.sort) || DEFAULT_SORT
-
-	// Определение порядка сортировки с помощью объекта
-	const order: Prisma.ProductItemOrderByWithRelationInput =
-		sort === 'cheap'
-			? { price: 'asc' }
-			: sort === 'expensive'
-				? { price: 'desc' }
-				: sort === 'novelty'
-					? { createdAt: 'desc' }
-					: sort === 'rating'
-						? { createdAt: 'desc' } // TODO: Поменять createdAt на rating
-						: { createdAt: 'asc' } // Сортировка по умолчанию (если нет ни одного из критериев)
 
 	const categories = await prisma.category.findMany({
 		include: {
@@ -82,7 +69,16 @@ export const sortProducts = async (params: GetSearchParams) => {
 				include: {
 					ingredients: true,
 					items: {
-						orderBy: order,
+						orderBy:
+							sort === 'cheap'
+								? { price: 'asc' }
+								: sort === 'expensive'
+									? { price: 'desc' }
+									: sort === 'novelty'
+										? { createdAt: 'desc' }
+										: sort === 'rating'
+											? { rating: 'desc' }
+											: { createdAt: 'asc' },
 					},
 				},
 			},
@@ -102,7 +98,7 @@ export const sortProducts = async (params: GetSearchParams) => {
 			} else if (sort === 'novelty') {
 				return b.items[0].createdAt.getTime() - a.items[0].createdAt.getTime()
 			} else if (sort === 'rating') {
-				return a.items[0].createdAt.getTime() - b.items[0].createdAt.getTime() // TODO: Добавить rating
+				return b.items[0].rating - a.items[0].rating
 			}
 			return 0 // Если нет подходящего критерия сортировки, ничего не изменяем
 		})

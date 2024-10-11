@@ -60,7 +60,6 @@ model Product {
   name         String
   description  String?
   weight       Int           @default(0)
-  rating       Int           @default(0)
   imageUrl     String
   discount     Int           @default(0)
   discountType DiscountType?
@@ -78,6 +77,7 @@ model Product {
 model ProductItem {
   id        Int        @id @default(autoincrement())
   price     Int
+  rating    Int        @default(0)
   pizzaSize Int?
   pizzaType Int?
   //

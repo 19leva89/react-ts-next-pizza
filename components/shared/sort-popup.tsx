@@ -12,18 +12,20 @@ interface Props {
 }
 
 export const SortPopup: FC<Props> = ({ className }) => {
+	type SortOptions = 'cheap' | 'expensive' | 'novelty' | 'rating'
+
 	const filters = useFilters()
 	const [isOpen, setIsOpen] = useState(false)
 
-	const sortOptions: Record<string, string> = {
+	const sortOptions: Record<SortOptions, string> = {
 		cheap: 'Спочатку недорогі',
 		expensive: 'Спочатку дорогі',
 		novelty: 'Новинки',
 		rating: 'За рейтингом',
 	}
 
-	const updateSort = (sort: string) => {
-		filters.setSort(sort)
+	const updateSort = (name: string, newSort: SortOptions) => {
+		filters.setSort(name, newSort)
 		setIsOpen(false)
 	}
 
@@ -39,18 +41,20 @@ export const SortPopup: FC<Props> = ({ className }) => {
 
 					<b>Сортування:</b>
 
-					<b className="text-primary">{sortOptions[filters.sort]}</b>
+					<b className="text-primary">
+						<b className="text-primary">{sortOptions[filters.sort as SortOptions]}</b>
+					</b>
 				</div>
 			</PopoverTrigger>
 
 			<PopoverContent className="w-[240px]">
 				<ul>
-					{Object.entries(sortOptions).map(([key, value]) => (
+					{(Object.entries(sortOptions) as [SortOptions, string][]).map(([key, value]) => (
 						<li
 							key={key}
-							onClick={() => updateSort(key)}
+							onClick={() => updateSort('sort', key as SortOptions)}
 							className={cn('hover:bg-secondary hover:text-primary mt-1 p-2 px-4 cursor-pointer rounded-md', {
-								'bg-secondary text-primary': filters.sort === key,
+								'bg-secondary text-primary': filters.sort.toString() === String(key),
 							})}
 						>
 							{value}

@@ -1,12 +1,19 @@
 import { useSet } from 'react-use'
+import { useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { useMemo, useState, useEffect, useCallback } from 'react'
 
-import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE, DEFAULT_SORT } from '@/constants/filter'
+import { DEFAULT_SORT } from '@/constants/filter'
 
 interface PriceProps {
 	priceFrom?: number
 	priceTo?: number
+}
+
+interface QueryFilters extends PriceProps {
+	pizzaTypes: string
+	pizzaSizes: string
+	ingredients: string
+	sort: string
 }
 
 export interface Filters {
@@ -22,33 +29,31 @@ interface ReturnProps extends Filters {
 	setPizzaSizes: (value: string) => void
 	setPrices: (name: keyof PriceProps, value: number) => void
 	setIngredients: (value: string) => void
-	setSort: (value: string) => void
-}
-
-const getSetFromParam = (searchParams: URLSearchParams, key: string) =>
-	new Set<string>(searchParams.has(key) ? searchParams.get(key)?.split(',') : [])
-
-const compareSets = (setA: Set<string>, setB: Set<string>): boolean => {
-	if (setA.size !== setB.size) return false
-	const arrayA = Array.from(setA)
-	const arrayB = Array.from(setB)
-	for (const item of arrayA) {
-		if (!arrayB.includes(item)) return false
-	}
-	return true
+	setSort: (name: string, value: 'cheap' | 'expensive' | 'novelty' | 'rating') => void
 }
 
 export const useFilters = (): ReturnProps => {
-	const searchParams = useSearchParams()
+	const searchParams = useSearchParams() as unknown as Map<keyof QueryFilters, string>
 
-	const [pizzaSizes, { toggle: togglePizzaSizes }] = useSet(getSetFromParam(searchParams, 'pizzaSizes'))
-	const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(getSetFromParam(searchParams, 'pizzaTypes'))
-	const [ingredients, { toggle: toggleIngredients }] = useSet(getSetFromParam(searchParams, 'ingredients'))
-	const [sort, setSort] = useState<string>(searchParams.get('sort') || DEFAULT_SORT)
+	const [pizzaSizes, { toggle: togglePizzaSizes }] = useSet(
+		new Set<string>(searchParams.has('pizzaSizes') ? searchParams.get('pizzaSizes')?.split(',') : []),
+	)
+
+	const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(
+		new Set<string>(searchParams.has('pizzaTypes') ? searchParams.get('pizzaTypes')?.split(',') : []),
+	)
+
+	const [ingredients, { toggle: toggleIngredients }] = useSet(
+		new Set<string>(searchParams.has('ingredients') ? searchParams.get('ingredients')?.split(',') : []),
+	)
+
+	const [sort, setSort] = useState<string>(
+		searchParams.has('sort') ? (searchParams.get('sort') as string) : DEFAULT_SORT,
+	)
 
 	const [prices, setPrices] = useState<PriceProps>({
-		priceFrom: Number(searchParams.get('priceFrom')) || DEFAULT_MIN_PRICE,
-		priceTo: Number(searchParams.get('priceTo')) || DEFAULT_MAX_PRICE,
+		priceFrom: Number(searchParams.get('priceFrom')) || undefined,
+		priceTo: Number(searchParams.get('priceTo')) || undefined,
 	})
 
 	const onPriceChange = (name: keyof PriceProps, value: number) => {
@@ -58,47 +63,11 @@ export const useFilters = (): ReturnProps => {
 		}))
 	}
 
-	const onSortChange = useCallback(
-		(newSort: string) => {
-			if (newSort !== sort) {
-				setSort(newSort)
-			}
-		},
-		[sort],
-	)
-
-	useEffect(() => {
-		const updatedPizzaTypes = getSetFromParam(searchParams, 'pizzaTypes')
-		const updatedPizzaSizes = getSetFromParam(searchParams, 'pizzaSizes')
-		const updatedIngredients = getSetFromParam(searchParams, 'ingredients')
-		const updatedSort = searchParams.get('sort') || DEFAULT_SORT
-
-		// Сравниваем с текущими параметрами
-		if (!compareSets(updatedPizzaTypes, pizzaTypes)) {
-			pizzaTypes.clear()
-			updatedPizzaTypes.forEach((type) => togglePizzaTypes(type))
+	const onSortChange = (name: string, value: string) => {
+		if (name === 'sort') {
+			setSort((prev) => (prev === value ? '' : value))
 		}
-
-		if (!compareSets(updatedPizzaSizes, pizzaSizes)) {
-			pizzaSizes.clear()
-			updatedPizzaSizes.forEach((size) => togglePizzaSizes(size))
-		}
-
-		if (!compareSets(updatedIngredients, ingredients)) {
-			ingredients.clear()
-			updatedIngredients.forEach((ingredient) => toggleIngredients(ingredient))
-		}
-
-		if (updatedSort !== sort) {
-			setSort(updatedSort)
-		}
-
-		setPrices({
-			priceFrom: Number(searchParams.get('priceFrom')) || DEFAULT_MIN_PRICE,
-			priceTo: Number(searchParams.get('priceTo')) || DEFAULT_MAX_PRICE,
-		})
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchParams])
+	}
 
 	return useMemo(
 		() => ({
@@ -122,7 +91,6 @@ export const useFilters = (): ReturnProps => {
 			togglePizzaTypes,
 			togglePizzaSizes,
 			toggleIngredients,
-			onSortChange,
 		],
 	)
 }
