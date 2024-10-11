@@ -505,7 +505,6 @@ export const products = [
 		imageUrl: '/assets/img/products/coffee-latte',
 		categoryId: 6,
 	},
-
 	{
 		name: 'Чікен бокс',
 		description:
