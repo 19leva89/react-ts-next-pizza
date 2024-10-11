@@ -1,14 +1,15 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-import { cn } from '@/lib'
 import { Button } from '@/components/ui'
 import { Title } from '@/components/shared'
+import { cn, getProductDetails } from '@/lib'
 
 interface Props {
 	name: string
 	description?: string
 	price: number
+	weight: number
 	imageUrl: string
 	loading?: boolean
 	onSubmit?: VoidFunction
@@ -22,11 +23,14 @@ export const ChooseProductForm: FC<Props> = ({
 	name,
 	description,
 	price,
+	weight,
 	imageUrl,
 	loading,
 	onSubmit,
 	className,
 }) => {
+	const { details } = getProductDetails(weight)
+
 	return (
 		<div className={cn(className, 'flex flex-1')}>
 			<div className="flex items-center justify-center flex-1 relative w-full">
@@ -39,10 +43,14 @@ export const ChooseProductForm: FC<Props> = ({
 				/>
 			</div>
 
-			<div className="w-[490px] bg-[#f7f6f5] p-7">
-				<Title text={name} size="md" className="font-extrabold mb-1" />
+			<div className="flex flex-col justify-between w-[490px] h-[600px] bg-[#f7f6f5] p-7">
+				<div className="flex flex-col justify-start">
+					<Title text={name} size="md" className="font-extrabold mb-1" />
 
-				<p className="text-sm text-gray-400">{description}</p>
+					{weight >= 1 && <p className="text-gray-400 text-sm">{details}</p>}
+
+					<p className="text-sm text-gray-400">{description}</p>
+				</div>
 
 				<Button
 					loading={loading}

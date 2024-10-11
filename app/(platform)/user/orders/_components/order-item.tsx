@@ -71,6 +71,7 @@ export const OrderItem: FC<Props> = ({
 									item.ingredients,
 									item.productItem.pizzaType as PizzaType,
 									item.productItem.pizzaSize as PizzaSize,
+									item.productItem.weight as number,
 								)}
 								count={item.quantity}
 								price={item.productItem.price * item.quantity}

@@ -53,6 +53,7 @@ export const CheckoutCart: FC<Props> = ({
 									item.ingredients,
 									item.pizzaType as PizzaType,
 									item.pizzaSize as PizzaSize,
+									item.weight as number,
 								)}
 								price={item.price}
 								quantity={item.quantity}

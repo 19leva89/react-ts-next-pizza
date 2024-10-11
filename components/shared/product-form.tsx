@@ -60,6 +60,7 @@ export const ProductForm: FC<Props> = ({ product, ingredients, onSubmit }) => {
 			name={product.name}
 			description={product.description || ''}
 			price={firstItem.price}
+			weight={product.items[0].weight || 0}
 			imageUrl={imageUrl}
 			loading={loading}
 			onSubmit={handleAddToCart}

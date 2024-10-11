@@ -35,6 +35,7 @@ export const ChoosePizzaForm: FC<Props> = ({
 	const {
 		size,
 		type,
+		weight,
 		selectedIngredientIds,
 		availableSizes,
 		currentItemId,
@@ -43,7 +44,13 @@ export const ChoosePizzaForm: FC<Props> = ({
 		addIngredient,
 	} = usePizzaOptions(items)
 
-	const { details, additionalIngredients } = getPizzaDetails(type, size, ingredients, selectedIngredientIds)
+	const { details, additionalIngredients } = getPizzaDetails(
+		type,
+		size,
+		weight,
+		ingredients,
+		selectedIngredientIds,
+	)
 
 	const totalPrice = calcTotalPizzaPrice(type, size, items, ingredients, selectedIngredientIds)
 
@@ -57,44 +64,46 @@ export const ChoosePizzaForm: FC<Props> = ({
 		<div className={cn(className, 'flex flex-1')}>
 			<PizzaImage name={name} size={size} imageUrl={imageUrl} />
 
-			<div className="w-[490px] h-[800px] bg-[#f7f6f5] p-7">
-				<Title text={name} size="md" className="font-extrabold mb-1" />
+			<div className="flex flex-col justify-between w-[490px] h-[800px] bg-[#f7f6f5] p-7">
+				<div className="flex flex-col justify-start">
+					<Title text={name} size="md" className="font-extrabold mb-1" />
 
-				<p className="text-gray-400 text-sm">{details}</p>
+					<p className="text-gray-400 text-sm">{details}</p>
 
-				<p className="text-gray-400 text-sm">{additionalIngredients}</p>
+					<p className="text-gray-400 text-sm">{additionalIngredients}</p>
 
-				<div className="flex flex-col gap-4 mt-5">
-					<GroupVariants
-						items={availableSizes}
-						value={String(size)}
-						onClick={(value) => setSize(Number(value) as PizzaSize)}
-					/>
+					<div className="flex flex-col gap-1 mt-2">
+						<GroupVariants
+							items={availableSizes}
+							value={String(size)}
+							onClick={(value) => setSize(Number(value) as PizzaSize)}
+						/>
 
-					<GroupVariants
-						items={pizzaTypes}
-						value={String(type)}
-						onClick={(value) => setType(Number(value) as PizzaType)}
-					/>
-				</div>
+						<GroupVariants
+							items={pizzaTypes}
+							value={String(type)}
+							onClick={(value) => setType(Number(value) as PizzaType)}
+						/>
+					</div>
 
-				<div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar mt-5">
-					<div className="grid grid-cols-3 gap-3">
-						{ingredients.map((item) => {
-							const bdImagePath = item.imageUrl
-							const imageUrl = `${bdImagePath}.png`
+					<div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar mt-1">
+						<div className="grid grid-cols-3 gap-3">
+							{ingredients.map((item) => {
+								const bdImagePath = item.imageUrl
+								const imageUrl = `${bdImagePath}.png`
 
-							return (
-								<IngredientItem
-									key={item.id}
-									name={item.name}
-									price={item.price}
-									imageUrl={imageUrl}
-									onClick={() => addIngredient(item.id)}
-									active={selectedIngredientIds.has(item.id)}
-								/>
-							)
-						})}
+								return (
+									<IngredientItem
+										key={item.id}
+										name={item.name}
+										price={item.price}
+										imageUrl={imageUrl}
+										onClick={() => addIngredient(item.id)}
+										active={selectedIngredientIds.has(item.id)}
+									/>
+								)
+							})}
+						</div>
 					</div>
 				</div>
 
