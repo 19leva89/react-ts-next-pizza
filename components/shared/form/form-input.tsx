@@ -11,11 +11,12 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	name: string
 	label?: string
 	type: string
+	placeholder?: string
 	required?: boolean
 	className?: string
 }
 
-export const FormInput: FC<Props> = ({ className, name, label, type, required, ...props }) => {
+export const FormInput: FC<Props> = ({ className, name, label, type, placeholder, required, ...props }) => {
 	const {
 		register,
 		formState: { errors },
@@ -46,9 +47,10 @@ export const FormInput: FC<Props> = ({ className, name, label, type, required, .
 			<div className="relative">
 				<Input
 					className="h-12 text-md pr-20"
+					type={type === 'password' && !isPasswordVisible ? 'password' : 'text'}
+					placeholder={placeholder}
 					{...register(name)}
 					{...props}
-					type={type === 'password' && !isPasswordVisible ? 'password' : 'text'}
 				/>
 
 				{type === 'password' && (

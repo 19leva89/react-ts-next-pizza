@@ -3,9 +3,17 @@ import toast from 'react-hot-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import { Button } from '@/components/ui'
+import {
+	Button,
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui'
 import { registerUser } from '@/app/actions'
-import { FormInput, Title } from '@/components/shared'
+import { FormInput } from '@/components/shared'
 import { TFormRegisterValues, formRegisterSchema } from './schemas'
 
 interface Props {
@@ -41,24 +49,30 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
 
 	return (
 		<FormProvider {...form}>
-			<form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
-				<div className="mr-2">
-					<Title text="Реєстрація аккаунта" size="md" className="font-bold" />
+			<form className="flex flex-col gap-5 min-h-[450px]" onSubmit={form.handleSubmit(onSubmit)}>
+				<Card>
+					<CardHeader>
+						<CardTitle>Реєстрація аккаунта</CardTitle>
 
-					<p className="text-gray-400 text-sm">Введіть свої дані, щоб зареєструвати акаунт</p>
-				</div>
+						<CardDescription>Введіть свої дані, щоб зареєструвати акаунт</CardDescription>
+					</CardHeader>
 
-				<FormInput name="email" label="Email" type="email" required />
+					<CardContent className="flex flex-col gap-5">
+						<FormInput name="email" type="email" placeholder="Email" required />
 
-				<FormInput name="fullName" label="Повне ім'я" type="text" required />
+						<FormInput name="fullName" type="text" placeholder="Повне ім'я" required />
 
-				<FormInput name="password" label="Пароль" type="password" required />
+						<FormInput name="password" type="password" placeholder="Пароль" required />
 
-				<FormInput name="confirmPassword" label="Підтвердьте пароль" type="password" required />
+						<FormInput name="confirmPassword" type="password" placeholder="Повторіть пароль" required />
+					</CardContent>
 
-				<Button loading={form.formState.isSubmitting} className="h-12 text-base" type="submit">
-					Зареєструватись
-				</Button>
+					<CardFooter>
+						<Button loading={form.formState.isSubmitting} className="h-12 text-base w-full" type="submit">
+							Зареєструватись
+						</Button>
+					</CardFooter>
+				</Card>
 			</form>
 		</FormProvider>
 	)
