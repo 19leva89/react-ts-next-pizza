@@ -8,8 +8,6 @@ export const useQueryFilters = (filters: Filters) => {
 	const router = useRouter()
 	const isMounted = useRef(false)
 
-	console.log('filters', filters)
-
 	useEffect(() => {
 		if (isMounted.current) {
 			const params = {
@@ -24,8 +22,6 @@ export const useQueryFilters = (filters: Filters) => {
 			const query = qs.stringify(params, {
 				arrayFormat: 'comma',
 			})
-
-			console.log('query', query)
 
 			router.push(`?${query}`, {
 				scroll: false,
