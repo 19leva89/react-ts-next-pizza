@@ -4,6 +4,7 @@ import { FC, useState } from 'react'
 import { ArrowUpDown } from 'lucide-react'
 
 import { cn } from '@/lib'
+import { SortOption, sortOptions } from '@/constants'
 import { useFilters, useQueryFilters } from '@/hooks'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui'
 
@@ -12,24 +13,17 @@ interface Props {
 }
 
 export const SortPopup: FC<Props> = ({ className }) => {
-	type SortOptions = 'cheap' | 'expensive' | 'novelty' | 'rating'
-
 	const filters = useFilters()
 	const [isOpen, setIsOpen] = useState(false)
 
-	const sortOptions: Record<SortOptions, string> = {
-		cheap: 'Спочатку недорогі',
-		expensive: 'Спочатку дорогі',
-		novelty: 'Новинки',
-		rating: 'За рейтингом',
-	}
+	useQueryFilters(filters)
 
-	const updateSort = (name: string, newSort: SortOptions) => {
-		filters.setSort(name, newSort)
+	const handleSortChange = (value: SortOption) => {
+		if (filters.sort !== value) {
+			filters.setSort(value)
+		}
 		setIsOpen(false)
 	}
-
-	useQueryFilters(filters)
 
 	return (
 		<Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -41,23 +35,21 @@ export const SortPopup: FC<Props> = ({ className }) => {
 
 					<b>Сортування:</b>
 
-					<b className="text-primary">
-						<b className="text-primary">{sortOptions[filters.sort as SortOptions]}</b>
-					</b>
+					<b className="text-primary">{sortOptions.find((option) => option.value === filters.sort)?.name}</b>
 				</div>
 			</PopoverTrigger>
 
 			<PopoverContent className="w-[240px]">
 				<ul>
-					{(Object.entries(sortOptions) as [SortOptions, string][]).map(([key, value]) => (
+					{sortOptions.map(({ value, name }) => (
 						<li
-							key={key}
-							onClick={() => updateSort('sort', key as SortOptions)}
+							key={value}
+							onClick={() => handleSortChange(value as SortOption)}
 							className={cn('hover:bg-secondary hover:text-primary mt-1 p-2 px-4 cursor-pointer rounded-md', {
-								'bg-secondary text-primary': filters.sort.toString() === String(key),
+								'bg-secondary text-primary': filters.sort === value,
 							})}
 						>
-							{value}
+							{name}
 						</li>
 					))}
 				</ul>

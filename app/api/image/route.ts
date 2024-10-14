@@ -1,7 +1,7 @@
 import sharp from 'sharp'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
 	const { searchParams } = new URL(req.url)
 	const imageUrl = searchParams.get('url')
 	const widthParam = searchParams.get('width')
@@ -41,7 +41,7 @@ export async function GET(req: Request) {
 
 		const resizedImageBuffer = await sharpInstance.toBuffer()
 
-		return new Response(resizedImageBuffer, {
+		return new NextResponse(resizedImageBuffer, {
 			headers: {
 				'Content-Type': 'image/png',
 				'Cache-Control': 'no-store',

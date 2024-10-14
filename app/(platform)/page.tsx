@@ -12,7 +12,7 @@ import {
 } from '@/components/shared'
 import { sortProducts, GetSearchParams } from '@/lib/sort-products'
 
-export default async function Home({ searchParams }: { searchParams: GetSearchParams }) {
+export default async function HomePage({ searchParams }: { searchParams: GetSearchParams }) {
 	const categories = await sortProducts(searchParams)
 
 	const ingredientsIdArr = searchParams.ingredients?.split(',').map(Number) || []

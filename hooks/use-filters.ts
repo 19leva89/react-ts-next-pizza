@@ -2,6 +2,7 @@ import { useSet } from 'react-use'
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 
+import { SortOption } from '@/constants'
 import { DEFAULT_SORT } from '@/constants/filter'
 
 interface PriceProps {
@@ -19,17 +20,17 @@ interface QueryFilters extends PriceProps {
 export interface Filters {
 	pizzaTypes: Set<string>
 	pizzaSizes: Set<string>
-	prices: PriceProps
 	ingredients: Set<string>
+	prices: PriceProps
 	sort: string
 }
 
 interface ReturnProps extends Filters {
 	setPizzaTypes: (value: string) => void
 	setPizzaSizes: (value: string) => void
-	setPrices: (name: keyof PriceProps, value: number) => void
 	setIngredients: (value: string) => void
-	setSort: (name: string, value: 'cheap' | 'expensive' | 'novelty' | 'rating') => void
+	setPrices: (name: keyof PriceProps, value: number) => void
+	setSort: (value: SortOption) => void
 }
 
 export const useFilters = (): ReturnProps => {
@@ -47,8 +48,8 @@ export const useFilters = (): ReturnProps => {
 		new Set<string>(searchParams.has('ingredients') ? searchParams.get('ingredients')?.split(',') : []),
 	)
 
-	const [sort, setSort] = useState<string>(
-		searchParams.has('sort') ? (searchParams.get('sort') as string) : DEFAULT_SORT,
+	const [sort, setSort] = useState<SortOption>(
+		searchParams.has('sort') ? (searchParams.get('sort') as SortOption) : DEFAULT_SORT,
 	)
 
 	const [prices, setPrices] = useState<PriceProps>({
@@ -63,10 +64,8 @@ export const useFilters = (): ReturnProps => {
 		}))
 	}
 
-	const onSortChange = (name: string, value: string) => {
-		if (name === 'sort') {
-			setSort((prev) => (prev === value ? '' : value))
-		}
+	const onSortChange = (value: SortOption) => {
+		setSort(value)
 	}
 
 	return useMemo(
@@ -82,15 +81,6 @@ export const useFilters = (): ReturnProps => {
 			setIngredients: toggleIngredients,
 			setSort: onSortChange,
 		}),
-		[
-			pizzaTypes,
-			pizzaSizes,
-			prices,
-			ingredients,
-			sort,
-			togglePizzaTypes,
-			togglePizzaSizes,
-			toggleIngredients,
-		],
+		[pizzaTypes, pizzaSizes, prices, ingredients, sort],
 	)
 }
