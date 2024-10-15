@@ -52,9 +52,9 @@ export const LoginForm: FC<Props> = ({ onClose }) => {
 
 	return (
 		<FormProvider {...form}>
-			<form className="flex flex-col gap-5 h-[450px]" onSubmit={form.handleSubmit(onSubmit)}>
-				<Card className="flex flex-col justify-between items-stretch h-full">
-					<div className="flex-grow">
+			<form className="flex flex-col gap-5 h-full min-h-[450px]" onSubmit={form.handleSubmit(onSubmit)}>
+				<Card className="flex flex-col justify-between items-stretch flex-grow">
+					<div>
 						<CardHeader>
 							<CardTitle>Вхід в аккаунт</CardTitle>
 

@@ -3,11 +3,11 @@ import { useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 
 import { SortOption } from '@/constants'
-import { DEFAULT_SORT } from '@/constants/filter'
+import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE, DEFAULT_SORT } from '@/constants/filter'
 
 interface PriceProps {
-	priceFrom?: number
-	priceTo?: number
+	priceFrom: number
+	priceTo: number
 }
 
 interface QueryFilters extends PriceProps {
@@ -31,20 +31,21 @@ interface ReturnProps extends Filters {
 	setIngredients: (value: string) => void
 	setPrices: (name: keyof PriceProps, value: number) => void
 	setSort: (value: SortOption) => void
+	reset: () => void
 }
 
 export const useFilters = (): ReturnProps => {
 	const searchParams = useSearchParams() as unknown as Map<keyof QueryFilters, string>
 
-	const [pizzaSizes, { toggle: togglePizzaSizes }] = useSet(
+	const [pizzaSizes, { toggle: togglePizzaSizes, reset: resetPizzaSizes }] = useSet(
 		new Set<string>(searchParams.has('pizzaSizes') ? searchParams.get('pizzaSizes')?.split(',') : []),
 	)
 
-	const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(
+	const [pizzaTypes, { toggle: togglePizzaTypes, reset: resetPizzaTypes }] = useSet(
 		new Set<string>(searchParams.has('pizzaTypes') ? searchParams.get('pizzaTypes')?.split(',') : []),
 	)
 
-	const [ingredients, { toggle: toggleIngredients }] = useSet(
+	const [ingredients, { toggle: toggleIngredients, reset: resetIngredients }] = useSet(
 		new Set<string>(searchParams.has('ingredients') ? searchParams.get('ingredients')?.split(',') : []),
 	)
 
@@ -53,8 +54,8 @@ export const useFilters = (): ReturnProps => {
 	)
 
 	const [prices, setPrices] = useState<PriceProps>({
-		priceFrom: Number(searchParams.get('priceFrom')) || undefined,
-		priceTo: Number(searchParams.get('priceTo')) || undefined,
+		priceFrom: Number(searchParams.get('priceFrom')) || DEFAULT_MIN_PRICE,
+		priceTo: Number(searchParams.get('priceTo')) || DEFAULT_MAX_PRICE,
 	})
 
 	const onPriceChange = (name: keyof PriceProps, value: number) => {
@@ -66,6 +67,17 @@ export const useFilters = (): ReturnProps => {
 
 	const onSortChange = (value: SortOption) => {
 		setSort(value)
+	}
+
+	const reset = () => {
+		resetPizzaTypes()
+		resetPizzaSizes()
+		resetIngredients()
+		setSort(DEFAULT_SORT)
+		setPrices({
+			priceFrom: DEFAULT_MIN_PRICE,
+			priceTo: DEFAULT_MAX_PRICE,
+		})
 	}
 
 	return useMemo(
@@ -80,6 +92,7 @@ export const useFilters = (): ReturnProps => {
 			setPrices: onPriceChange,
 			setIngredients: toggleIngredients,
 			setSort: onSortChange,
+			reset,
 		}),
 		[pizzaTypes, pizzaSizes, prices, ingredients, sort],
 	)

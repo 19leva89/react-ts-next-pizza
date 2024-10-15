@@ -49,25 +49,27 @@ export const RegisterForm: FC<Props> = ({ onClose }) => {
 
 	return (
 		<FormProvider {...form}>
-			<form className="flex flex-col gap-5 min-h-[450px]" onSubmit={form.handleSubmit(onSubmit)}>
-				<Card>
-					<CardHeader>
-						<CardTitle>Реєстрація аккаунта</CardTitle>
+			<form className="flex flex-col gap-5 h-full min-h-[450px]" onSubmit={form.handleSubmit(onSubmit)}>
+				<Card className="flex flex-col justify-between items-stretch flex-grow">
+					<div>
+						<CardHeader>
+							<CardTitle>Реєстрація аккаунта</CardTitle>
 
-						<CardDescription>Введіть свої дані, щоб зареєструвати акаунт</CardDescription>
-					</CardHeader>
+							<CardDescription>Введіть свої дані, щоб зареєструвати акаунт</CardDescription>
+						</CardHeader>
 
-					<CardContent className="flex flex-col gap-5">
-						<FormInput name="email" type="email" placeholder="Email" required />
+						<CardContent className="flex flex-col gap-5">
+							<FormInput name="email" type="email" placeholder="Email" required />
 
-						<FormInput name="fullName" type="text" placeholder="Повне ім'я" required />
+							<FormInput name="fullName" type="text" placeholder="Повне ім'я" required />
 
-						<FormInput name="password" type="password" placeholder="Пароль" required />
+							<FormInput name="password" type="password" placeholder="Пароль" required />
 
-						<FormInput name="confirmPassword" type="password" placeholder="Повторіть пароль" required />
-					</CardContent>
+							<FormInput name="confirmPassword" type="password" placeholder="Повторіть пароль" required />
+						</CardContent>
+					</div>
 
-					<CardFooter>
+					<CardFooter className="flex flex-col gap-4">
 						<Button loading={form.formState.isSubmitting} className="h-12 text-base w-full" type="submit">
 							Зареєструватись
 						</Button>

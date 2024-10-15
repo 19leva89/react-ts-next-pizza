@@ -3,6 +3,7 @@
 import { FC, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 
+import { Separator } from '@/components/ui'
 import { cn, getCartItemDetails } from '@/lib'
 import { CartItemDTO } from '@/services/dto/cart.dto'
 import { PizzaSize, PizzaType } from '@/constants/pizza'
@@ -40,7 +41,7 @@ export const OrderItem: FC<Props> = ({
 		<div className={cn('bg-white rounded-3xl select-none', className)}>
 			<div
 				onClick={() => setIsExpanded(!isExpanded)}
-				className="flex cursor-pointer justify-between items-center gap-2 p-7 border-b border-gray-100"
+				className="flex cursor-pointer justify-between items-center gap-2 p-7"
 			>
 				<div className="flex items-center gap-6">
 					<Title text={`Замовлення #${id}`} size="sm" className="font-bold" />
@@ -55,6 +56,8 @@ export const OrderItem: FC<Props> = ({
 				</div>
 			</div>
 
+			<Separator />
+
 			<div className={cn('transition-all overflow-hidden')} style={{ height: TOTAL_HEIGHT }}>
 				<div>
 					{items.map((item) => {
@@ -62,21 +65,24 @@ export const OrderItem: FC<Props> = ({
 						const imageUrl = `${bdImagePath}.avif`
 
 						return (
-							<OrderCartItem
-								key={item.id}
-								id={item.productItem.product.id}
-								name={item.productItem.product.name}
-								imageUrl={imageUrl}
-								details={getCartItemDetails(
-									item.ingredients,
-									item.productItem.pizzaType as PizzaType,
-									item.productItem.pizzaSize as PizzaSize,
-									item.productItem.weight as number,
-								)}
-								count={item.quantity}
-								price={item.productItem.price * item.quantity}
-								className="border-b border-gray-100"
-							/>
+							<>
+								<OrderCartItem
+									key={item.id}
+									id={item.productItem.product.id}
+									name={item.productItem.product.name}
+									imageUrl={imageUrl}
+									details={getCartItemDetails(
+										item.ingredients,
+										item.productItem.pizzaType as PizzaType,
+										item.productItem.pizzaSize as PizzaSize,
+										item.productItem.weight as number,
+									)}
+									count={item.quantity}
+									price={item.productItem.price * item.quantity}
+								/>
+
+								<Separator />
+							</>
 						)
 					})}
 

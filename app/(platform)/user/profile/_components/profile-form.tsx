@@ -63,7 +63,7 @@ export const ProfileForm: FC<Props> = ({ data }) => {
 
 					<FormInput name="confirmPassword" label="Повторіть пароль" type="password" />
 
-					<Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
+					<Button disabled={form.formState.isSubmitting} className="h-12 text-base mt-10" type="submit">
 						Зберегти
 					</Button>
 				</form>

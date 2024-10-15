@@ -2,6 +2,7 @@
 
 import { FC } from 'react'
 
+import { SearchX } from 'lucide-react'
 import { Input, Separator } from '@/components/ui'
 import { useIngredients, useFilters, useQueryFilters } from '@/hooks'
 import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE } from '@/constants/filter'
@@ -23,6 +24,10 @@ export const Filters: FC<Props> = ({ className }) => {
 	const updatePrices = (prices: number[]) => {
 		filters.setPrices('priceFrom', prices[0])
 		filters.setPrices('priceTo', prices[1])
+	}
+
+	const resetFilters = () => {
+		filters.reset()
 	}
 
 	useQueryFilters(filters)
@@ -107,6 +112,11 @@ export const Filters: FC<Props> = ({ className }) => {
 				onClickCheckbox={filters.setIngredients}
 				selected={filters.ingredients}
 			/>
+
+			{/* Reset button */}
+			<div className="flex items-center gap-2 mt-5 cursor-pointer hover:text-primary" onClick={resetFilters}>
+				Скинути всі фільтри <SearchX className="hover:stroke-primary" />
+			</div>
 		</div>
 	)
 }

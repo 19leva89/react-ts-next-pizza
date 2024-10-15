@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Trash2Icon } from 'lucide-react'
 
 import { cn } from '@/lib'
+import { Separator } from '@/components/ui'
 import { CountButton } from '@/components/shared'
 import * as CartItemDetails from '@/components/shared/cart-item-details'
 
@@ -53,7 +54,7 @@ export const CartDrawerItem: FC<Props> = ({
 			<div className="flex-1">
 				<CartItemDetails.Info name={name} details={details} />
 
-				<hr className="my-3" />
+				<Separator className="my-3" />
 
 				<div className="flex items-center justify-between">
 					<CountButton onClick={onClickCountButton} value={quantity} />
