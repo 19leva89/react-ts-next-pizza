@@ -1,6 +1,6 @@
 import fs from 'fs'
-import { hashSync } from 'bcrypt'
-import { prisma } from './../prisma/db'
+import { hashSync } from 'bcryptjs'
+import { prisma } from '../src/lib/prisma'
 import { categories, ingredients, products, storyItems, stories } from './constants'
 
 async function up() {

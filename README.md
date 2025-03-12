@@ -4,17 +4,17 @@ Animation and Interaction:
 - React Insta Stories (stories like Instagram)
 
 Authentication and User Management:
-- Bcrypt (password hashing)
+- Bcryptjs (password hashing)
 - NextAuth (authentication)
 
 Core Technologies:
-- React 18
+- React 19
 - TypeScript
-- Next 14 (framework)
+- Next 15 (framework)
 
 Data Fetching and State Management:
 - Axios (sending request to backend)
-- Prisma 5 (ORM for DB)
+- Prisma 6 (ORM for DB)
 - React Hook Form (working with forms)
 - Zustand (state management)
 
@@ -28,7 +28,7 @@ Form and Validation:
 - Zod (first schema validation)
 
 Image Handling and Optimization:
-- Sharp (image optimizator)
+- Sharp (image optimizer)
 
 Middleware and Server Utilities:
 - Concurrently (all projects are running in tandem)
