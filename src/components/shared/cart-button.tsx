@@ -1,5 +1,6 @@
 'use client'
 
+import { shallow } from 'zustand/shallow'
 import { ArrowRight, ShoppingCart } from 'lucide-react'
 
 import { cn } from '@/lib'
@@ -12,11 +13,10 @@ interface Props {
 }
 
 export const CartButton = ({ className }: Props) => {
-	const [items, totalAmount, loading] = useCartStore((state) => [
-		state.items,
-		state.totalAmount,
-		state.loading,
-	])
+	const [items, totalAmount, loading] = useCartStore(
+		(state) => [state.items, state.totalAmount, state.loading],
+		shallow,
+	)
 
 	return (
 		<CartDrawer>

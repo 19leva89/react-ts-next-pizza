@@ -25,10 +25,11 @@ enum DiscountType {
 }
 
 model User {
-  id               Int               @id @default(autoincrement())
+  id               String            @id @default(cuid()) @map("_id")
   fullName         String
   email            String            @unique
-  password         String
+  password         String?
+  image            String?
   //
   role             UserRole          @default(USER)
   verified         DateTime?
@@ -38,25 +39,110 @@ model User {
   cartItems        CartItem[]
   orders           Order[]
   //
-  provider         String?
-  providerId       String?
+  accounts         Account[]
+  sessions         Session[]
+  authenticator    Authenticator[]
   //
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
+
+  @@map("user")
+}
+
+model Account {
+  id                String   @id @default(cuid()) @map("_id")
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  //
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  //
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("account")
+}
+
+model Session {
+  id           String   @id @default(cuid()) @map("_id")
+  sessionToken String   @unique
+  expires      DateTime
+  //
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  //
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+  @@map("session")
+}
+
+model VerificationToken {
+  id         String   @id @default(cuid()) @map("_id")
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_token")
+}
+
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @id @map("_id")
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+  //
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, credentialID])
+  @@map("authenticator")
+}
+
+model VerificationCode {
+  id        String   @id @default(cuid()) @map("_id")
+  //
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @unique
+  //
+  code      String
+  //
+  createdAt DateTime @default(now())
+
+  @@map("verification_code")
 }
 
 model Category {
-  id        Int       @id @default(autoincrement())
+  id        Int       @id @default(autoincrement()) @map("_id")
   name      String    @unique
   slug      String    @unique
+  //
   products  Product[]
   //
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
+  @@map("category")
 }
 
 model Product {
-  id           Int           @id @default(autoincrement())
+  id           Int           @id @default(autoincrement()) @map("_id")
   name         String
   description  String?
   imageUrl     String
@@ -71,10 +157,15 @@ model Product {
   //
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+
+  @@index([categoryId])
+  @@index([discountType, discount])
+  @@index([createdAt])
+  @@map("product")
 }
 
 model ProductItem {
-  id        Int        @id @default(autoincrement())
+  id        Int        @id @default(autoincrement()) @map("_id")
   price     Int
   rating    Int        @default(0)
   pizzaSize Int?
@@ -88,10 +179,16 @@ model ProductItem {
   //
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+
+  @@index([productId])
+  @@index([price])
+  @@index([pizzaSize, pizzaType])
+  @@index([createdAt])
+  @@map("product_item")
 }
 
 model Ingredient {
-  id        Int        @id @default(autoincrement())
+  id        Int        @id @default(autoincrement()) @map("_id")
   name      String     @unique
   price     Int
   imageUrl  String
@@ -101,13 +198,16 @@ model Ingredient {
   //
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+
+  @@index([price])
+  @@map("ingredient")
 }
 
 model Cart {
-  id          Int        @id @default(autoincrement())
+  id          String     @id @default(cuid()) @map("_id")
   //
   user        User?      @relation("UserCart", fields: [userId], references: [id])
-  userId      Int?
+  userId      String?
   //
   token       String     @unique
   //
@@ -116,29 +216,37 @@ model Cart {
   //
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("cart")
 }
 
 model CartItem {
-  id            Int          @id @default(autoincrement())
+  id            String       @id @default(cuid()) @map("_id")
   //
   cart          Cart         @relation(fields: [cartId], references: [id])
-  cartId        Int
+  cartId        String
   //
   productItem   ProductItem  @relation(fields: [productItemId], references: [id])
   productItemId Int
   //
   user          User?        @relation(fields: [userId], references: [id])
-  userId        Int?
+  userId        String?
   //
   ingredients   Ingredient[]
   quantity      Int          @default(1)
   //
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("cart_item")
 }
 
 model Order {
-  id            Int         @id @default(autoincrement())
+  id            Int         @id @default(autoincrement()) @map("_id")
   fullName      String
   email         String
   phone         String
@@ -148,7 +256,7 @@ model Order {
   comment       String?
   //
   user          User?       @relation(fields: [userId], references: [id])
-  userId        Int?
+  userId        String?
   //
   token         String
   //
@@ -161,80 +269,94 @@ model Order {
   //
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([userId])
+  @@index([paymentId])
+  @@map("order")
 }
 
 model State {
-  id        Int        @id @default(autoincrement())
+  id        String     @id @default(cuid()) @map("_id")
   name      String     @unique
   //
   districts District[]
+
+  @@index([name])
+  @@map("state")
 }
 
 model District {
-  id          Int         @id @default(autoincrement())
+  id          String      @id @default(cuid()) @map("_id")
   name        String
   //
   state       State       @relation(fields: [stateId], references: [id])
-  stateId     Int
+  stateId     String
   //
   communities Community[]
+
+  @@index([name])
+  @@map("district")
 }
 
 model Community {
-  id         Int       @id @default(autoincrement())
+  id         String    @id @default(cuid()) @map("_id")
   name       String
   //
   district   District  @relation(fields: [districtId], references: [id])
-  districtId Int
+  districtId String
   //
   cities     City[]
   villages   Village[]
+
+  @@index([name])
+  @@map("community")
 }
 
 model City {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(cuid()) @map("_id")
   name        String
   //
   community   Community @relation(fields: [communityId], references: [id])
-  communityId Int
+  communityId String
+
+  @@index([name])
+  @@map("city")
 }
 
 model Village {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(cuid()) @map("_id")
   name        String
   //
   community   Community @relation(fields: [communityId], references: [id])
-  communityId Int
-}
+  communityId String
 
-model VerificationCode {
-  id        Int      @id @default(autoincrement())
-  //
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int      @unique
-  //
-  code      String
-  //
-  createdAt DateTime @default(now())
-
-  @@unique([userId, code])
+  @@index([name])
+  @@map("village")
 }
 
 model Story {
-  id        Int         @id @default(autoincrement())
+  id        Int         @id @default(autoincrement()) @map("_id")
   imageUrl  String
   //
   items     StoryItem[]
   //
   createdAt DateTime    @default(now())
+
+  @@index([createdAt])
+  @@map("story")
 }
 
 model StoryItem {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid()) @map("_id")
   sourceUrl String
   //
   story     Story    @relation(fields: [storyId], references: [id])
   storyId   Int
   //
   createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("story_item")
 }

@@ -21,13 +21,13 @@ import {
 	SheetTrigger,
 } from '@/components/ui'
 import { getProductPluralize } from '@/lib'
-import { CartDrawerItem, Title } from '@/components/shared'
+import { CartDrawerItem } from '@/components/shared'
 
 export const CartDrawer = ({ children }: PropsWithChildren) => {
 	const [redirecting, setRedirecting] = useState(false)
 	const { items, totalAmount, removeCartItem, updateItemQuantity } = useCart()
 
-	const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+	const onClickCountButton = (id: string, quantity: number, type: 'plus' | 'minus') => {
 		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
 
 		updateItemQuantity(id, newQuantity)

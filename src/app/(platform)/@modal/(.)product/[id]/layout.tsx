@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { PropsWithChildren } from 'react'
 
 import { prisma } from '@/lib/prisma'
 
@@ -16,7 +16,7 @@ export const generateMetadata = async ({ params }: Props) => {
 	}
 }
 
-const ModalProductIdLayout = async ({ children }: { children: ReactNode }) => {
+const ModalProductIdLayout = async ({ children }: PropsWithChildren) => {
 	return <>{children}</>
 }
 

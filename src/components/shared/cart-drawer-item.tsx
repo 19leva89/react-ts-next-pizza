@@ -7,7 +7,7 @@ import { CountButton } from '@/components/shared'
 import * as CartItemDetails from '@/components/shared/cart-item-details'
 
 interface CartItemProps {
-	id: number
+	id: string
 	name: string
 	imageUrl: string
 	details: string

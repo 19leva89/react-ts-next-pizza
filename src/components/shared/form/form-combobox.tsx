@@ -20,9 +20,9 @@ import { useFormContext } from 'react-hook-form'
 import { ErrorText } from '@/components/shared'
 
 interface Item {
-	id: number
+	id: string
 	name: string
-	communityId?: number
+	communityId?: string
 }
 
 interface Props {
@@ -57,7 +57,7 @@ export function FormCombobox({
 
 	const selectedItem = mapTable.find((item) => item.name === value)
 
-	const handleSelect = (currentValue: number) => {
+	const handleSelect = (currentValue: string) => {
 		const selectedItem = mapTable.find((item) => item.id === currentValue)
 
 		if (selectedItem) {

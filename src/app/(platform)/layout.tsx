@@ -1,14 +1,12 @@
-import { ReactNode, Suspense } from 'react'
+import { PropsWithChildren, ReactNode, Suspense } from 'react'
 
 import { Header } from '@/components/shared'
 
-export default function PlatformLayout({
-	children,
-	modal,
-}: Readonly<{
-	children: ReactNode
+type Props = PropsWithChildren<{
 	modal: ReactNode
-}>) {
+}>
+
+export default function PlatformLayout({ children, modal }: Props) {
 	return (
 		<main className="min-h-screen">
 			<Suspense>

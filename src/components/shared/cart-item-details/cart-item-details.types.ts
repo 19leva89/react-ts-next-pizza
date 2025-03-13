@@ -1,5 +1,5 @@
 export interface CartItemProps {
-	id: number
+	id: string
 	imageUrl: string
 	details: string
 	name: string

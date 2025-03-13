@@ -1,14 +1,13 @@
-import { getServerSession } from 'next-auth/next'
 import { NextResponse } from 'next/server'
 
+import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
-import { authOptions } from '@/constants/auth-options'
 
 export const dynamic = 'force-dynamic'
 
 export async function GET() {
 	try {
-		const user = await getServerSession(authOptions)
+		const user = await auth()
 
 		if (!user) {
 			return NextResponse.json({ message: 'Ви не авторизовані' }, { status: 401 })
@@ -16,7 +15,7 @@ export async function GET() {
 
 		const data = await prisma.user.findUnique({
 			where: {
-				id: Number(user.user.id),
+				id: user.user.id,
 			},
 			select: {
 				fullName: true,

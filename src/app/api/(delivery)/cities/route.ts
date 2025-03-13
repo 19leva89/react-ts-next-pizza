@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 			where: {
 				community: {
 					district: {
-						stateId: Number(stateId),
+						stateId,
 					},
 				},
 			},

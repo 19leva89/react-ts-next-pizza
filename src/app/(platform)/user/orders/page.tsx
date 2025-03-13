@@ -14,7 +14,7 @@ const OrdersPage = async () => {
 
 	const orders = await prisma.order.findMany({
 		where: {
-			userId: Number(session?.id),
+			userId: session?.id,
 		},
 		orderBy: {
 			createdAt: 'desc',

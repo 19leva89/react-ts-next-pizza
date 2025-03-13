@@ -948,32 +948,6 @@ async function up() {
 		],
 	})
 
-	await prisma.cart.createMany({
-		data: [
-			{
-				userId: 1,
-				token: '11111',
-				totalAmount: 0,
-			},
-			{
-				userId: 2,
-				token: '22222',
-				totalAmount: 0,
-			},
-		],
-	})
-
-	await prisma.cartItem.create({
-		data: {
-			productItemId: 1,
-			cartId: 1,
-			userId: 1,
-			ingredients: {
-				connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
-			},
-		},
-	})
-
 	await prisma.story.createMany({
 		data: stories,
 	})
@@ -984,22 +958,22 @@ async function up() {
 }
 
 async function down() {
-	await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "ProductItem" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "Order" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "State" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "District" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "Community" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "City" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "Village" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "VerificationCode" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "Story" RESTART IDENTITY CASCADE;`
-	await prisma.$executeRaw`TRUNCATE TABLE "StoryItem" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "user" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "verification_code" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "category" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "product" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "product_item" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "ingredient" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "cart" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "cart_item" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "order" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "state" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "district" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "community" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "city" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "village" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "story" RESTART IDENTITY CASCADE;`
+	await prisma.$executeRaw`TRUNCATE TABLE "story_item" RESTART IDENTITY CASCADE;`
 }
 
 async function main() {

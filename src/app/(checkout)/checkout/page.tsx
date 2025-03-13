@@ -73,7 +73,7 @@ const CheckoutPage = () => {
 		}
 	}
 
-	const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+	const onClickCountButton = (id: string, quantity: number, type: 'plus' | 'minus') => {
 		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
 		updateItemQuantity(id, newQuantity)
 	}

@@ -147,7 +147,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
 
 		const existingUser = await prisma.user.findFirst({
 			where: {
-				id: Number(currentUser.id),
+				id: currentUser.id,
 			},
 		})
 
@@ -175,7 +175,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
 
 		const updatedUser = await prisma.user.update({
 			where: {
-				id: Number(currentUser.id),
+				id: currentUser.id,
 			},
 			data: updatedData,
 		})
@@ -207,7 +207,7 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 			data: {
 				fullName: body.fullName,
 				email: body.email,
-				password: hashSync(body.password, 10),
+				password: hashSync(body.password as string, 10),
 			},
 		})
 

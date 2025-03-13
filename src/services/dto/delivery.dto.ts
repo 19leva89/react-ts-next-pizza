@@ -1,18 +1,18 @@
 import { City, Community, District, State } from '@prisma/client'
 
 export type StateDTO = State & {
-	id: number
+	id: string
 	name: string
 }
 
 export type DistrictDTO = District & {
-	stateId: number
+	stateId: string
 }
 
 export type CommunityDTO = Community & {
-	districtId: number
+	districtId: string
 }
 
 export type CityDTO = City & {
-	communityId: number
+	communityId: string
 }

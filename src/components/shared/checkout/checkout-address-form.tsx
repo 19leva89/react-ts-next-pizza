@@ -13,7 +13,7 @@ interface Props {
 
 export const CheckoutAddressForm = ({ className }: Props) => {
 	const [states, setStates] = useState<StateDTO[]>([])
-	const [selectedState, setSelectedState] = useState<number | null>(null)
+	const [selectedState, setSelectedState] = useState<string | null>(null)
 	const [filteredCities, setFilteredCities] = useState<CityDTO[]>([])
 
 	useEffect(() => {

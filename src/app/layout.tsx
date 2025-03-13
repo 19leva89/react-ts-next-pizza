@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
 import type { Metadata } from 'next'
+import { PropsWithChildren } from 'react'
 
 import { siteConfig } from '@/config/site'
 import { Providers } from '@/components/shared/providers'
@@ -27,11 +27,7 @@ export const metadata: Metadata = {
 	],
 }
 
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: ReactNode
-}>) {
+export default function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<html lang="en">
 			<body className={nunito.variable}>

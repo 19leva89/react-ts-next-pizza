@@ -9,7 +9,7 @@ interface Props {
 
 export async function PATCH(req: NextRequest, { params }: Props) {
 	try {
-		const id = Number((await params).id)
+		const id = (await params).id
 		const data = (await req.json()) as { quantity: number }
 		const token = req.cookies.get('cartToken')?.value
 
@@ -18,9 +18,7 @@ export async function PATCH(req: NextRequest, { params }: Props) {
 		}
 
 		const cartItem = await prisma.cartItem.findFirst({
-			where: {
-				id,
-			},
+			where: { id },
 		})
 
 		if (!cartItem) {
@@ -28,9 +26,7 @@ export async function PATCH(req: NextRequest, { params }: Props) {
 		}
 
 		await prisma.cartItem.update({
-			where: {
-				id,
-			},
+			where: { id },
 			data: {
 				quantity: data.quantity,
 			},
@@ -47,7 +43,7 @@ export async function PATCH(req: NextRequest, { params }: Props) {
 
 export async function DELETE(req: NextRequest, { params }: Props) {
 	try {
-		const id = Number((await params).id)
+		const id = (await params).id
 		const token = req.cookies.get('cartToken')?.value
 
 		if (!token) {
@@ -55,9 +51,7 @@ export async function DELETE(req: NextRequest, { params }: Props) {
 		}
 
 		const cartItem = await prisma.cartItem.findFirst({
-			where: {
-				id: id,
-			},
+			where: { id },
 		})
 
 		if (!cartItem) {
@@ -65,9 +59,7 @@ export async function DELETE(req: NextRequest, { params }: Props) {
 		}
 
 		await prisma.cartItem.delete({
-			where: {
-				id: id,
-			},
+			where: { id },
 		})
 
 		const updatedUserCart = await updateCartTotalAmount(token)

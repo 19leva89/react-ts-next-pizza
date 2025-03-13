@@ -11,7 +11,7 @@ import { CartDTO } from '@/services/dto/cart.dto'
  */
 
 export type CartStateItem = {
-	id: number
+	id: string
 	quantity: number
 	name: string
 	imageUrl: string
@@ -29,6 +29,15 @@ interface ReturnProps {
 }
 
 export const getCartDetails = (data: CartDTO): ReturnProps => {
+	const defaultResult: ReturnProps = {
+		items: [],
+		totalAmount: 0,
+	}
+
+	if (!data) {
+		return defaultResult
+	}
+
 	const items = data.items.map((item) => ({
 		id: item.id,
 		quantity: item.quantity,

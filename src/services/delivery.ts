@@ -7,7 +7,7 @@ export const getStates = async (): Promise<StateDTO[]> => {
 	return data
 }
 
-export const getCitiesByStateId = async (stateId: number): Promise<CityDTO[]> => {
+export const getCitiesByStateId = async (stateId: string): Promise<CityDTO[]> => {
 	const { data } = await axiosInstance.get<CityDTO[]>(`/cities?stateId=${stateId}`)
 
 	return data

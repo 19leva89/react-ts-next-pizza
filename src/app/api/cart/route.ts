@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 	try {
 		const token = req.cookies.get('cartToken')?.value
 		const currentUser = await getUserSession()
-		const userId = Number(currentUser?.id)
+		const userId = currentUser?.id
 
 		if (!token) {
 			return NextResponse.json({ totalAmount: 0, items: [] })
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
 	try {
 		let token = req.cookies.get('cartToken')?.value
 		const currentUser = await getUserSession()
-		const userId = Number(currentUser?.id)
+		const userId = currentUser?.id
 		const data = (await req.json()) as CreateCartItemValues
 
 		if (!token) {

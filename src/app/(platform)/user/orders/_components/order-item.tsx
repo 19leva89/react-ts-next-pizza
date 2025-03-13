@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
+import { Fragment, useState } from 'react'
 
 import { Separator } from '@/components/ui'
 import { cn, getCartItemDetails } from '@/lib'
@@ -65,9 +65,8 @@ export const OrderItem = ({
 						const imageUrl = `${bdImagePath}.avif`
 
 						return (
-							<>
+							<Fragment key={item.id}>
 								<OrderCartItem
-									key={item.id}
 									id={item.productItem.product.id}
 									name={item.productItem.product.name}
 									imageUrl={imageUrl}
@@ -82,7 +81,7 @@ export const OrderItem = ({
 								/>
 
 								<Separator />
-							</>
+							</Fragment>
 						)
 					})}
 

@@ -9,8 +9,8 @@ type ReturnProps = {
 	totalAmount: number
 	loading: boolean
 	addCartItem: (values: CreateCartItemValues) => void
-	updateItemQuantity: (id: number, quantity: number) => void
-	removeCartItem: (id: number) => void
+	updateItemQuantity: (id: string, quantity: number) => void
+	removeCartItem: (id: string) => void
 }
 
 export const useCart = (): ReturnProps => {

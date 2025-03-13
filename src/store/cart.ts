@@ -1,5 +1,6 @@
 import { toast } from 'sonner'
-import { create } from 'zustand'
+import { createWithEqualityFn as create } from 'zustand/traditional'
+
 import { getCartDetails } from '@/lib'
 import { Api } from '../services/api-client'
 import { CartStateItem } from '@/lib/cart/get-cart-details'
@@ -15,13 +16,13 @@ export interface CartState {
 	fetchCartItems: () => Promise<void>
 
 	/* Request to update the quantity of goods */
-	updateItemQuantity: (id: number, quantity: number) => Promise<void>
+	updateItemQuantity: (id: string, quantity: number) => Promise<void>
 
 	/* Request to add product to cart */
 	addCartItem: (values: CreateCartItemValues) => Promise<void>
 
 	/* Request to remove item from cart */
-	removeCartItem: (id: number) => Promise<void>
+	removeCartItem: (id: string) => Promise<void>
 }
 
 export const useCartStore = create<CartState>((set) => ({
@@ -43,7 +44,7 @@ export const useCartStore = create<CartState>((set) => ({
 		}
 	},
 
-	updateItemQuantity: async (id: number, quantity: number) => {
+	updateItemQuantity: async (id: string, quantity: number) => {
 		try {
 			set((state) => ({
 				loading: true,
@@ -63,7 +64,7 @@ export const useCartStore = create<CartState>((set) => ({
 		}
 	},
 
-	removeCartItem: async (id: number) => {
+	removeCartItem: async (id: string) => {
 		try {
 			set((state) => ({
 				loading: true,

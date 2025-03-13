@@ -2,7 +2,7 @@
 
 import { prisma } from '@/lib/prisma'
 
-export async function addUserIdToCart(token: string, userId: number) {
+export async function addUserIdToCart(token: string, userId: string) {
 	try {
 		// Find the existing cart using the token
 		const cart = await prisma.cart.findUnique({

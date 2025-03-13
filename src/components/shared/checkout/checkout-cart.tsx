@@ -8,8 +8,8 @@ interface Props {
 	items: CartStateItem[]
 	loading?: boolean
 	className?: string
-	removeCartItem: (id: number) => void
-	onClickCountButton: (id: number, quantity: number, type: 'plus' | 'minus') => void
+	removeCartItem: (id: string) => void
+	onClickCountButton: (id: string, quantity: number, type: 'plus' | 'minus') => void
 }
 
 export const CheckoutCart = ({ items, loading, className, removeCartItem, onClickCountButton }: Props) => {

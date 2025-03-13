@@ -1,5 +1,6 @@
 'use client'
 
+import { shallow } from 'zustand/shallow'
 import { useIntersection } from 'react-use'
 import { RefObject, useEffect, useRef } from 'react'
 
@@ -20,7 +21,7 @@ interface Props {
 
 export const ProductsGroupList = ({ title, slug, items, categoryId, className, listClassName }: Props) => {
 	const intersectionRef = useRef<HTMLDivElement>(null) as RefObject<HTMLElement>
-	const setCategoryActiveId = useCategoryStore((state) => state.setActiveId)
+	const setCategoryActiveId = useCategoryStore((state) => state.setActiveId, shallow)
 
 	const intersection = useIntersection(intersectionRef, {
 		threshold: 0.1,

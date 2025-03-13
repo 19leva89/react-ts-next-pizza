@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { shallow } from 'zustand/shallow'
 
 import { cn } from '@/lib'
 import { Category } from '@prisma/client'
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export const Categories = ({ items, className }: Props) => {
-	const categoryActiveId = useCategoryStore((state) => state.activeId)
+	const categoryActiveId = useCategoryStore((state) => state.activeId, shallow)
 
 	return (
 		<div className={cn('inline-flex gap-1 bg-gray-50 p-1 rounded-2xl', className)}>

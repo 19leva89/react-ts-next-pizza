@@ -41,7 +41,10 @@ export const RangeSlider = forwardRef(
 				step={step}
 				value={values}
 				onValueChange={handleValueChange}
-				className={cn('relative flex w-full touch-none select-none mb-6 items-center', className)}
+				className={cn(
+					'relative flex w-full touch-none select-none mb-6 items-center cursor-pointer',
+					className,
+				)}
 				{...props}
 			>
 				<SliderPrimitive.Track className="relative h-1 w-full grow overflow-hidden rounded-full bg-primary/20">
