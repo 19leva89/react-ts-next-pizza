@@ -21,7 +21,10 @@ export const ChooseProductModal = ({ product, ingredients, className }: Props) =
 	return (
 		<Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
 			<DialogContent
-				className={cn('p-0 w-[1060px] max-w-[1060px] min-h-[550px] bg-white overflow-hidden', className)}
+				className={cn(
+					'p-0 sm:max-w-[1060px] w-[1060px] max-w-[1060px] min-h-[550px] bg-white overflow-hidden',
+					className,
+				)}
 				aria-describedby={undefined}
 			>
 				<DialogTitle>
