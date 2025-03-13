@@ -40,12 +40,24 @@ const CheckoutPage = () => {
 
 	useEffect(() => {
 		async function fetchUserInfo() {
-			const data = await Api.auth.getMe()
-			const [firstName, lastName] = data.fullName.split(' ')
+			try {
+				const data = await Api.auth.getMe()
 
-			form.setValue('firstName', firstName)
-			form.setValue('lastName', lastName)
-			form.setValue('email', data.email)
+				if (!data?.fullName) {
+					form.setValue('firstName', '')
+					form.setValue('lastName', '')
+					form.setValue('email', data?.email || '')
+					return
+				}
+
+				const [firstName = '', lastName = ''] = data.fullName.split(' ')
+
+				form.setValue('firstName', firstName)
+				form.setValue('lastName', lastName || '')
+				form.setValue('email', data.email || '')
+			} catch (error) {
+				console.error('Failed to fetch user info:', error)
+			}
 		}
 
 		if (session) {

@@ -1,29 +1,183 @@
 'use server'
 
-import { hashSync } from 'bcryptjs'
+import axios from 'axios'
+import { compare } from 'bcryptjs'
 import { cookies } from 'next/headers'
+import { revalidatePath } from 'next/cache'
 
 import { prisma } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
 
 import { sendEmail } from '@/lib'
+import { auth, signIn } from '@/auth'
 import { createPayment } from '@/lib/stripe'
 import { DISCOUNT } from '@/constants/discount'
 import { CheckoutFormValues } from '@/constants'
+import { saltAndHashPassword } from '@/lib/salt'
 import { DELIVERY_PRICE } from '@/constants/delivery'
-import { getUserSession } from '@/lib/get-user-session'
 import { PayOrderTemplate, VerificationUserTemplate } from '@/components/shared/email-templates'
 
-export async function createOrder(data: CheckoutFormValues) {
+const handleError = (error: unknown, context: string) => {
+	if (error instanceof Prisma.PrismaClientKnownRequestError) {
+		console.error(`💾 Prisma error [${context}]:`, error.code, error.message)
+	} else if (axios.isAxiosError(error)) {
+		console.error(`🌐 API error [${context}]:`, error.response?.status, error.message)
+	} else if (error instanceof Error) {
+		console.error(`🚨 Unexpected error [${context}]:`, error.message)
+	} else {
+		console.error(`❌ Unknown error [${context}]`, error)
+	}
+
+	throw error
+}
+
+export const registerUser = async (body: Prisma.UserCreateInput) => {
+	try {
+		const user = await prisma.user.findFirst({
+			where: {
+				email: body.email,
+			},
+		})
+
+		if (user) {
+			if (!user.verified) throw new Error('Email не підтверджено')
+
+			throw new Error('Користувач вже існує')
+		}
+
+		const createdUser = await prisma.user.create({
+			data: {
+				fullName: body.fullName,
+				email: body.email,
+				password: await saltAndHashPassword(body.password as string),
+			},
+		})
+
+		const code = Math.floor(100000 + Math.random() * 900000).toString()
+
+		await prisma.verificationCode.create({
+			data: {
+				code,
+				userId: createdUser.id,
+			},
+		})
+
+		await sendEmail(
+			createdUser.email,
+			'Next Pizza / 📝 Підтвердження реєстрації',
+			VerificationUserTemplate({
+				code,
+			}),
+		)
+	} catch (error) {
+		handleError(error, 'CREATE_USER')
+	}
+}
+
+export const loginUser = async (provider: string) => {
+	await signIn(provider, { redirectTo: '/' })
+
+	revalidatePath('/')
+}
+
+export const loginUserWithCreds = async (body: Prisma.UserCreateInput) => {
+	const user = await prisma.user.findUnique({
+		where: { email: body.email },
+		include: { accounts: true },
+	})
+
+	if (!user) throw new Error('Невірний пароль або email')
+	if (user.accounts.length > 0)
+		throw new Error(
+			'Цей email пов’язаний з логіном із соціальної мережі. Будь ласка, використовуйте GitHub або Google',
+		)
+
+	const isPasswordValid = await compare(body.password as string, user.password ?? '')
+
+	if (!isPasswordValid) throw new Error('Невірний пароль або email')
+	if (!user.verified) throw new Error('Email не підтверджено')
+
+	const data = {
+		email: body.email,
+		password: body.password,
+		redirect: false,
+	}
+
+	const result = await signIn('credentials', data)
+
+	if (result?.error) throw new Error(result.error)
+
+	revalidatePath('/')
+}
+
+export const updateUserInfo = async (body: Prisma.UserUpdateInput) => {
+	try {
+		const session = await auth()
+
+		if (!session) throw new Error('Користувача не знайдено')
+
+		const existingUser = await prisma.user.findFirst({
+			where: { id: session?.user.id },
+			include: { accounts: true },
+		})
+
+		if (!existingUser) throw new Error('Користувача не знайдено')
+
+		// Checking if the user has OAuth accounts
+		const hasOAuthAccounts = existingUser.accounts.length > 0
+
+		// If the user logged in via OAuth, prohibit changing the email and password
+		if (hasOAuthAccounts) {
+			if (body.email && body.email !== existingUser.email)
+				throw new Error('Email не можна змінити для користувачів OAuth')
+
+			if (body.password) throw new Error('Пароль не можна змінити для користувачів OAuth')
+		}
+
+		// Validation for email uniqueness
+		if (body.email && body.email !== existingUser.email && !hasOAuthAccounts) {
+			const emailExists = await prisma.user.findUnique({
+				where: {
+					email: body.email as string,
+				},
+			})
+
+			if (emailExists) throw new Error('Email вже використовується')
+		}
+
+		const updatedData: Prisma.UserUpdateInput = {
+			fullName: body.fullName,
+		}
+
+		// If the user is not OAuth, allow email and password updates
+		if (!hasOAuthAccounts) {
+			updatedData.email = body.email ? body.email : existingUser.email
+			updatedData.password = body.password
+				? await saltAndHashPassword(body.password as string)
+				: existingUser.password
+		}
+
+		const updatedUser = await prisma.user.update({
+			where: {
+				id: session?.user.id,
+			},
+			data: updatedData,
+		})
+
+		return updatedUser
+	} catch (error) {
+		handleError(error, 'UPDATE_USER')
+	}
+}
+
+export const createOrder = async (data: CheckoutFormValues) => {
 	try {
 		const cookieStore = cookies()
 		const token = (await cookieStore).get('cartToken')?.value
 
-		if (!token) {
-			throw new Error('Cart token not found')
-		}
+		if (!token) throw new Error('Кошик не знайдено')
 
-		/* Find a basket by token */
+		// Find a basket by token
 		const userCart = await prisma.cart.findFirst({
 			include: {
 				user: true,
@@ -43,20 +197,16 @@ export async function createOrder(data: CheckoutFormValues) {
 			},
 		})
 
-		/* If the cart is not found, return an error */
-		if (!userCart) {
-			throw new Error('Cart not found')
-		}
+		// If the cart is not found, return an error
+		if (!userCart) throw new Error('Cart not found')
 
-		/* If the cart is empty, return an error */
-		if (userCart?.totalAmount === 0) {
-			throw new Error('Cart is empty')
-		}
+		// If the cart is empty, return an error
+		if (userCart?.totalAmount === 0) throw new Error('Cart is empty')
 
 		const discount = (userCart?.totalAmount * DISCOUNT) / 100
 		const totalPrice = userCart.totalAmount - discount + DELIVERY_PRICE
 
-		/* Create an order */
+		// Create an order
 		const order = await prisma.order.create({
 			data: {
 				token,
@@ -75,7 +225,7 @@ export async function createOrder(data: CheckoutFormValues) {
 			},
 		})
 
-		/* Clear the cart */
+		// Clear the cart
 		await prisma.cart.update({
 			where: {
 				id: userCart.id,
@@ -91,7 +241,7 @@ export async function createOrder(data: CheckoutFormValues) {
 			},
 		})
 
-		/* Creating a payment link */
+		// Creating a payment link
 		const paymentData = await createPayment({
 			token,
 			email: data.email,
@@ -119,7 +269,7 @@ export async function createOrder(data: CheckoutFormValues) {
 			throw new Error('Payment url not found')
 		}
 
-		/* Send an email */
+		// Send an email
 		await sendEmail(
 			data.email,
 			'Next Pizza / Оплата замовлення #' + order.id,
@@ -132,103 +282,7 @@ export async function createOrder(data: CheckoutFormValues) {
 		)
 
 		return paymentUrl
-	} catch (err) {
-		console.log('[CreateOrder] Server error', err)
-	}
-}
-
-export async function updateUserInfo(body: Prisma.UserUpdateInput) {
-	try {
-		const currentUser = await getUserSession()
-
-		if (!currentUser) {
-			throw new Error('Користувача не знайдено')
-		}
-
-		const existingUser = await prisma.user.findFirst({
-			where: {
-				id: currentUser.id,
-			},
-		})
-
-		if (!existingUser) {
-			throw new Error('Користувача не знайдено')
-		}
-
-		// Validation of email uniqueness
-		if (body.email && body.email !== existingUser.email) {
-			const emailExists = await prisma.user.findUnique({
-				where: {
-					email: body.email as string,
-				},
-			})
-			if (emailExists) {
-				throw new Error('Email вже використовується')
-			}
-		}
-
-		const updatedData: Prisma.UserUpdateInput = {
-			fullName: body.fullName,
-			email: body.email ? body.email : existingUser.email, // Conditional assignment
-			password: body.password ? hashSync(body.password as string, 10) : existingUser.password,
-		}
-
-		const updatedUser = await prisma.user.update({
-			where: {
-				id: currentUser.id,
-			},
-			data: updatedData,
-		})
-
-		return updatedUser
-	} catch (err) {
-		console.log('Error [UPDATE_USER]', err)
-		throw err
-	}
-}
-
-export async function registerUser(body: Prisma.UserCreateInput) {
-	try {
-		const user = await prisma.user.findFirst({
-			where: {
-				email: body.email,
-			},
-		})
-
-		if (user) {
-			if (!user.verified) {
-				throw new Error('Пошта не підтверджена')
-			}
-
-			throw new Error('Користувач вже існує')
-		}
-
-		const createdUser = await prisma.user.create({
-			data: {
-				fullName: body.fullName,
-				email: body.email,
-				password: hashSync(body.password as string, 10),
-			},
-		})
-
-		const code = Math.floor(100000 + Math.random() * 900000).toString()
-
-		await prisma.verificationCode.create({
-			data: {
-				code,
-				userId: createdUser.id,
-			},
-		})
-
-		await sendEmail(
-			createdUser.email,
-			'Next Pizza / 📝 Підтвердження реєстрації',
-			VerificationUserTemplate({
-				code,
-			}),
-		)
-	} catch (err) {
-		console.log('Error [CREATE_USER]', err)
-		throw err
+	} catch (error) {
+		handleError(error, 'CREATE_ORDER')
 	}
 }

@@ -6,7 +6,7 @@ const CancelOrderPage = () => {
 			<InfoBlock
 				title="Замовлення скасовано"
 				text="Нам дуже прикро, що так сталося!"
-				imageUrl="/assets/img/cancel-order.svg"
+				imageUrl="/assets/svg/cancel-order.svg"
 			/>
 		</div>
 	)

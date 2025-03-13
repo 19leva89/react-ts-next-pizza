@@ -19,7 +19,7 @@ export const ProfileForm = ({ data }: Props) => {
 		resolver: zodResolver(updateUserInfoSchema),
 		defaultValues: {
 			email: data.email,
-			fullName: data.fullName,
+			fullName: data.fullName || '',
 			password: '',
 			confirmPassword: '',
 		},

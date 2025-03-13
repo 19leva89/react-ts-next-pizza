@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import { prisma } from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { getUserSession } from '@/lib/get-user-session'
+import { auth } from '@/auth'
 import { CreateCartItemValues } from '@/services/dto/cart.dto'
 import { addUserIdToCart } from '@/lib/cart/add-user-id-to-cart'
 import { findOrCreateCart } from '@/lib/cart/find-or-create-cart'
@@ -12,8 +12,8 @@ import { updateCartTotalAmount } from '@/lib/cart/update-cart-total-amount'
 export async function GET(req: NextRequest) {
 	try {
 		const token = req.cookies.get('cartToken')?.value
-		const currentUser = await getUserSession()
-		const userId = currentUser?.id
+		const session = await auth()
+		const userId = session?.user.id
 
 		if (!token) {
 			return NextResponse.json({ totalAmount: 0, items: [] })
@@ -54,8 +54,8 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
 	try {
 		let token = req.cookies.get('cartToken')?.value
-		const currentUser = await getUserSession()
-		const userId = currentUser?.id
+		const session = await auth()
+		const userId = session?.user.id
 		const data = (await req.json()) as CreateCartItemValues
 
 		if (!token) {

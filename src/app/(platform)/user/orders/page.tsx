@@ -1,12 +1,12 @@
 import { redirect } from 'next/navigation'
 
+import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { OrderItem } from './_components/order-item'
-import { getUserSession } from '@/lib/get-user-session'
 import { Container, InfoBlock, Title } from '@/components/shared'
 
 const OrdersPage = async () => {
-	const session = await getUserSession()
+	const session = await auth()
 
 	if (!session) {
 		return redirect('/not-auth')
@@ -14,7 +14,7 @@ const OrdersPage = async () => {
 
 	const orders = await prisma.order.findMany({
 		where: {
-			userId: session?.id,
+			userId: session.user.id,
 		},
 		orderBy: {
 			createdAt: 'desc',
