@@ -42,13 +42,11 @@ const OrdersPage = async () => {
 					</div>
 				</>
 			) : (
-				<div className="flex flex-col items-center justify-center mt-40">
-					<InfoBlock
-						title="У вас наразі немає замовлень"
-						text="Але це ніколи не пізно виправити!"
-						imageUrl="/assets/img/empty-box.png"
-					/>
-				</div>
+				<InfoBlock
+					title="У вас наразі немає замовлень"
+					text="Але це ніколи не пізно виправити!"
+					imageUrl="/assets/img/empty-box.png"
+				/>
 			)}
 		</Container>
 	)

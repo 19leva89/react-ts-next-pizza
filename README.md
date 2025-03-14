@@ -47,6 +47,7 @@ Styling and UI Frameworks:
 - Tailwind CSS (stylization)
 
 Utilities and Libraries:
+- Knip (code analyzer and declutter)
 - PostCSS (transforms CSS code to AST)
 - React Use (custom React Hooks)
 - QueryString (Parse and stringify URL)
@@ -54,6 +55,7 @@ Utilities and Libraries:
 
 To run the client and server via concurrently:
 terminal powershell -> npm run all
+terminal powershell -> npm run knip
 
 terminal powershell -> npx prisma generate
 terminal powershell -> npx prisma db push
