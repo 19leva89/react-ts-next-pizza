@@ -68,7 +68,7 @@ export default {
 					return {
 						id: user.id.toString(),
 						email: user.email,
-						name: user.fullName,
+						name: user.name,
 						image: user.image,
 						role: user.role,
 					}

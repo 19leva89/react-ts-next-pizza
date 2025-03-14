@@ -43,14 +43,14 @@ const CheckoutPage = () => {
 			try {
 				const data = await Api.auth.getMe()
 
-				if (!data?.fullName) {
+				if (!data?.name) {
 					form.setValue('firstName', '')
 					form.setValue('lastName', '')
 					form.setValue('email', data?.email || '')
 					return
 				}
 
-				const [firstName = '', lastName = ''] = data.fullName.split(' ')
+				const [firstName = '', lastName = ''] = data.name.split(' ')
 
 				form.setValue('firstName', firstName)
 				form.setValue('lastName', lastName || '')

@@ -40,14 +40,14 @@ export const registerUser = async (body: Prisma.UserCreateInput) => {
 		})
 
 		if (user) {
-			if (!user.verified) throw new Error('Email не підтверджено')
+			if (!user.emailVerified) throw new Error('Email не підтверджено')
 
 			throw new Error('Користувач вже існує')
 		}
 
 		const createdUser = await prisma.user.create({
 			data: {
-				fullName: body.fullName,
+				name: body.name,
 				email: body.email,
 				password: await saltAndHashPassword(body.password as string),
 			},
@@ -95,7 +95,7 @@ export const loginUserWithCreds = async (body: Prisma.UserCreateInput) => {
 	const isPasswordValid = await compare(body.password as string, user.password ?? '')
 
 	if (!isPasswordValid) throw new Error('Невірний пароль або email')
-	if (!user.verified) throw new Error('Email не підтверджено')
+	if (!user.emailVerified) throw new Error('Email не підтверджено')
 
 	const data = {
 		email: body.email,
@@ -146,7 +146,7 @@ export const updateUserInfo = async (body: Prisma.UserUpdateInput) => {
 		}
 
 		const updatedData: Prisma.UserUpdateInput = {
-			fullName: body.fullName,
+			name: body.name,
 		}
 
 		// If the user is not OAuth, allow email and password updates

@@ -24,13 +24,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
 			const findUser = await prisma.user.findUnique({
 				where: { email: token.email },
-				select: { id: true, email: true, fullName: true, image: true, role: true },
+				select: { id: true, email: true, name: true, image: true, role: true },
 			})
 
 			if (findUser) {
 				token.id = findUser.id
 				token.email = findUser.email
-				token.name = findUser.fullName
+				token.name = findUser.name
 				token.image = findUser.image
 				token.role = findUser.role
 			}

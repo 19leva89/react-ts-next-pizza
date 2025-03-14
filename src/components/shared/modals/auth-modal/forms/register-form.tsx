@@ -33,7 +33,7 @@ export const RegisterForm = ({ onClose }: Props) => {
 	const onSubmit = async (data: TFormRegisterValues) => {
 		try {
 			await registerUser({
-				fullName: data.fullName,
+				name: data.fullName,
 				email: data.email,
 				password: data.password,
 			})
