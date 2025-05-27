@@ -17,7 +17,7 @@ export const ClearButton = ({ onClick, className }: Props) => {
 				className,
 			)}
 		>
-			<Delete className="h-5 w-5" />
+			<Delete className="size-5" />
 		</button>
 	)
 }

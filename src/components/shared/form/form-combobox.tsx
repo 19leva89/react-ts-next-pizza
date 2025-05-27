@@ -88,14 +88,14 @@ export function FormCombobox({
 					>
 						{selectedItem ? selectedItem.name : placeholder}
 
-						<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+						<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
 					</Button>
 				</PopoverTrigger>
 
 				{errorText && <ErrorText text={errorText} className="mt-2 ml-4" />}
 			</div>
 
-			<PopoverContent className="w-[200px] p-0">
+			<PopoverContent className="w-50 p-0">
 				<Command>
 					<CommandInput placeholder={selectPlaceholder} name={name} />
 
@@ -105,7 +105,7 @@ export function FormCombobox({
 						<CommandGroup>
 							{mapTable.map((item) => (
 								<CommandItem key={item.id} value={item.name} onSelect={() => handleSelect(item.id)}>
-									<Check className={cn('mr-2 h-4 w-4', value === item.name ? 'opacity-100' : 'opacity-0')} />
+									<Check className={cn('mr-2 size-4', value === item.name ? 'opacity-100' : 'opacity-0')} />
 									{item.name}
 								</CommandItem>
 							))}

@@ -42,13 +42,7 @@ export const CartDrawerItem = ({
 				className,
 			)}
 		>
-			<Image
-				className={cn('h-[60px] w-[60px]', className)}
-				src={imageUrl}
-				width={60}
-				height={60}
-				alt={name}
-			/>
+			<Image className={cn('size-15', className)} src={imageUrl} width={60} height={60} alt={name} />
 
 			<div className="flex-1">
 				<CartItemDetails.Info name={name} details={details} />

@@ -28,9 +28,7 @@ export const SortPopup = ({ className }: Props) => {
 	return (
 		<Popover open={isOpen} onOpenChange={setIsOpen}>
 			<PopoverTrigger asChild>
-				<div
-					className={cn('inline-flex items-center gap-1 px-5 h-[52px] cursor-pointer rounded-2xl', className)}
-				>
+				<div className={cn('inline-flex items-center gap-1 h-13 px-5 rounded-2xl cursor-pointer', className)}>
 					<ArrowUpDown size={16} />
 
 					<b>Сортування:</b>
@@ -39,7 +37,7 @@ export const SortPopup = ({ className }: Props) => {
 				</div>
 			</PopoverTrigger>
 
-			<PopoverContent className="w-[240px]">
+			<PopoverContent className="w-60">
 				<ul>
 					{sortOptions.map(({ value, name }) => (
 						<li

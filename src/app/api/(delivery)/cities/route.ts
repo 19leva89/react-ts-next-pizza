@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
 	const stateId = searchParams.get('stateId')
 
 	if (!stateId) {
-		return NextResponse.json({ error: 'stateId не предоставлен' }, { status: 400 })
+		return NextResponse.json({ error: 'stateId не надано' }, { status: 400 })
 	}
 
 	try {

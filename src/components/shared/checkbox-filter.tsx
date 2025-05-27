@@ -26,7 +26,7 @@ export const CheckboxFilter = ({
 				value={value}
 				checked={checked}
 				onCheckedChange={onCheckedChange}
-				className="rounded-[8px] w-6 h-6 cursor-pointer"
+				className="rounded-[8px] size-6 cursor-pointer"
 			/>
 			<label
 				htmlFor={`checkbox-${String(name)}-${String(value)}`}

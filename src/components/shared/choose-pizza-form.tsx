@@ -63,7 +63,7 @@ export const ChoosePizzaForm = ({
 		<div className={cn(className, 'flex flex-1')}>
 			<PizzaImage name={name} size={size} imageUrl={imageUrl} />
 
-			<div className="flex flex-col justify-between w-[490px] h-[800px] bg-[#f7f6f5] p-7">
+			<div className="flex flex-col justify-between w-[490px] h-200 p-7 bg-[#f7f6f5]">
 				<div className="flex flex-col justify-start">
 					<Title text={name} size="md" className="font-extrabold mb-1" />
 
@@ -85,7 +85,7 @@ export const ChoosePizzaForm = ({
 						/>
 					</div>
 
-					<div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar mt-1">
+					<div className="h-105 p-5 mt-1 rounded-md bg-gray-50 overflow-auto scrollbar">
 						<div className="grid grid-cols-3 gap-3">
 							{ingredients.map((item) => {
 								const bdImagePath = item.imageUrl

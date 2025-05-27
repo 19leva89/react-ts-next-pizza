@@ -42,7 +42,7 @@ export const ChooseProductForm = ({
 				/>
 			</div>
 
-			<div className="flex flex-col justify-between w-[490px] h-[600px] bg-[#f7f6f5] p-7">
+			<div className="flex flex-col justify-between w-[490px] h-150 p-7 bg-[#f7f6f5]">
 				<div className="flex flex-col justify-start">
 					<Title text={name} size="md" className="font-extrabold mb-1" />
 

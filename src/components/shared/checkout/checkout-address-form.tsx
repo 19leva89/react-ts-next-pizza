@@ -48,7 +48,7 @@ export const CheckoutAddressForm = ({ className }: Props) => {
 						noResultsText="Область не знайдена"
 						selectPlaceholder="Знайти область..."
 						mapTable={states}
-						className="w-full justify-between h-12 text-md"
+						className="justify-between w-full h-12 text-md"
 						onSelect={(state) => {
 							setSelectedState(state.id)
 							setFilteredCities([])

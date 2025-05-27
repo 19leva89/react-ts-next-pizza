@@ -41,7 +41,7 @@ export const Stories = ({ className }: Props) => {
 			<Container className={cn('flex items-center justify-between gap-2 my-10', className)}>
 				{stories.length === 0 &&
 					[...Array(6)].map((_, index) => (
-						<div key={index} className="w-[200px] h-[250px] bg-gray-200 rounded-md animate-pulse" />
+						<div key={index} className="w-50 h-[250px] bg-gray-200 rounded-md animate-pulse" />
 					))}
 
 				{stories.map((story) => {
@@ -62,13 +62,13 @@ export const Stories = ({ className }: Props) => {
 				})}
 
 				{open && (
-					<div className="absolute left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
+					<div className="absolute left-0 top-0 size-full bg-black/80 flex items-center justify-center z-30">
 						<div className="relative" style={{ width: 520 }}>
 							<button
 								className="absolute -right-10 -top-5 z-30 cursor-pointer transition-colors ease-in-out duration-300"
 								onClick={() => setOpen(false)}
 							>
-								<X className="absolute top-0 right-0 w-8 h-8 text-white/50" />
+								<X className="absolute top-0 right-0 size-8 text-white/50" />
 							</button>
 
 							<ReactStories

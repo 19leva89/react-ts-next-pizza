@@ -1,4 +1,4 @@
-This project contains the following technologies
+# This project contains the following technologies
 
 Animation and Interaction:
 - React Insta Stories (stories like Instagram)
@@ -53,15 +53,17 @@ Utilities and Libraries:
 - QueryString (Parse and stringify URL)
 
 
-To run the client and server via concurrently:
-terminal powershell -> npm run all
-terminal powershell -> npm run knip
+# To run the client and server via concurrently:
+terminal powershell -> `npm i` (install dependencies)
+terminal powershell -> `npm run all`
+terminal powershell -> `npm run lint` (loading ESLint checker)
+terminal powershell -> `npm run knip`
 
-terminal powershell -> npx prisma generate
-terminal powershell -> npx prisma db push
-terminal powershell -> npx prisma migrate reset
+terminal powershell -> `npx prisma generate`
+terminal powershell -> `npx prisma db push`
+terminal powershell -> `npx prisma migrate reset`
 
-terminal powershell -> npx prisma db seed (loading test database)
+terminal powershell -> `npx prisma db seed` (loading test database)
 
-terminal CommandPrompt -> stripe login
-terminal CommandPrompt -> stripe listen --forward-to localhost:3000/api/webhook
+terminal CommandPrompt -> `stripe login`
+terminal CommandPrompt -> `stripe listen --forward-to localhost:3000/api/webhook`

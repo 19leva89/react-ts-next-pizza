@@ -9,5 +9,5 @@ interface Props {
 }
 
 export const CartItemDetailsImage = ({ src, name, className }: Props) => {
-	return <Image className={cn('w-[60px] h-[60px]', className)} src={src} width={60} height={60} alt={name} />
+	return <Image className={cn('size-15', className)} src={src} width={60} height={60} alt={name} />
 }

@@ -20,7 +20,7 @@ export const CountIconButton = ({ size = 'sm', disabled, type, onClick }: Props)
 			type="button"
 			className={cn(
 				'p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400 disabled:pointer-events-auto disabled:cursor-not-allowed transition-colors ease-in-out duration-300',
-				size === 'sm' ? 'w-[30px] h-[30px] rounded-[10px]' : 'w-[38px] h-[38px] rounded-md',
+				size === 'sm' ? 'size-[30px] rounded-[10px]' : 'size-[38px] rounded-md',
 			)}
 		>
 			{type === 'plus' ? (

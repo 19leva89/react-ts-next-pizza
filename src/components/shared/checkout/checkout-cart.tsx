@@ -20,7 +20,7 @@ export const CheckoutCart = ({ items, loading, className, removeCartItem, onClic
 					[...Array(items.length || 3)].map((_, index) => (
 						<div key={index} className="flex items-center justify-between">
 							<div className="flex items-center gap-5">
-								<Skeleton className="w-[60px] h-[60px] rounded-full" />
+								<Skeleton className="size-15 rounded-full" />
 								<Skeleton className="w-40 h-8 rounded" />
 							</div>
 

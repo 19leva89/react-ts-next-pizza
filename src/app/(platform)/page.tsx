@@ -48,7 +48,7 @@ const HomePage = async ({ searchParams }: Props) => {
 			<Stories />
 
 			<Container className="mt-10 pb-14">
-				<div className="flex gap-[80px]">
+				<div className="flex gap-20">
 					{/* Filter */}
 					<div className="w-[250px]">
 						<Suspense>
@@ -72,7 +72,7 @@ const HomePage = async ({ searchParams }: Props) => {
 					</div>
 				</div>
 
-				<ScrollToTop className="font-bold bg-[#ffe4d5] w-12 h-12" />
+				<ScrollToTop className="font-bold bg-[#ffe4d5] size-12" />
 			</Container>
 		</>
 	)

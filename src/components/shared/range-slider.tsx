@@ -69,7 +69,7 @@ export const RangeSlider = forwardRef(
 							<span className="text-sm">{formatLabel ? formatLabel(value) : value}</span>
 						</div>
 
-						<SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+						<SliderPrimitive.Thumb className="block size-4 rounded-full border border-primary/50 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
 					</Fragment>
 				))}
 			</SliderPrimitive.Root>
