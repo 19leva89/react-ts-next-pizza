@@ -14,19 +14,19 @@ interface Props {
 
 export const CheckoutCart = ({ items, loading, className, removeCartItem, onClickCountButton }: Props) => {
 	return (
-		<WhiteBlock title="1. Кошик" className={className}>
-			<div className="flex flex-col gap-5">
+		<WhiteBlock title='1. Кошик' className={className}>
+			<div className='flex flex-col gap-5'>
 				{loading ? (
 					[...Array(items.length || 3)].map((_, index) => (
-						<div key={index} className="flex items-center justify-between">
-							<div className="flex items-center gap-5">
-								<Skeleton className="size-15 rounded-full" />
-								<Skeleton className="w-40 h-8 rounded" />
+						<div key={index} className='flex items-center justify-between'>
+							<div className='flex items-center gap-5'>
+								<Skeleton className='size-15 rounded-full' />
+								<Skeleton className='h-8 w-40 rounded' />
 							</div>
 
-							<Skeleton className="h-8 w-16 rounded" />
+							<Skeleton className='h-8 w-16 rounded' />
 
-							<Skeleton className="h-8 w-[133px] rounded" />
+							<Skeleton className='h-8 w-[133px] rounded' />
 						</div>
 					))
 				) : items.length > 0 ? (
@@ -58,9 +58,9 @@ export const CheckoutCart = ({ items, loading, className, removeCartItem, onClic
 				) : (
 					// Show text if cart is empty
 					<>
-						<Title size="sm" text="Кошик порожній" className="text-center font-bold my-2" />
+						<Title size='sm' text='Кошик порожній' className='my-2 text-center font-bold' />
 
-						<p className="text-center text-neutral-500 mb-5">Але це ніколи не пізно виправити :)</p>
+						<p className='mb-5 text-center text-neutral-500'>Але це ніколи не пізно виправити :)</p>
 					</>
 				)}
 			</div>

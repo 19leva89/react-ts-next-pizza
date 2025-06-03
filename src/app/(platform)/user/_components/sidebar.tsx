@@ -14,78 +14,78 @@ export const Sidebar = () => {
 	}
 
 	return (
-		<div className="flex flex-col gap-5 ">
-			<Link href="/user/profile">
+		<div className='flex flex-col gap-5 '>
+			<Link href='/user/profile'>
 				<Button
-					variant="secondary"
-					className="flex justify-start gap-3 text-base w-full border hover:border-primary transition-colors ease-in-out duration-300"
-					type="button"
+					variant='secondary'
+					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
+					type='button'
 				>
 					<User />
 					Особисті дані
 				</Button>
 			</Link>
 
-			<Link href="/user/orders">
+			<Link href='/user/orders'>
 				<Button
-					variant="secondary"
-					className="flex justify-start gap-3 text-base w-full border hover:border-primary transition-colors ease-in-out duration-300"
-					type="button"
+					variant='secondary'
+					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
+					type='button'
 				>
 					<PackageOpen />
 					Замовлення
 				</Button>
 			</Link>
 
-			<Link href="/user/delivery">
+			<Link href='/user/delivery'>
 				<Button
-					variant="secondary"
-					className="flex justify-start gap-3 text-base w-full border hover:border-primary transition-colors ease-in-out duration-300"
-					type="button"
+					variant='secondary'
+					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
+					type='button'
 				>
 					<MapPin />
 					Адреси доставки
 				</Button>
 			</Link>
 
-			<Link href="/user/discount">
+			<Link href='/user/discount'>
 				<Button
-					variant="secondary"
-					className="flex justify-start gap-3 text-base w-full border hover:border-primary transition-colors ease-in-out duration-300"
-					type="button"
+					variant='secondary'
+					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
+					type='button'
 				>
 					<BadgePercent />
 					Дисконт
 				</Button>
 			</Link>
 
-			<Link href="/user/wishlist">
+			<Link href='/user/wishlist'>
 				<Button
-					variant="secondary"
-					className="flex justify-start gap-3 text-base w-full border hover:border-primary transition-colors ease-in-out duration-300"
-					type="button"
+					variant='secondary'
+					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
+					type='button'
 				>
 					<Heart />
 					Закладки
 				</Button>
 			</Link>
 
-			<Link href="/user/subscribes">
+			<Link href='/user/subscribes'>
 				<Button
-					variant="secondary"
-					className="flex justify-start gap-3 text-base w-full border hover:border-primary transition-colors ease-in-out duration-300"
-					type="button"
+					variant='secondary'
+					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
+					type='button'
 				>
 					<Mail />
 					Розсилка
 				</Button>
 			</Link>
 
-			<Link href="/user/notice">
+			<Link href='/user/notice'>
 				<Button
-					variant="secondary"
-					className="flex justify-start gap-3 text-base w-full border hover:border-primary transition-colors ease-in-out duration-300"
-					type="button"
+					variant='secondary'
+					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
+					type='button'
 				>
 					<Bell />
 					Повідомлення
@@ -95,9 +95,9 @@ export const Sidebar = () => {
 			<Separator />
 
 			<Button
-				variant="ghost"
-				className="flex justify-start gap-3 text-base w-full border-transparent transition-colors ease-in-out duration-300"
-				type="button"
+				variant='ghost'
+				className='flex w-full justify-start gap-3 border-transparent text-base transition-colors duration-300 ease-in-out'
+				type='button'
 				onClick={onClickSignOut}
 			>
 				<LogOut />

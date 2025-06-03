@@ -36,7 +36,7 @@ const ProductPage = async ({ params }: Props) => {
 	}
 
 	return (
-		<Container className="flex flex-col my-10">
+		<Container className='my-10 flex flex-col'>
 			<ProductForm product={product} ingredients={ingredients} />
 		</Container>
 	)

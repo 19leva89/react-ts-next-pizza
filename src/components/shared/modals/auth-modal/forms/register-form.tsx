@@ -41,15 +41,15 @@ export const RegisterForm = ({ onClose }: Props) => {
 			toast.success('Реєстрація успішна 📝. Підтвердьте свою пошту')
 
 			onClose?.()
-		} catch (error) {
+		} catch {
 			return toast.error('Неправильний Email або пароль')
 		}
 	}
 
 	return (
 		<FormProvider {...form}>
-			<form className="flex flex-col gap-5 h-full min-h-[450px]" onSubmit={form.handleSubmit(onSubmit)}>
-				<Card className="flex flex-col justify-between items-stretch flex-grow">
+			<form className='flex h-full min-h-[450px] flex-col gap-5' onSubmit={form.handleSubmit(onSubmit)}>
+				<Card className='flex flex-grow flex-col items-stretch justify-between'>
 					<div>
 						<CardHeader>
 							<CardTitle>Реєстрація аккаунта</CardTitle>
@@ -57,22 +57,22 @@ export const RegisterForm = ({ onClose }: Props) => {
 							<CardDescription>Введіть свої дані, щоб зареєструвати акаунт</CardDescription>
 						</CardHeader>
 
-						<CardContent className="flex flex-col gap-5">
-							<FormInput name="email" type="email" placeholder="Email" required />
+						<CardContent className='flex flex-col gap-5'>
+							<FormInput name='email' type='email' placeholder='Email' required />
 
-							<FormInput name="fullName" type="text" placeholder="Повне ім'я" required />
+							<FormInput name='fullName' type='text' placeholder="Повне ім'я" required />
 
-							<FormInput name="password" type="password" placeholder="Пароль" required />
+							<FormInput name='password' type='password' placeholder='Пароль' required />
 
-							<FormInput name="confirmPassword" type="password" placeholder="Повторіть пароль" required />
+							<FormInput name='confirmPassword' type='password' placeholder='Повторіть пароль' required />
 						</CardContent>
 					</div>
 
-					<CardFooter className="flex flex-col gap-4">
+					<CardFooter className='flex flex-col gap-4'>
 						<Button
 							loading={form.formState.isSubmitting}
-							className="h-12 text-base w-full transition-colors ease-in-out duration-300"
-							type="submit"
+							className='h-12 w-full text-base transition-colors duration-300 ease-in-out'
+							type='submit'
 						>
 							Зареєструватись
 						</Button>

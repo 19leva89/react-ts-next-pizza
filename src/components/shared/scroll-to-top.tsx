@@ -44,10 +44,10 @@ export const ScrollToTop = ({ className }: Props) => {
 		<>
 			{visible && (
 				<Button
-					type="button"
-					variant="outline"
+					type='button'
+					variant='outline'
 					className={cn(
-						'fixed bottom-11 left-11 rounded-full p-0 transition-colors ease-in-out duration-300',
+						'fixed bottom-11 left-11 rounded-full p-0 transition-colors duration-300 ease-in-out',
 						className,
 					)}
 					onClick={scrollToTop}

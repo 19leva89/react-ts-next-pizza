@@ -11,7 +11,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
 		<>
 			<SessionProvider>{children}</SessionProvider>
 
-			<Toaster position="bottom-right" expand={false} richColors />
+			<Toaster position='bottom-right' expand={false} richColors />
 
 			<NextTopLoader showSpinner={false} />
 		</>

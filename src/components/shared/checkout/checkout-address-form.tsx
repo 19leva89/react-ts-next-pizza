@@ -39,16 +39,16 @@ export const CheckoutAddressForm = ({ className }: Props) => {
 	}, [selectedState])
 
 	return (
-		<WhiteBlock title="3. Адреса доставки" className={className}>
-			<div className="flex flex-col gap-5">
-				<div className="grid grid-cols-2 gap-5">
+		<WhiteBlock title='3. Адреса доставки' className={className}>
+			<div className='flex flex-col gap-5'>
+				<div className='grid grid-cols-2 gap-5'>
 					<FormCombobox
-						name="state"
-						placeholder="Область"
-						noResultsText="Область не знайдена"
-						selectPlaceholder="Знайти область..."
+						name='state'
+						placeholder='Область'
+						noResultsText='Область не знайдена'
+						selectPlaceholder='Знайти область...'
 						mapTable={states}
-						className="justify-between w-full h-12 text-md"
+						className='text-md h-12 w-full justify-between'
 						onSelect={(state) => {
 							setSelectedState(state.id)
 							setFilteredCities([])
@@ -56,18 +56,18 @@ export const CheckoutAddressForm = ({ className }: Props) => {
 					/>
 
 					<FormCombobox
-						name="city"
-						placeholder="Місто"
-						noResultsText="Місто не знайдене"
-						selectPlaceholder="Знайти місто..."
+						name='city'
+						placeholder='Місто'
+						noResultsText='Місто не знайдене'
+						selectPlaceholder='Знайти місто...'
 						mapTable={filteredCities}
-						className="w-full justify-between h-12 text-md"
+						className='text-md h-12 w-full justify-between'
 					/>
 				</div>
 
-				<FormInput name="address" type="text" className="text-base" placeholder="Адреса" />
+				<FormInput name='address' type='text' className='text-base' placeholder='Адреса' />
 
-				<FormTextarea name="comment" className="text-base" placeholder="Коментар до замовлення" rows={5} />
+				<FormTextarea name='comment' className='text-base' placeholder='Коментар до замовлення' rows={5} />
 			</div>
 		</WhiteBlock>
 	)

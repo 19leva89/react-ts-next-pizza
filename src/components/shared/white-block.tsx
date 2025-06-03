@@ -19,11 +19,11 @@ export const WhiteBlock = ({
 	children,
 }: PropsWithChildren<Props>) => {
 	return (
-		<div className={cn('bg-white rounded-3xl', className)}>
+		<div className={cn('rounded-3xl bg-white', className)}>
 			{title && (
 				<>
-					<div className="flex items-center justify-between p-5 px-7">
-						<Title text={title} size="sm" className="font-bold" />
+					<div className='flex items-center justify-between p-5 px-7'>
+						<Title text={title} size='sm' className='font-bold' />
 
 						{endAdornment}
 					</div>

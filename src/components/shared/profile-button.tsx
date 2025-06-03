@@ -16,18 +16,18 @@ export const ProfileButton = ({ className, onClickLogin }: Props) => {
 		<div className={className}>
 			{!session ? (
 				<Button
-					variant="outline"
+					variant='outline'
 					onClick={onClickLogin}
-					className="flex items-center gap-1 transition-colors ease-in-out duration-300"
+					className='flex items-center gap-1 transition-colors duration-300 ease-in-out'
 				>
 					<User size={16} />
 					Увійти
 				</Button>
 			) : (
-				<Link href="/user/profile">
+				<Link href='/user/profile'>
 					<Button
-						variant="outline"
-						className="flex items-center gap-2 transition-colors ease-in-out duration-300"
+						variant='outline'
+						className='flex items-center gap-2 transition-colors duration-300 ease-in-out'
 					>
 						<CircleUser size={18} />
 						Профіль

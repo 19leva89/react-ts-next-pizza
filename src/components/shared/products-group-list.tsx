@@ -35,9 +35,9 @@ export const ProductsGroupList = ({ title, slug, items, categoryId, className, l
 
 	return (
 		<div className={className} id={slug} ref={intersectionRef as RefObject<HTMLDivElement>}>
-			<Title text={title} size="lg" className="font-extrabold mb-5" />
+			<Title text={title} size='lg' className='mb-5 font-extrabold' />
 
-			<div className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8', listClassName)}>
+			<div className={cn('grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8', listClassName)}>
 				{items.map((product) => {
 					const bdImagePath = product.imageUrl
 					const imageUrl = `${bdImagePath}.avif`

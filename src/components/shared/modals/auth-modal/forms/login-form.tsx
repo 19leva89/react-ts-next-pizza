@@ -59,8 +59,8 @@ export const LoginForm = ({ onClose }: Props) => {
 
 	return (
 		<FormProvider {...form}>
-			<form className="flex flex-col gap-5 h-full min-h-[450px]" onSubmit={form.handleSubmit(onSubmit)}>
-				<Card className="flex flex-col justify-between items-stretch flex-grow">
+			<form className='flex h-full min-h-[450px] flex-col gap-5' onSubmit={form.handleSubmit(onSubmit)}>
+				<Card className='flex flex-grow flex-col items-stretch justify-between'>
 					<div>
 						<CardHeader>
 							<CardTitle>Вхід в аккаунт</CardTitle>
@@ -68,40 +68,40 @@ export const LoginForm = ({ onClose }: Props) => {
 							<CardDescription>Введіть свою пошту, щоб увійти до свого акаунту</CardDescription>
 						</CardHeader>
 
-						<CardContent className="flex flex-col gap-5">
-							<FormInput name="email" type="email" placeholder="Email" required />
+						<CardContent className='flex flex-col gap-5'>
+							<FormInput name='email' type='email' placeholder='Email' required />
 
-							<FormInput name="password" type="password" placeholder="Пароль" required />
+							<FormInput name='password' type='password' placeholder='Пароль' required />
 						</CardContent>
 					</div>
 
-					<CardFooter className="flex flex-col gap-4">
+					<CardFooter className='flex flex-col gap-4'>
 						<Button
 							loading={form.formState.isSubmitting}
-							className="h-12 text-base w-full transition-colors ease-in-out duration-300"
-							type="submit"
+							className='h-12 w-full text-base transition-colors duration-300 ease-in-out'
+							type='submit'
 						>
 							Увійти
 						</Button>
 
-						<div className="flex gap-2 w-full">
+						<div className='flex w-full gap-2'>
 							<Button
-								variant="outline"
+								variant='outline'
 								onClick={() => handleLogin('github')}
-								type="button"
-								className="gap-2 h-12 p-2 flex-1 transition-colors ease-in-out duration-300"
+								type='button'
+								className='h-12 flex-1 gap-2 p-2 transition-colors duration-300 ease-in-out'
 							>
-								<Image width={24} height={24} alt="GitHub" src="/assets/svg/github-icon.svg" />
+								<Image width={24} height={24} alt='GitHub' src='/assets/svg/github-icon.svg' />
 								GitHub
 							</Button>
 
 							<Button
-								variant="outline"
+								variant='outline'
 								onClick={() => handleLogin('google')}
-								type="button"
-								className="gap-2 h-12 p-2 flex-1 transition-colors ease-in-out duration-300"
+								type='button'
+								className='h-12 flex-1 gap-2 p-2 transition-colors duration-300 ease-in-out'
 							>
-								<Image width={24} height={24} alt="Google" src="/assets/svg/google-icon.svg" />
+								<Image width={24} height={24} alt='Google' src='/assets/svg/google-icon.svg' />
 								Google
 							</Button>
 						</div>

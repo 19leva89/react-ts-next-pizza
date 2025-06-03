@@ -16,14 +16,14 @@ export const Categories = ({ items, className }: Props) => {
 	const categoryActiveId = useCategoryStore((state) => state.activeId, shallow)
 
 	return (
-		<div className={cn('inline-flex gap-1 bg-gray-50 p-1 rounded-2xl', className)}>
+		<div className={cn('inline-flex gap-1 rounded-2xl bg-gray-50 p-1', className)}>
 			{items.map(({ id, name, slug }) => (
 				<Link
 					key={id}
 					className={cn(
-						'flex items-center font-bold h-11 rounded-2xl px-5 border transition-colors',
+						'flex h-11 items-center rounded-2xl border px-5 font-bold transition-colors',
 						categoryActiveId === id
-							? 'bg-white shadow-md shadow-gray-200 text-primary border-primary'
+							? 'border-primary bg-white text-primary shadow-md shadow-gray-200'
 							: 'border-transparent',
 					)}
 					href={`/#${slug}`}

@@ -37,37 +37,37 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
 		<Sheet>
 			<SheetTrigger asChild>{children}</SheetTrigger>
 
-			<SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]" aria-describedby={undefined}>
-				<div className={cn('flex flex-col h-full', !totalAmount && 'justify-center')}>
+			<SheetContent className='flex flex-col justify-between bg-[#F4F1EE] pb-0' aria-describedby={undefined}>
+				<div className={cn('flex h-full flex-col', !totalAmount && 'justify-center')}>
 					<SheetHeader>
 						<SheetTitle>
 							{totalAmount > 0 ? (
 								<>
 									<span>У кошику </span>
 
-									<span className="font-bold">
+									<span className='font-bold'>
 										{items.length} {getProductPluralize(items.length)}
 									</span>
 								</>
 							) : (
-								<div className="text-center font-bold my-2">Кошик порожній</div>
+								<div className='my-2 text-center font-bold'>Кошик порожній</div>
 							)}
 						</SheetTitle>
 
 						{totalAmount > 0 && (
-							<SheetDescription className="sr-only">Список товарів в кошику</SheetDescription>
+							<SheetDescription className='sr-only'>Список товарів в кошику</SheetDescription>
 						)}
 					</SheetHeader>
 
 					{totalAmount > 0 ? (
 						<>
-							<div className="mt-5 overflow-auto flex-1">
+							<div className='mt-5 flex-1 overflow-auto'>
 								{items.map((item) => {
 									const bdImagePath = item.imageUrl
 									const imageUrl = `${bdImagePath}.avif`
 
 									return (
-										<div key={item.id} className="mb-2">
+										<div key={item.id} className='mb-2'>
 											<CartDrawerItem
 												id={item.id}
 												name={item.name}
@@ -89,40 +89,40 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
 								})}
 							</div>
 
-							<SheetFooter className="bg-white p-8">
-								<div className="w-full">
-									<div className="flex mb-4">
-										<span className="flex flex-1 text-lg text-neutral-500">
+							<SheetFooter className='bg-white p-8'>
+								<div className='w-full'>
+									<div className='mb-4 flex'>
+										<span className='flex flex-1 text-lg text-neutral-500'>
 											Разом
-											<div className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
+											<div className='relative -top-1 mx-2 flex-1 border-b border-dashed border-b-neutral-200' />
 										</span>
 
-										<span className="font-bold text-lg">{totalAmount} грн</span>
+										<span className='text-lg font-bold'>{totalAmount} грн</span>
 									</div>
 
-									<Link href="/checkout">
+									<Link href='/checkout'>
 										<Button
-											type="submit"
+											type='submit'
 											loading={redirecting}
 											onClick={() => setRedirecting(true)}
-											className="w-full h-12 text-base transition-colors ease-in-out duration-300"
+											className='h-12 w-full text-base transition-colors duration-300 ease-in-out'
 										>
 											Оформити замовлення
-											<ArrowRight className="w-5 ml-2" />
+											<ArrowRight className='ml-2 w-5' />
 										</Button>
 									</Link>
 								</div>
 							</SheetFooter>
 						</>
 					) : (
-						<div className="flex flex-col items-center justify-center w-72 mx-auto">
-							<Image src="/assets/img/empty-box.png" alt="empty cart" width={120} height={120} />
+						<div className='mx-auto flex w-72 flex-col items-center justify-center'>
+							<Image src='/assets/img/empty-box.png' alt='empty cart' width={120} height={120} />
 
-							<p className="text-center text-neutral-500 mb-5">Але це ніколи не пізно виправити :)</p>
+							<p className='mb-5 text-center text-neutral-500'>Але це ніколи не пізно виправити :)</p>
 
 							<SheetClose asChild>
-								<Button className="w-56 h-12 text-base transition-colors ease-in-out duration-300" size="lg">
-									<ArrowLeft className="w-5 mr-2" />
+								<Button className='h-12 w-56 text-base transition-colors duration-300 ease-in-out' size='lg'>
+									<ArrowLeft className='mr-2 w-5' />
 									Повернутись назад
 								</Button>
 							</SheetClose>

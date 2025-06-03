@@ -47,28 +47,28 @@ export const Header = ({ hasSearch = true, hasCart = true, className }: Props) =
 
 	return (
 		<header className={(cn('border-b'), className)}>
-			<Container className="flex items-center justify-between py-8">
+			<Container className='flex items-center justify-between py-8'>
 				{/* Left part */}
-				<Link href="/">
-					<div className="flex items-center gap-4">
-						<Image src="/logo.png" width={35} height={35} alt="logo" />
+				<Link href='/'>
+					<div className='flex items-center gap-4'>
+						<Image src='/logo.png' width={35} height={35} alt='logo' />
 
 						<div>
-							<h1 className="text-2xl uppercase font-black">Next Pizza</h1>
-							<p className="text-sm text-gray-400 leading-3">смачніше вже нікуди</p>
+							<h1 className='text-2xl font-black uppercase'>Next Pizza</h1>
+							<p className='text-sm leading-3 text-gray-400'>смачніше вже нікуди</p>
 						</div>
 					</div>
 				</Link>
 
 				{/* Search part */}
 				{hasSearch && (
-					<div className="mx-10 flex-1">
+					<div className='mx-10 flex-1'>
 						<SearchInput />
 					</div>
 				)}
 
 				{/* Right part */}
-				<div className="flex items-center gap-3">
+				<div className='flex items-center gap-3'>
 					<AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)} />
 
 					<ProfileButton onClickLogin={() => setOpenAuthModal(true)} />

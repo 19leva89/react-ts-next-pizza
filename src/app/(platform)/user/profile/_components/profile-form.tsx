@@ -49,22 +49,22 @@ export const ProfileForm = ({ data }: Props) => {
 
 	return (
 		<Container>
-			<Title text="Персональна інформація" size="md" className="font-bold" />
+			<Title text='Персональна інформація' size='md' className='font-bold' />
 
 			<FormProvider {...form}>
-				<form className="flex flex-col gap-5 w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
-					<FormInput name="email" label="Email" type="email" required />
+				<form className='mt-10 flex w-96 flex-col gap-5' onSubmit={form.handleSubmit(onSubmit)}>
+					<FormInput name='email' label='Email' type='email' required />
 
-					<FormInput name="fullName" label="Повне ім'я" type="text" required />
+					<FormInput name='fullName' label="Повне ім'я" type='text' required />
 
-					<FormInput name="password" label="Новий пароль" type="password" />
+					<FormInput name='password' label='Новий пароль' type='password' />
 
-					<FormInput name="confirmPassword" label="Повторіть пароль" type="password" />
+					<FormInput name='confirmPassword' label='Повторіть пароль' type='password' />
 
 					<Button
 						disabled={form.formState.isSubmitting}
-						className="h-12 text-base mt-10 transition-colors ease-in-out duration-300"
-						type="submit"
+						className='mt-10 h-12 text-base transition-colors duration-300 ease-in-out'
+						type='submit'
 					>
 						Зберегти
 					</Button>

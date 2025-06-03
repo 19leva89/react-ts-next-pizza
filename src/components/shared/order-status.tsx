@@ -23,7 +23,7 @@ export const OrderStatus = ({ className, variant, text }: Props) => {
 					'bg-red-100 text-red-700 hover:bg-red-100': variant === IOrderStatus.CANCELLED,
 					'bg-yellow-100 text-yellow-700 hover:bg-yellow-100': variant === IOrderStatus.PENDING,
 				},
-				'font-normal text-sm',
+				'text-sm font-normal',
 				className,
 			)}
 		>

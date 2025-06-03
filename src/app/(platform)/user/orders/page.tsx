@@ -19,9 +19,9 @@ const OrdersPage = async () => {
 		<Container>
 			{orders.length > 0 ? (
 				<>
-					<Title text="Мої замовлення" size="md" className="font-bold mb-8" />
+					<Title text='Мої замовлення' size='md' className='mb-8 font-bold' />
 
-					<div className="flex flex-col gap-3 flex-1 mb-20 w-full">
+					<div className='mb-20 flex w-full flex-1 flex-col gap-3'>
 						{orders.map((order) => (
 							<OrderItem
 								key={order.id}
@@ -43,9 +43,9 @@ const OrdersPage = async () => {
 				</>
 			) : (
 				<InfoBlock
-					title="У вас наразі немає замовлень"
-					text="Але це ніколи не пізно виправити!"
-					imageUrl="/assets/img/empty-box.png"
+					title='У вас наразі немає замовлень'
+					text='Але це ніколи не пізно виправити!'
+					imageUrl='/assets/img/empty-box.png'
 				/>
 			)}
 		</Container>
