@@ -25,33 +25,33 @@ export const AuthModal = ({ open, onClose }: Props) => {
 
 	return (
 		<Dialog open={open} onOpenChange={handleClose}>
-			<DialogContent className="w-120 p-10 bg-white" aria-describedby={undefined}>
-				<DialogTitle className="hidden" />
+			<DialogContent className='w-120 bg-white p-10' aria-describedby={undefined}>
+				<DialogTitle className='hidden' />
 
-				<DialogDescription className="hidden" />
+				<DialogDescription className='hidden' />
 
-				<Tabs defaultValue="account" className="w-100">
-					<TabsList className="grid grid-cols-2 w-full bg-[#ffe4d5]">
+				<Tabs defaultValue='account' className='w-100'>
+					<TabsList className='grid w-full grid-cols-2 bg-[#ffe4d5]'>
 						<TabsTrigger
-							value="login"
-							className="cursor-pointer data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:border data-[state=active]:border-primary"
+							value='login'
+							className='cursor-pointer data-[state=active]:border data-[state=active]:border-primary data-[state=active]:bg-white data-[state=active]:text-primary'
 						>
 							Вхід
 						</TabsTrigger>
 
 						<TabsTrigger
-							value="register"
-							className="cursor-pointer data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:border data-[state=active]:border-primary"
+							value='register'
+							className='cursor-pointer data-[state=active]:border data-[state=active]:border-primary data-[state=active]:bg-white data-[state=active]:text-primary'
 						>
 							Реєстрація
 						</TabsTrigger>
 					</TabsList>
 
-					<TabsContent value="login">
+					<TabsContent value='login'>
 						<LoginForm onClose={handleClose} />
 					</TabsContent>
 
-					<TabsContent value="register">
+					<TabsContent value='register'>
 						<RegisterForm onClose={handleClose} />
 					</TabsContent>
 				</Tabs>

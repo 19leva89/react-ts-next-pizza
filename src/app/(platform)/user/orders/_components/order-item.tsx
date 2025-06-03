@@ -38,18 +38,18 @@ export const OrderItem = ({
 	const TOTAL_HEIGHT = isExpanded ? items.length * ITEM_HEIGHT + FOOTER_HEIGHT : 0
 
 	return (
-		<div className={cn('bg-white rounded-3xl select-none', className)}>
+		<div className={cn('rounded-3xl bg-white select-none', className)}>
 			<div
 				onClick={() => setIsExpanded(!isExpanded)}
-				className="flex cursor-pointer justify-between items-center gap-2 p-7"
+				className='flex cursor-pointer items-center justify-between gap-2 p-7'
 			>
-				<div className="flex items-center gap-6">
-					<Title text={`Замовлення #${id}`} size="sm" className="font-bold" />
+				<div className='flex items-center gap-6'>
+					<Title text={`Замовлення #${id}`} size='sm' className='font-bold' />
 
-					<span className="text-gray-400">{createdAt}</span>
+					<span className='text-gray-400'>{createdAt}</span>
 				</div>
 
-				<div className="flex items-center gap-5">
+				<div className='flex items-center gap-5'>
 					<OrderStatus variant={status} />
 
 					<ChevronDown className={isExpanded ? 'rotate-180' : ''} />
@@ -58,7 +58,7 @@ export const OrderItem = ({
 
 			<Separator />
 
-			<div className="transition-all overflow-hidden" style={{ height: TOTAL_HEIGHT }}>
+			<div className='overflow-hidden transition-all' style={{ height: TOTAL_HEIGHT }}>
 				<div>
 					{items.map((item) => {
 						const bdImagePath = item.productItem.product.imageUrl
@@ -85,8 +85,8 @@ export const OrderItem = ({
 						)
 					})}
 
-					<div className="p-5 px-7">
-						<h3 className="text-xl">
+					<div className='p-5 px-7'>
+						<h3 className='text-xl'>
 							Разом: <b>{totalAmount} грн</b>
 						</h3>
 					</div>

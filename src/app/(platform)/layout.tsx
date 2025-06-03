@@ -8,7 +8,7 @@ type Props = PropsWithChildren<{
 
 export default function PlatformLayout({ children, modal }: Props) {
 	return (
-		<main className="min-h-screen">
+		<main className='min-h-screen'>
 			<Suspense>
 				<Header />
 			</Suspense>

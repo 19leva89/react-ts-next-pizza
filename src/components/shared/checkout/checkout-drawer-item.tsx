@@ -28,12 +28,12 @@ export const CheckoutDrawerItem = ({
 			className={cn(
 				'flex items-center justify-between',
 				{
-					'opacity-50 pointer-events-none': disabled,
+					'pointer-events-none opacity-50': disabled,
 				},
 				className,
 			)}
 		>
-			<div className="flex items-center gap-5 flex-1">
+			<div className='flex flex-1 items-center gap-5'>
 				<CartItemDetails.Image src={imageUrl} name={name} />
 
 				<CartItemDetails.Info name={name} details={details} />
@@ -41,11 +41,11 @@ export const CheckoutDrawerItem = ({
 
 			<CartItemDetails.Price value={price} />
 
-			<div className="flex items-center gap-5 ml-20">
+			<div className='ml-20 flex items-center gap-5'>
 				<CartItemDetails.CountButton onClick={onClickCountButton} value={quantity} />
 
-				<button type="button" onClick={onClickRemove} className="transition ease-in-out duration-300">
-					<X className="text-gray-400 cursor-pointer hover:text-gray-600" size={20} />
+				<button type='button' onClick={onClickRemove} className='transition duration-300 ease-in-out'>
+					<X className='cursor-pointer text-gray-400 hover:text-gray-600' size={20} />
 				</button>
 			</div>
 		</div>

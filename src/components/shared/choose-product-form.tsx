@@ -32,29 +32,29 @@ export const ChooseProductForm = ({
 
 	return (
 		<div className={cn(className, 'flex flex-1')}>
-			<div className="flex items-center justify-center flex-1 relative w-full">
+			<div className='relative flex w-full flex-1 items-center justify-center'>
 				<Image
 					src={imageUrl}
 					alt={name}
 					width={350}
 					height={350}
-					className="relative left-2 top-2 transition-all z-10 duration-300"
+					className='relative top-2 left-2 z-10 transition-all duration-300'
 				/>
 			</div>
 
-			<div className="flex flex-col justify-between w-[490px] h-150 p-7 bg-[#f7f6f5]">
-				<div className="flex flex-col justify-start">
-					<Title text={name} size="md" className="font-extrabold mb-1" />
+			<div className='flex h-150 w-[490px] flex-col justify-between bg-[#f7f6f5] p-7'>
+				<div className='flex flex-col justify-start'>
+					<Title text={name} size='md' className='mb-1 font-extrabold' />
 
-					{weight >= 1 && <p className="text-gray-400 text-sm">{details}</p>}
+					{weight >= 1 && <p className='text-sm text-gray-400'>{details}</p>}
 
-					<p className="text-sm text-gray-400">{description}</p>
+					<p className='text-sm text-gray-400'>{description}</p>
 				</div>
 
 				<Button
 					loading={loading}
 					onClick={() => onSubmit?.()}
-					className="h-[55px] px-10 text-base rounded-[18px] w-full mt-5 transition-colors ease-in-out duration-300"
+					className='mt-5 h-[55px] w-full rounded-[18px] px-10 text-base transition-colors duration-300 ease-in-out'
 				>
 					Додати до кошику за {price} грн
 				</Button>

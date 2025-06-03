@@ -38,10 +38,10 @@ export const Stories = ({ className }: Props) => {
 
 	return (
 		<>
-			<Container className={cn('flex items-center justify-between gap-2 my-10', className)}>
+			<Container className={cn('my-10 flex items-center justify-between gap-2', className)}>
 				{stories.length === 0 &&
 					[...Array(6)].map((_, index) => (
-						<div key={index} className="w-50 h-[250px] bg-gray-200 rounded-md animate-pulse" />
+						<div key={index} className='h-[250px] w-50 animate-pulse rounded-md bg-gray-200' />
 					))}
 
 				{stories.map((story) => {
@@ -52,23 +52,23 @@ export const Stories = ({ className }: Props) => {
 						<Image
 							key={story.id}
 							onClick={() => onClickStory(story)}
-							className="rounded-md cursor-pointer"
+							className='cursor-pointer rounded-md'
 							height={250}
 							width={200}
 							src={imageUrl}
-							alt="story"
+							alt='story'
 						/>
 					)
 				})}
 
 				{open && (
-					<div className="absolute left-0 top-0 size-full bg-black/80 flex items-center justify-center z-30">
-						<div className="relative" style={{ width: 520 }}>
+					<div className='absolute top-0 left-0 z-30 flex size-full items-center justify-center bg-black/80'>
+						<div className='relative' style={{ width: 520 }}>
 							<button
-								className="absolute -right-10 -top-5 z-30 cursor-pointer transition-colors ease-in-out duration-300"
+								className='absolute -top-5 -right-10 z-30 cursor-pointer transition-colors duration-300 ease-in-out'
 								onClick={() => setOpen(false)}
 							>
-								<X className="absolute top-0 right-0 size-8 text-white/50" />
+								<X className='absolute top-0 right-0 size-8 text-white/50' />
 							</button>
 
 							<ReactStories

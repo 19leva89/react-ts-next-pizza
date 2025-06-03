@@ -76,26 +76,26 @@ export function FormCombobox({
 			<div>
 				<PopoverTrigger asChild>
 					<Button
-						variant="outline"
-						role="combobox"
+						variant='outline'
+						role='combobox'
 						aria-expanded={open}
 						onClick={() => setOpen(true)}
 						className={cn(
-							'border-[##e5e7eb] text-[#78716c] hover:bg-transparent transition-colors ease-in-out duration-300',
+							'border-[#e5e7eb] text-[#78716c] transition-colors duration-300 ease-in-out hover:bg-transparent',
 							className,
 						)}
 						{...register(name)}
 					>
 						{selectedItem ? selectedItem.name : placeholder}
 
-						<ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
+						<ChevronsUpDown className='ml-2 size-4 shrink-0 opacity-50' />
 					</Button>
 				</PopoverTrigger>
 
-				{errorText && <ErrorText text={errorText} className="mt-2 ml-4" />}
+				{errorText && <ErrorText text={errorText} className='mt-2 ml-4' />}
 			</div>
 
-			<PopoverContent className="w-50 p-0">
+			<PopoverContent className='w-50 p-0'>
 				<Command>
 					<CommandInput placeholder={selectPlaceholder} name={name} />
 

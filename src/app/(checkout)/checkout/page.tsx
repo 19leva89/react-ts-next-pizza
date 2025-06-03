@@ -91,14 +91,14 @@ const CheckoutPage = () => {
 	}
 
 	return (
-		<Container className="mt-10">
-			<Title text="Оформлення замовлення" className="font-extrabold mb-8 text-[36px]" />
+		<Container className='mt-10'>
+			<Title text='Оформлення замовлення' className='mb-8 text-[36px] font-extrabold' />
 
 			<FormProvider {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
-					<div className="flex gap-10">
+					<div className='flex gap-10'>
 						{/* Left side */}
-						<div className="flex flex-col gap-10 flex-1 mb-20">
+						<div className='mb-20 flex flex-1 flex-col gap-10'>
 							<CheckoutCart
 								items={items}
 								loading={loading}
@@ -106,13 +106,13 @@ const CheckoutPage = () => {
 								onClickCountButton={onClickCountButton}
 							/>
 
-							<CheckoutPersonalForm className={loading ? 'opacity-40 pointer-events-none' : ''} />
+							<CheckoutPersonalForm className={loading ? 'pointer-events-none opacity-40' : ''} />
 
-							<CheckoutAddressForm className={loading ? 'opacity-40 pointer-events-none' : ''} />
+							<CheckoutAddressForm className={loading ? 'pointer-events-none opacity-40' : ''} />
 						</div>
 
 						{/* Right side */}
-						<div className="w-[450px]">
+						<div className='w-[450px]'>
 							<CheckoutSidebar totalAmount={totalAmount} loading={loading || submitting} />
 						</div>
 					</div>

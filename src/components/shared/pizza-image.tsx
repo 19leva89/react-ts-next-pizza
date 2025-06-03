@@ -11,18 +11,18 @@ interface Props {
 
 export const PizzaImage = ({ name, size, imageUrl, className }: Props) => {
 	return (
-		<div className={cn('flex items-center justify-center flex-1 relative w-full', className)}>
+		<div className={cn('relative flex w-full flex-1 items-center justify-center', className)}>
 			<Image
 				src={imageUrl}
 				alt={name}
 				width={size === 20 ? 300 : size === 30 ? 400 : 500}
 				height={size === 20 ? 300 : size === 30 ? 400 : 500}
-				className="z-10 relative left-2 top-2 transition-all ease-in-out duration-300"
+				className='relative top-2 left-2 z-10 transition-all duration-300 ease-in-out'
 			/>
 
 			{/* Decorative circles */}
-			<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed border-2 rounded-full border-gray-200 size-[450px]" />
-			<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dotted border-2 rounded-full border-gray-100 size-[370px]" />
+			<div className='absolute top-1/2 left-1/2 size-[450px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-gray-200' />
+			<div className='absolute top-1/2 left-1/2 size-[370px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dotted border-gray-100' />
 		</div>
 	)
 }

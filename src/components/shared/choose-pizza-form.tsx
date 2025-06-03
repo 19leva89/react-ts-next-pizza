@@ -63,15 +63,15 @@ export const ChoosePizzaForm = ({
 		<div className={cn(className, 'flex flex-1')}>
 			<PizzaImage name={name} size={size} imageUrl={imageUrl} />
 
-			<div className="flex flex-col justify-between w-[490px] h-200 p-7 bg-[#f7f6f5]">
-				<div className="flex flex-col justify-start">
-					<Title text={name} size="md" className="font-extrabold mb-1" />
+			<div className='flex h-200 w-[490px] flex-col justify-between bg-[#f7f6f5] p-7'>
+				<div className='flex flex-col justify-start'>
+					<Title text={name} size='md' className='mb-1 font-extrabold' />
 
-					<p className="text-gray-400 text-sm">{details}</p>
+					<p className='text-sm text-gray-400'>{details}</p>
 
-					<p className="text-gray-400 text-sm">{additionalIngredients}</p>
+					<p className='text-sm text-gray-400'>{additionalIngredients}</p>
 
-					<div className="flex flex-col gap-1 mt-2">
+					<div className='mt-2 flex flex-col gap-1'>
 						<GroupVariants
 							items={availableSizes}
 							value={String(size)}
@@ -85,8 +85,8 @@ export const ChoosePizzaForm = ({
 						/>
 					</div>
 
-					<div className="h-105 p-5 mt-1 rounded-md bg-gray-50 overflow-auto scrollbar">
-						<div className="grid grid-cols-3 gap-3">
+					<div className='scrollbar mt-1 h-105 overflow-auto rounded-md bg-gray-50 p-5'>
+						<div className='grid grid-cols-3 gap-3'>
 							{ingredients.map((item) => {
 								const bdImagePath = item.imageUrl
 								const imageUrl = `${bdImagePath}.png`
@@ -109,7 +109,7 @@ export const ChoosePizzaForm = ({
 				<Button
 					loading={loading}
 					onClick={handleClickAdd}
-					className="h-[55px] px-10 text-base rounded-[18px] w-full mt-5 transition-colors ease-in-out duration-300"
+					className='mt-5 h-[55px] w-full rounded-[18px] px-10 text-base transition-colors duration-300 ease-in-out'
 				>
 					Додати до кошику за {totalPrice} грн
 				</Button>

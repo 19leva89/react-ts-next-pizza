@@ -35,10 +35,10 @@ const HomePage = async ({ searchParams }: Props) => {
 
 	return (
 		<>
-			<Container className="flex justify-between gap-10 mt-10 rounded-2xl">
-				<Title text="Усі товари" size="lg" className="font-extrabold" />
+			<Container className='mt-10 flex justify-between gap-10 rounded-2xl'>
+				<Title text='Усі товари' size='lg' className='font-extrabold' />
 
-				<div className="flex items-center">
+				<div className='flex items-center'>
 					<SortPopup />
 				</div>
 			</Container>
@@ -47,18 +47,18 @@ const HomePage = async ({ searchParams }: Props) => {
 
 			<Stories />
 
-			<Container className="mt-10 pb-14">
-				<div className="flex gap-20">
+			<Container className='mt-10 pb-14'>
+				<div className='flex gap-20'>
 					{/* Filter */}
-					<div className="w-[250px]">
+					<div className='w-[250px]'>
 						<Suspense>
 							<Filters />
 						</Suspense>
 					</div>
 
 					{/* Product list */}
-					<div className="flex-1">
-						<div className="flex flex-col gap-16">
+					<div className='flex-1'>
+						<div className='flex flex-col gap-16'>
 							{filteredCategories.map((category) => (
 								<ProductsGroupList
 									key={category.id}
@@ -72,7 +72,7 @@ const HomePage = async ({ searchParams }: Props) => {
 					</div>
 				</div>
 
-				<ScrollToTop className="font-bold bg-[#ffe4d5] size-12" />
+				<ScrollToTop className='size-12 bg-[#ffe4d5] font-bold' />
 			</Container>
 		</>
 	)

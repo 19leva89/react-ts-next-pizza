@@ -35,30 +35,30 @@ export const CartDrawerItem = ({
 	return (
 		<div
 			className={cn(
-				'flex bg-white p-5 gap-6',
+				'flex gap-6 bg-white p-5',
 				{
-					'opacity-50 pointer-events-none': disabled,
+					'pointer-events-none opacity-50': disabled,
 				},
 				className,
 			)}
 		>
 			<Image className={cn('size-15', className)} src={imageUrl} width={60} height={60} alt={name} />
 
-			<div className="flex-1">
+			<div className='flex-1'>
 				<CartItemDetails.Info name={name} details={details} />
 
-				<Separator className="my-3" />
+				<Separator className='my-3' />
 
-				<div className="flex items-center justify-between">
+				<div className='flex items-center justify-between'>
 					<CountButton onClick={onClickCountButton} value={quantity} />
 
-					<div className="flex items-center gap-3">
+					<div className='flex items-center gap-3'>
 						<h2 className={cn('font-bold', className)}>{price} грн</h2>
 
 						<Trash2Icon
 							size={16}
 							onClick={onClickRemove}
-							className="text-gray-400 cursor-pointer hover:text-gray-600"
+							className='cursor-pointer text-gray-400 hover:text-gray-600'
 						/>
 					</div>
 				</div>

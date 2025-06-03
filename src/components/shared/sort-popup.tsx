@@ -28,22 +28,22 @@ export const SortPopup = ({ className }: Props) => {
 	return (
 		<Popover open={isOpen} onOpenChange={setIsOpen}>
 			<PopoverTrigger asChild>
-				<div className={cn('inline-flex items-center gap-1 h-13 px-5 rounded-2xl cursor-pointer', className)}>
+				<div className={cn('inline-flex h-13 cursor-pointer items-center gap-1 rounded-2xl px-5', className)}>
 					<ArrowUpDown size={16} />
 
 					<b>Сортування:</b>
 
-					<b className="text-primary">{sortOptions.find((option) => option.value === filters.sort)?.name}</b>
+					<b className='text-primary'>{sortOptions.find((option) => option.value === filters.sort)?.name}</b>
 				</div>
 			</PopoverTrigger>
 
-			<PopoverContent className="w-60">
+			<PopoverContent className='w-60'>
 				<ul>
 					{sortOptions.map(({ value, name }) => (
 						<li
 							key={value}
 							onClick={() => handleSortChange(value as SortOption)}
-							className={cn('hover:bg-secondary hover:text-primary mt-1 p-2 px-4 cursor-pointer rounded-md', {
+							className={cn('mt-1 cursor-pointer rounded-md p-2 px-4 hover:bg-secondary hover:text-primary', {
 								'bg-secondary text-primary': filters.sort === value,
 							})}
 						>
