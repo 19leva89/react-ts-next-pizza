@@ -8,7 +8,7 @@ const errMsg = {
 
 export const updateUserInfoSchema = z
 	.object({
-		email: z.string().trim().email({ message: errMsg.email }),
+		email: z.email({ message: errMsg.email }).trim(),
 		fullName: z.string().trim().min(2, { message: errMsg.fullName }).optional(),
 		password: z
 			.string()
@@ -18,28 +18,36 @@ export const updateUserInfoSchema = z
 					if (!val) return true // If the password is not specified, validation passes
 					return val.length >= 8 // Check the password length
 				},
-				{ message: 'Пароль повинен бути не менше 8 символів' },
+				{
+					error: 'Пароль повинен бути не менше 8 символів',
+				},
 			)
 			.refine(
 				(val) => {
 					if (!val) return true // If the password is not specified, validation passes
 					return /[A-Z]/.test(val) // Check for at least one capital letter
 				},
-				{ message: 'Пароль повинен містити хоча б одну велику літеру' },
+				{
+					error: 'Пароль повинен містити хоча б одну велику літеру',
+				},
 			)
 			.refine(
 				(val) => {
 					if (!val) return true // If the password is not specified, validation passes
 					return /[a-z]/.test(val) // Check for at least one lowercase letter
 				},
-				{ message: 'Пароль повинен містити хоча б одну маленьку літеру' },
+				{
+					error: 'Пароль повинен містити хоча б одну маленьку літеру',
+				},
 			)
 			.refine(
 				(val) => {
 					if (!val) return true // If the password is not specified, validation passes
 					return /\d/.test(val) // Check for the presence of at least one digit
 				},
-				{ message: 'Пароль повинен містити хоча б одну цифру' },
+				{
+					error: 'Пароль повинен містити хоча б одну цифру',
+				},
 			),
 		confirmPassword: z.string().optional(),
 	})

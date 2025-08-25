@@ -10,13 +10,13 @@ import { UserRole } from '@prisma/client'
 export default {
 	providers: [
 		Google({
-			clientId: process.env.GOOGLE_CLIENT_ID,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+			clientId: process.env.AUTH_GOOGLE_ID,
+			clientSecret: process.env.AUTH_GOOGLE_SECRET,
 		}),
 
 		GitHub({
-			clientId: process.env.GITHUB_ID,
-			clientSecret: process.env.GITHUB_SECRET,
+			clientId: process.env.AUTH_GITHUB_ID,
+			clientSecret: process.env.AUTH_GITHUB_SECRET,
 			profile(profile) {
 				return {
 					id: profile.id.toString(),
@@ -74,6 +74,7 @@ export default {
 					}
 				} catch (error) {
 					console.error('Error in authorize callback:', error)
+
 					return null
 				}
 			},

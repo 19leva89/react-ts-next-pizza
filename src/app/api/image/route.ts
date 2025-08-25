@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
 
 		const resizedImageBuffer = await sharpInstance.toBuffer()
 
-		return new NextResponse(resizedImageBuffer, {
+		return new NextResponse(new Uint8Array(resizedImageBuffer), {
 			headers: {
 				'Content-Type': 'image/png',
 				'Cache-Control': 'no-store',
@@ -49,6 +49,7 @@ export async function GET(req: NextRequest) {
 		})
 	} catch (error) {
 		console.error(error)
+
 		return NextResponse.json({ error: 'Error processing image' }, { status: 500 })
 	}
 }
