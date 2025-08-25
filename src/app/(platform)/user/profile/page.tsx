@@ -8,12 +8,16 @@ const ProfilePage = async () => {
 	const session = await auth()
 
 	if (!session) {
-		redirect('auth/not-auth')
+		redirect('/auth/not-auth')
 	}
 
 	const user = await prisma.user.findFirst({ where: { id: session?.user.id } })
 
-	return <ProfileForm data={user!} />
+	if (!user) {
+		redirect('/auth/not-auth')
+	}
+
+	return <ProfileForm data={user} />
 }
 
 export default ProfilePage

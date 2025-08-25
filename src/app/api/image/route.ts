@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
 
 		return new NextResponse(new Uint8Array(resizedImageBuffer), {
 			headers: {
-				'Content-Type': 'image/png',
+				'Content-Type': response.headers.get('content-type') ?? 'image/png',
 				'Cache-Control': 'no-store',
 			},
 		})
