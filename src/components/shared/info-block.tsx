@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -35,12 +34,15 @@ export const InfoBlock = ({ title, text, imageUrl, type, className }: Props) => 
 					</div>
 
 					<div className='mt-11 flex gap-5'>
-						<Link href='/'>
-							<Button variant='default' size='lg' className='transition-colors duration-300 ease-in-out'>
-								<ArrowLeft size={16} />
-								На головну
-							</Button>
-						</Link>
+						<Button
+							variant='default'
+							size='lg'
+							onClick={() => router.push('/')}
+							className='transition-colors duration-300 ease-in-out'
+						>
+							<ArrowLeft size={16} />
+							На головну
+						</Button>
 
 						{type === 'auth' ? (
 							<Button
