@@ -4,6 +4,7 @@ const UnauthorizedPage = () => {
 	return (
 		<div className='mt-40 flex flex-col items-center justify-center'>
 			<InfoBlock
+				type='auth'
 				title='Доступ заборонено'
 				text='Цю сторінку можуть переглядати лише авторизовані користувачі'
 				imageUrl='/assets/img/lock.png'

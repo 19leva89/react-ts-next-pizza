@@ -8,12 +8,12 @@ import authConfig from '@/auth.config'
 export const { auth, handlers, signIn, signOut } = NextAuth({
 	adapter: PrismaAdapter(prisma) as Adapter,
 
-	secret: process.env.NEXTAUTH_SECRET,
+	secret: process.env.AUTH_SECRET,
 
 	session: {
 		strategy: 'jwt',
-		// maxAge: 30 * 60, // 30 minutes
-		// updateAge: 10 * 60, // 10 minutes
+		maxAge: 60 * 60 * 24 * 7, // 7 days
+		updateAge: 60 * 60 * 24, // 1 day
 	},
 
 	callbacks: {

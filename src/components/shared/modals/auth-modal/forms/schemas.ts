@@ -9,14 +9,22 @@ const errMsg = {
 // Scheme for password
 const passwordSchema = z
 	.string()
-	.min(8, { message: 'Пароль повинен бути не менше 8 символів' })
-	.regex(/[A-Z]/, { message: 'Пароль повинен містити хоча б одну велику літеру' })
-	.regex(/[a-z]/, { message: 'Пароль повинен містити хоча б одну маленьку літеру' })
-	.regex(/\d/, { message: 'Пароль повинен містити хоча б одну цифру' })
+	.min(8, {
+		error: 'Пароль повинен бути не менше 8 символів',
+	})
+	.regex(/[A-Z]/, {
+		error: 'Пароль повинен містити хоча б одну велику літеру',
+	})
+	.regex(/[a-z]/, {
+		error: 'Пароль повинен містити хоча б одну маленьку літеру',
+	})
+	.regex(/\d/, {
+		error: 'Пароль повинен містити хоча б одну цифру',
+	})
 
 // Scheme for login
 export const formLoginSchema = z.object({
-	email: z.string().email({ message: errMsg.email }),
+	email: z.email({ message: errMsg.email }).trim(),
 	password: passwordSchema,
 })
 

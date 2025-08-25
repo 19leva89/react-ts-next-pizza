@@ -4,6 +4,7 @@ const CancelOrderPage = () => {
 	return (
 		<div className='mt-40 flex flex-col items-center justify-center'>
 			<InfoBlock
+				type='cancel'
 				title='Замовлення скасовано'
 				text='Нам дуже прикро, що так сталося!'
 				imageUrl='/assets/svg/cancel-order.svg'
