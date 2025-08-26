@@ -48,7 +48,7 @@ export const CheckoutForm = ({ session }: { session: Session | null }) => {
 					return
 				}
 
-				const [firstName = '', lastName = ''] = session?.user?.name.split(' ')
+				const [firstName = '', lastName = ''] = (session?.user?.name ?? '').split(/\s+/, 2)
 
 				form.setValue('firstName', firstName)
 				form.setValue('lastName', lastName || '')
@@ -71,11 +71,15 @@ export const CheckoutForm = ({ session }: { session: Session | null }) => {
 
 			const url = await createOrder(data)
 
-			toast.success('Замовлення успішно оформлене! 📝 Перехід на оплату... ')
-
 			if (url) {
-				location.href = url
+				toast.success('Замовлення успішно оформлене! 📝 Перехід на оплату...')
+				location.assign(url)
+
+				return
 			}
+
+			setSubmitting(false)
+			toast.error('Не вдалося отримати посилання на оплату')
 		} catch (err) {
 			console.log(err)
 			setSubmitting(false)
