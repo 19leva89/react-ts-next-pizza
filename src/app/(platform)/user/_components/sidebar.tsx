@@ -2,11 +2,25 @@
 
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
-
-import { Button, Separator } from '@/components/ui'
+import { usePathname } from 'next/navigation'
 import { BadgePercent, Bell, Heart, LogOut, Mail, MapPin, PackageOpen, User } from 'lucide-react'
 
+import { cn } from '@/lib'
+import { Button, Separator } from '@/components/ui'
+
 export const Sidebar = () => {
+	const pathname = usePathname()
+
+	const navigationItems = [
+		{ href: '/user/profile', icon: User, label: 'Особисті дані' },
+		{ href: '/user/orders', icon: PackageOpen, label: 'Замовлення' },
+		{ href: '/user/delivery', icon: MapPin, label: 'Адреси доставки' },
+		{ href: '/user/discount', icon: BadgePercent, label: 'Дисконт' },
+		{ href: '/user/wishlist', icon: Heart, label: 'Закладки' },
+		{ href: '/user/subscribes', icon: Mail, label: 'Розсилка' },
+		{ href: '/user/notice', icon: Bell, label: 'Повідомлення' },
+	]
+
 	const onClickSignOut = () => {
 		signOut({
 			callbackUrl: '/',
@@ -14,91 +28,30 @@ export const Sidebar = () => {
 	}
 
 	return (
-		<div className='flex flex-col gap-5 '>
-			<Link href='/user/profile'>
-				<Button
-					variant='secondary'
-					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
-					type='button'
-				>
-					<User />
-					Особисті дані
-				</Button>
-			</Link>
-
-			<Link href='/user/orders'>
-				<Button
-					variant='secondary'
-					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
-					type='button'
-				>
-					<PackageOpen />
-					Замовлення
-				</Button>
-			</Link>
-
-			<Link href='/user/delivery'>
-				<Button
-					variant='secondary'
-					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
-					type='button'
-				>
-					<MapPin />
-					Адреси доставки
-				</Button>
-			</Link>
-
-			<Link href='/user/discount'>
-				<Button
-					variant='secondary'
-					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
-					type='button'
-				>
-					<BadgePercent />
-					Дисконт
-				</Button>
-			</Link>
-
-			<Link href='/user/wishlist'>
-				<Button
-					variant='secondary'
-					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
-					type='button'
-				>
-					<Heart />
-					Закладки
-				</Button>
-			</Link>
-
-			<Link href='/user/subscribes'>
-				<Button
-					variant='secondary'
-					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
-					type='button'
-				>
-					<Mail />
-					Розсилка
-				</Button>
-			</Link>
-
-			<Link href='/user/notice'>
-				<Button
-					variant='secondary'
-					className='flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary'
-					type='button'
-				>
-					<Bell />
-					Повідомлення
-				</Button>
-			</Link>
+		<div className='flex flex-col gap-5'>
+			{navigationItems.map(({ href, icon: Icon, label }) => (
+				<Link key={href} href={href}>
+					<Button
+						type='button'
+						variant='secondary'
+						className={cn(
+							'flex w-full justify-start gap-3 border text-base transition-colors duration-300 ease-in-out hover:border-primary',
+							pathname === href && 'border-primary',
+						)}
+					>
+						<Icon />
+						{label}
+					</Button>
+				</Link>
+			))}
 
 			<Separator />
 
 			<Button
-				variant='ghost'
-				className='flex w-full justify-start gap-3 border-transparent text-base transition-colors duration-300 ease-in-out'
 				type='button'
+				variant='ghost'
 				onClick={onClickSignOut}
+				className='flex w-full justify-start gap-3 border-transparent text-base transition-colors duration-300 ease-in-out'
 			>
 				<LogOut />
 				Вийти

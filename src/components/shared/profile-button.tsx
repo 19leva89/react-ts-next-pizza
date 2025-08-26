@@ -24,7 +24,7 @@ export const ProfileButton = ({ className, onClickLogin }: Props) => {
 					Увійти
 				</Button>
 			) : (
-				<Link href='/user/profile'>
+				<Link href='/user/orders'>
 					<Button
 						variant='outline'
 						className='flex items-center gap-2 transition-colors duration-300 ease-in-out'

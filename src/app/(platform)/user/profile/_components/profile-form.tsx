@@ -4,14 +4,16 @@ import { toast } from 'sonner'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import { User } from '@prisma/client'
 import { Button } from '@/components/ui'
 import { updateUserInfo } from '@/app/actions'
 import { Container, FormInput, Title } from '@/components/shared'
 import { updateUserInfoSchema, UserFormValues } from '@/constants/update-user-info-schema'
 
 interface Props {
-	data: User
+	data: {
+		name: string | null
+		email: string
+	}
 }
 
 export const ProfileForm = ({ data }: Props) => {
