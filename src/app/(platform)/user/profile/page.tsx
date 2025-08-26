@@ -11,7 +11,13 @@ const ProfilePage = async () => {
 		redirect('/auth/not-auth')
 	}
 
-	const user = await prisma.user.findFirst({ where: { id: session?.user.id } })
+	const user = await prisma.user.findFirst({
+		where: { id: session?.user.id },
+		select: {
+			name: true,
+			email: true,
+		},
+	})
 
 	if (!user) {
 		redirect('/auth/not-auth')
