@@ -4,7 +4,7 @@ Animation and Interaction:
 - React Insta Stories (stories like Instagram)
 
 Authentication and User Management:
-- Bcryptjs (password hashing)
+- Bcrypt-ts (password hashing)
 - NextAuth (authentication)
 
 Core Technologies:

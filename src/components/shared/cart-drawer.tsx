@@ -24,7 +24,8 @@ import { getProductPluralize } from '@/lib'
 import { CartDrawerItem } from '@/components/shared'
 
 export const CartDrawer = ({ children }: PropsWithChildren) => {
-	const [redirecting, setRedirecting] = useState(false)
+	const [redirecting, setRedirecting] = useState<boolean>(false)
+
 	const { items, totalAmount, removeCartItem, updateItemQuantity } = useCart()
 
 	const onClickCountButton = (id: string, quantity: number, type: 'plus' | 'minus') => {
@@ -121,7 +122,7 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
 							<p className='mb-5 text-center text-neutral-500'>Але це ніколи не пізно виправити :)</p>
 
 							<SheetClose asChild>
-								<Button className='h-12 w-56 text-base transition-colors duration-300 ease-in-out' size='lg'>
+								<Button size='lg' className='h-12 w-56 text-base transition-colors duration-300 ease-in-out'>
 									<ArrowLeft className='mr-2 w-5' />
 									Повернутись назад
 								</Button>

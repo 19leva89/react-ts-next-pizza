@@ -87,7 +87,7 @@ export const LoginForm = ({ onClose }: Props) => {
 
 						<Separator className='relative my-4'>
 							<span className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/100 px-2 text-sm text-muted-foreground'>
-								або
+								або продовжити з
 							</span>
 						</Separator>
 

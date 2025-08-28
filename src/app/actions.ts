@@ -1,7 +1,7 @@
 'use server'
 
 import axios from 'axios'
-import { compare } from 'bcryptjs'
+import { compare } from 'bcrypt-ts'
 import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 

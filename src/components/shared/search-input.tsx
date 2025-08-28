@@ -17,9 +17,10 @@ interface Props {
 
 export const SearchInput = ({ className }: Props) => {
 	const ref = useRef(null)
-	const [focused, setFocused] = useState(false)
-	const [searchQuery, setSearchQuery] = useState('')
+
+	const [focused, setFocused] = useState<boolean>(false)
 	const [products, setProducts] = useState<Product[]>([])
+	const [searchQuery, setSearchQuery] = useState<string>('')
 
 	useClickAway(ref, () => {
 		setFocused(false)

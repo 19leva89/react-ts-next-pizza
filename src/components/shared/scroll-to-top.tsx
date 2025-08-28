@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const ScrollToTop = ({ className }: Props) => {
-	const [visible, setVisible] = useState(false)
+	const [visible, setVisible] = useState<boolean>(false)
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -46,11 +46,11 @@ export const ScrollToTop = ({ className }: Props) => {
 				<Button
 					type='button'
 					variant='outline'
+					onClick={scrollToTop}
 					className={cn(
 						'fixed bottom-11 left-11 rounded-full p-0 transition-colors duration-300 ease-in-out',
 						className,
 					)}
-					onClick={scrollToTop}
 				>
 					<ChevronUp width={28} height={28} />
 				</Button>

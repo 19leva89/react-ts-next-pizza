@@ -15,8 +15,8 @@ interface Props {
 }
 
 export const Stories = ({ className }: Props) => {
+	const [open, setOpen] = useState<boolean>(false)
 	const [stories, setStories] = useState<IStory[]>([])
-	const [open, setOpen] = useState(false)
 	const [selectedStory, setSelectedStory] = useState<IStory>()
 
 	useEffect(() => {
@@ -51,12 +51,12 @@ export const Stories = ({ className }: Props) => {
 					return (
 						<Image
 							key={story.id}
-							onClick={() => onClickStory(story)}
-							className='cursor-pointer rounded-md'
-							height={250}
-							width={200}
 							src={imageUrl}
 							alt='story'
+							height={250}
+							width={200}
+							onClick={() => onClickStory(story)}
+							className='cursor-pointer rounded-md'
 						/>
 					)
 				})}
