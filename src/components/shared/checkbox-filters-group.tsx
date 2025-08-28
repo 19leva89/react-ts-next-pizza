@@ -14,10 +14,10 @@ interface Props {
 	limit?: number
 	loading?: boolean
 	searchInputPlaceholder?: string
-	className?: string
-	onClickCheckbox?: (id: string) => void
 	defaultValue?: string[]
 	selected?: Set<string>
+	onClickCheckbox?: (id: string) => void
+	className?: string
 }
 
 export const CheckboxFiltersGroup = ({
@@ -28,12 +28,12 @@ export const CheckboxFiltersGroup = ({
 	limit = 5,
 	loading,
 	searchInputPlaceholder = 'Пошук...',
-	className,
-	onClickCheckbox,
 	selected,
+	onClickCheckbox,
+	className,
 }: Props) => {
-	const [search, setSearch] = useState('')
-	const [showAll, setShowAll] = useState(false)
+	const [search, setSearch] = useState<string>('')
+	const [showAll, setShowAll] = useState<boolean>(false)
 
 	const list = showAll
 		? items.filter((item) => item.text.toLowerCase().includes(search.toLowerCase()))

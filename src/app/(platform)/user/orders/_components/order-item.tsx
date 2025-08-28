@@ -33,7 +33,7 @@ export const OrderItem = ({
 	status,
 	className,
 }: Props) => {
-	const [isExpanded, setIsExpanded] = useState(expanded)
+	const [isExpanded, setIsExpanded] = useState<boolean>(expanded)
 
 	const TOTAL_HEIGHT = isExpanded ? items.length * ITEM_HEIGHT + FOOTER_HEIGHT : 0
 

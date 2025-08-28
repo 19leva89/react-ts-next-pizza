@@ -26,7 +26,7 @@ export const CartButton = ({ className }: Props) => {
 				<span className='mx-3 h-full w-px bg-white/30' />
 
 				<div className='flex items-center gap-1 transition duration-300 group-hover:opacity-0'>
-					<ShoppingCart size={16} className='relative' strokeWidth={2} />
+					<ShoppingCart size={16} strokeWidth={2} className='relative' />
 
 					<b>{items.length}</b>
 				</div>

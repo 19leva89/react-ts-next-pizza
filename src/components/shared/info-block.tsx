@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, UserIcon } from 'lucide-react'
+import { ArrowLeft, RefreshCcwIcon, UserIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { Button } from '@/components/ui'
@@ -63,6 +63,7 @@ export const InfoBlock = ({ title, text, imageUrl, type, className }: Props) => 
 								onClick={() => router.refresh()}
 								className='transition-colors duration-300 ease-in-out'
 							>
+								<RefreshCcwIcon size={16} />
 								Оновити
 							</Button>
 						)}

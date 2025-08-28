@@ -19,7 +19,7 @@ import { createOrder } from '@/app/actions'
 import { checkoutFormSchema, CheckoutFormValues } from '@/constants'
 
 export const CheckoutForm = ({ session }: { session: Session | null }) => {
-	const [submitting, setSubmitting] = useState(false)
+	const [submitting, setSubmitting] = useState<boolean>(false)
 
 	const { totalAmount, updateItemQuantity, items, removeCartItem, loading } = useCart()
 

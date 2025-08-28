@@ -21,7 +21,7 @@ export const Header = ({ hasSearch = true, hasCart = true, className }: Props) =
 	const router = useRouter()
 	const searchParams = useSearchParams()
 
-	const [openAuthModal, setOpenAuthModal] = useState(false)
+	const [openAuthModal, setOpenAuthModal] = useState<boolean>(false)
 
 	useEffect(() => {
 		let toastMessage = ''
@@ -55,6 +55,7 @@ export const Header = ({ hasSearch = true, hasCart = true, className }: Props) =
 
 						<div>
 							<h1 className='text-2xl font-black uppercase'>Next Pizza</h1>
+
 							<p className='text-sm leading-3 text-gray-400'>смачніше вже нікуди</p>
 						</div>
 					</div>

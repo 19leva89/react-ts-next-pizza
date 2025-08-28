@@ -20,13 +20,13 @@ export const Categories = ({ items, className }: Props) => {
 			{items.map(({ id, name, slug }) => (
 				<Link
 					key={id}
+					href={`/#${slug}`}
 					className={cn(
 						'flex h-11 items-center rounded-2xl border px-5 font-bold transition-colors',
 						categoryActiveId === id
 							? 'border-primary bg-white text-primary shadow-md shadow-gray-200'
 							: 'border-transparent',
 					)}
-					href={`/#${slug}`}
 				>
 					{name}
 				</Link>

@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { hashSync } from 'bcryptjs'
+import { hashSync } from 'bcrypt-ts'
 import { prisma } from '../src/lib/prisma'
 import { categories, ingredients, products, storyItems, stories } from './constants'
 
