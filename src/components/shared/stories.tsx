@@ -49,15 +49,15 @@ export const Stories = ({ className }: Props) => {
 					const imageUrl = `${bdImagePath}.webp`
 
 					return (
-						<Image
+						<button
 							key={story.id}
-							src={imageUrl}
-							alt='story'
-							height={250}
-							width={200}
+							type='button'
 							onClick={() => onClickStory(story)}
+							aria-label='Open story'
 							className='cursor-pointer rounded-md'
-						/>
+						>
+							<Image src={imageUrl} alt='story' height={250} width={200} className='rounded-md' />
+						</button>
 					)
 				})}
 

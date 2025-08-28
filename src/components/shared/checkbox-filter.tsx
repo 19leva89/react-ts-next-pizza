@@ -25,7 +25,7 @@ export const CheckboxFilter = ({
 				id={`checkbox-${String(name)}-${String(value)}`}
 				value={value}
 				checked={checked}
-				onCheckedChange={onCheckedChange}
+				onCheckedChange={(state) => onCheckedChange?.(state === true)}
 				className='size-6 cursor-pointer rounded-[8px]'
 			/>
 			<label
@@ -34,6 +34,7 @@ export const CheckboxFilter = ({
 			>
 				{text}
 			</label>
+
 			{endAdornment}
 		</div>
 	)
