@@ -17,13 +17,13 @@ type Props = {
 
 export const RangeSlider = forwardRef(
 	({ className, min, max, step, formatLabel, value, onValueChange, ...props }: Props, ref) => {
-		const initialValue = Array.isArray(value) ? value : [min, max]
+		const initialValue = value ? Array.from(value) : [min, max]
 
 		const [values, setValues] = useState<number[]>(initialValue)
 
 		useEffect(() => {
 			// Update localValues when the external value prop changes
-			setValues(Array.isArray(value) ? value : [min, max])
+			setValues(value ? Array.from(value) : [min, max])
 		}, [min, max, value])
 
 		const handleValueChange = (newValues: number[]) => {
