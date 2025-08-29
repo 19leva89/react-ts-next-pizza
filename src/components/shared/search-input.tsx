@@ -2,13 +2,13 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Search } from 'lucide-react'
+import { Product } from '@prisma/client'
 import { useRef, useState } from 'react'
+import { SearchIcon, XIcon } from 'lucide-react'
 import { useClickAway, useDebounce } from 'react-use'
 
-import { Product } from '@prisma/client'
-
 import { cn } from '@/lib'
+import { Button } from '@/components/ui'
 import { Api } from '@/services/api-client'
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const SearchInput = ({ className }: Props) => {
-	const ref = useRef(null)
+	const ref = useRef<HTMLDivElement | null>(null)
 
 	const [focused, setFocused] = useState<boolean>(false)
 	const [products, setProducts] = useState<Product[]>([])
@@ -30,12 +30,13 @@ export const SearchInput = ({ className }: Props) => {
 		async () => {
 			try {
 				const response = await Api.products.search(searchQuery)
+
 				setProducts(response)
 			} catch (error) {
 				console.log(error)
 			}
 		},
-		250,
+		500,
 		[searchQuery],
 	)
 
@@ -50,7 +51,7 @@ export const SearchInput = ({ className }: Props) => {
 			{focused && <div className='fixed top-0 right-0 bottom-0 left-0 z-30 bg-black/50' />}
 
 			<div ref={ref} className={cn('relative z-30 flex h-11 flex-1 justify-between rounded-2xl', className)}>
-				<Search className='absolute top-1/2 left-3 h-5 translate-y-[-50%] text-gray-400' />
+				<SearchIcon className='absolute top-1/2 left-3 h-5 translate-y-[-50%] text-gray-400' />
 
 				<input
 					type='text'
@@ -64,7 +65,7 @@ export const SearchInput = ({ className }: Props) => {
 				{products.length > 0 && (
 					<div
 						className={cn(
-							'invisible absolute top-14 z-30 w-full rounded-xl bg-white py-2 opacity-0 shadow-md transition-all duration-200',
+							'invisible absolute top-14 z-30 w-full rounded-2xl bg-white py-2 opacity-0 shadow-md transition-all duration-200',
 							focused && 'visible top-12 opacity-100',
 						)}
 					>
@@ -86,6 +87,30 @@ export const SearchInput = ({ className }: Props) => {
 							)
 						})}
 					</div>
+				)}
+
+				{products.length === 0 && searchQuery && (
+					<div
+						className={cn(
+							'invisible absolute top-14 z-30 w-full rounded-2xl bg-white py-2 opacity-0 shadow-md transition-all duration-200',
+							focused && 'visible top-12 opacity-100',
+						)}
+					>
+						<p className='w-full px-3 py-2 text-gray-400 hover:bg-primary/10'>
+							Нічого не знайдено, спробуйте змінити запит
+						</p>
+					</div>
+				)}
+
+				{focused && searchQuery && (
+					<Button
+						size='icon'
+						variant='ghost'
+						onClick={() => setSearchQuery('')}
+						className='absolute top-1/2 right-3 h-5 translate-y-[-50%] text-gray-400'
+					>
+						<XIcon />
+					</Button>
 				)}
 			</div>
 		</>

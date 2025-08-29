@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { CircleCheck } from 'lucide-react'
+import { CircleCheckIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 
@@ -22,7 +22,7 @@ export const IngredientItem = ({ name, price, imageUrl, active, onClick, classNa
 			)}
 			onClick={onClick}
 		>
-			{active && <CircleCheck className='absolute top-2 right-2 text-primary' />}
+			{active && <CircleCheckIcon className='absolute top-2 right-2 text-primary' />}
 
 			<Image width={110} height={110} src={imageUrl} alt={name} />
 

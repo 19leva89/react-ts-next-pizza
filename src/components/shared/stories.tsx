@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { X } from 'lucide-react'
+import { XIcon } from 'lucide-react'
 import ReactStories from 'react-insta-stories'
 import { useEffect, useState } from 'react'
 
@@ -68,7 +68,7 @@ export const Stories = ({ className }: Props) => {
 								className='absolute -top-5 -right-10 z-30 cursor-pointer transition-colors duration-300 ease-in-out'
 								onClick={() => setOpen(false)}
 							>
-								<X className='absolute top-0 right-0 size-8 text-white/50' />
+								<XIcon className='absolute top-0 right-0 size-8 text-white/50' />
 							</button>
 
 							<ReactStories

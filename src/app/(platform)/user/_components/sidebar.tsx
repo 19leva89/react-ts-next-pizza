@@ -1,9 +1,18 @@
 'use client'
 
+import {
+	BadgePercentIcon,
+	BellIcon,
+	HeartIcon,
+	LogOutIcon,
+	MailIcon,
+	MapPinIcon,
+	PackageOpenIcon,
+	UserIcon,
+} from 'lucide-react'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
-import { BadgePercent, Bell, Heart, LogOut, Mail, MapPin, PackageOpen, User } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { Button, Separator } from '@/components/ui'
@@ -12,13 +21,13 @@ export const Sidebar = () => {
 	const pathname = usePathname()
 
 	const navigationItems = [
-		{ href: '/user/profile', icon: User, label: 'Особисті дані' },
-		{ href: '/user/orders', icon: PackageOpen, label: 'Замовлення' },
-		{ href: '/user/delivery', icon: MapPin, label: 'Адреси доставки' },
-		{ href: '/user/discount', icon: BadgePercent, label: 'Дисконт' },
-		{ href: '/user/wishlist', icon: Heart, label: 'Закладки' },
-		{ href: '/user/subscribes', icon: Mail, label: 'Розсилка' },
-		{ href: '/user/notice', icon: Bell, label: 'Повідомлення' },
+		{ href: '/user/profile', icon: UserIcon, label: 'Особисті дані' },
+		{ href: '/user/orders', icon: PackageOpenIcon, label: 'Замовлення' },
+		{ href: '/user/delivery', icon: MapPinIcon, label: 'Адреси доставки' },
+		{ href: '/user/discount', icon: BadgePercentIcon, label: 'Дисконт' },
+		{ href: '/user/wishlist', icon: HeartIcon, label: 'Закладки' },
+		{ href: '/user/subscribes', icon: MailIcon, label: 'Розсилка' },
+		{ href: '/user/notice', icon: BellIcon, label: 'Повідомлення' },
 	]
 
 	const onClickSignOut = () => {
@@ -53,7 +62,7 @@ export const Sidebar = () => {
 				onClick={onClickSignOut}
 				className='flex w-full justify-start gap-3 border-transparent text-base transition-colors duration-300 ease-in-out'
 			>
-				<LogOut />
+				<LogOutIcon />
 				Вийти
 			</Button>
 		</div>

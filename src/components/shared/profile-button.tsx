@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
-import { CircleUser, User } from 'lucide-react'
+import { CircleUserIcon, UserIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui'
 
@@ -20,7 +20,7 @@ export const ProfileButton = ({ className, onClickLogin }: Props) => {
 					onClick={onClickLogin}
 					className='flex items-center gap-1 transition-colors duration-300 ease-in-out'
 				>
-					<User size={16} />
+					<UserIcon size={16} />
 					Увійти
 				</Button>
 			) : (
@@ -29,7 +29,7 @@ export const ProfileButton = ({ className, onClickLogin }: Props) => {
 						variant='outline'
 						className='flex items-center gap-2 transition-colors duration-300 ease-in-out'
 					>
-						<CircleUser size={18} />
+						<CircleUserIcon size={18} />
 						Профіль
 					</Button>
 				</Link>

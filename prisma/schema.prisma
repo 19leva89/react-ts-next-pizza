@@ -143,8 +143,8 @@ model Category {
 
 model Product {
   id           Int           @id @default(autoincrement()) @map("_id")
-  name         String
-  description  String?
+  name         String        @db.VarChar(255)
+  description  String?       @db.VarChar(1000)
   imageUrl     String
   discount     Int           @default(0)
   discountType DiscountType?
@@ -158,6 +158,7 @@ model Product {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 
+  @@index([name(ops: raw("varchar_pattern_ops"))], map: "product_name_idx")
   @@index([categoryId])
   @@index([discountType, discount])
   @@index([createdAt])

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Plus } from 'lucide-react'
+import { PlusIcon } from 'lucide-react'
 
 import { Ingredient } from '@prisma/client'
 
@@ -50,7 +50,7 @@ export const ProductCard = ({ id, name, description, price, imageUrl, ingredient
 						variant='outline'
 						className='bg-[#ffe4d5] text-base font-bold transition-colors duration-300 ease-in-out'
 					>
-						<Plus size={20} className='mr-1' />
+						<PlusIcon size={20} className='mr-1' />
 						Додати
 					</Button>
 				</div>

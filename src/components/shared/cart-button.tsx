@@ -1,7 +1,7 @@
 'use client'
 
 import { shallow } from 'zustand/shallow'
-import { ArrowRight, ShoppingCart } from 'lucide-react'
+import { ArrowRightIcon, ShoppingCartIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { useCartStore } from '@/store'
@@ -26,12 +26,12 @@ export const CartButton = ({ className }: Props) => {
 				<span className='mx-3 h-full w-px bg-white/30' />
 
 				<div className='flex items-center gap-1 transition duration-300 group-hover:opacity-0'>
-					<ShoppingCart size={16} strokeWidth={2} className='relative' />
+					<ShoppingCartIcon size={16} strokeWidth={2} className='relative' />
 
 					<b>{items.length}</b>
 				</div>
 
-				<ArrowRight
+				<ArrowRightIcon
 					size={20}
 					className='absolute right-5 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100'
 				/>

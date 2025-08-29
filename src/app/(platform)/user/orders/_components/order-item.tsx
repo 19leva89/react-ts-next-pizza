@@ -1,7 +1,7 @@
 'use client'
 
-import { ChevronDown } from 'lucide-react'
 import { Fragment, useState } from 'react'
+import { ChevronDownIcon } from 'lucide-react'
 
 import { Separator } from '@/components/ui'
 import { cn, getCartItemDetails } from '@/lib'
@@ -52,7 +52,7 @@ export const OrderItem = ({
 				<div className='flex items-center gap-5'>
 					<OrderStatus variant={status} />
 
-					<ChevronDown className={isExpanded ? 'rotate-180' : ''} />
+					<ChevronDownIcon className={isExpanded ? 'rotate-180' : ''} />
 				</div>
 			</div>
 
