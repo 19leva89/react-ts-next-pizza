@@ -1,6 +1,6 @@
 'use client'
 
-import { SearchX } from 'lucide-react'
+import { SearchXIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import { Input, Separator } from '@/components/ui'
@@ -18,8 +18,8 @@ export const Filters = ({ className }: Props) => {
 	const { ingredients, loading } = useIngredients()
 
 	// Add local state for price inputs
-	const [localPriceFrom, setLocalPriceFrom] = useState(filters.prices.priceFrom)
-	const [localPriceTo, setLocalPriceTo] = useState(filters.prices.priceTo)
+	const [localPriceFrom, setLocalPriceFrom] = useState<number>(filters.prices.priceFrom)
+	const [localPriceTo, setLocalPriceTo] = useState<number>(filters.prices.priceTo)
 
 	useEffect(() => {
 		setLocalPriceFrom(filters.prices.priceFrom)
@@ -139,7 +139,7 @@ export const Filters = ({ className }: Props) => {
 
 			{/* Reset button */}
 			<div className='mt-5 flex cursor-pointer items-center gap-2 hover:text-primary' onClick={resetFilters}>
-				Скинути всі фільтри <SearchX className='hover:stroke-primary' />
+				Скинути всі фільтри <SearchXIcon className='hover:stroke-primary' />
 			</div>
 		</div>
 	)

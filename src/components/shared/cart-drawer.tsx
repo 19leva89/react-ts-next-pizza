@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { PropsWithChildren, useState } from 'react'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 
 import { useCart } from '@/hooks'
 import { cn, getCartItemDetails } from '@/lib'
@@ -109,7 +109,7 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
 											className='h-12 w-full text-base transition-colors duration-300 ease-in-out'
 										>
 											Оформити замовлення
-											<ArrowRight className='ml-2 w-5' />
+											<ArrowRightIcon className='ml-2 w-5' />
 										</Button>
 									</Link>
 								</div>
@@ -123,7 +123,7 @@ export const CartDrawer = ({ children }: PropsWithChildren) => {
 
 							<SheetClose asChild>
 								<Button size='lg' className='h-12 w-56 text-base transition-colors duration-300 ease-in-out'>
-									<ArrowLeft className='mr-2 w-5' />
+									<ArrowLeftIcon className='mr-2 w-5' />
 									Повернутись назад
 								</Button>
 							</SheetClose>

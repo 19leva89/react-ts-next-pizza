@@ -1,7 +1,7 @@
 'use client'
 
-import { ChevronUp } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { ChevronUpIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { Button } from '@/components/ui'
@@ -52,7 +52,7 @@ export const ScrollToTop = ({ className }: Props) => {
 						className,
 					)}
 				>
-					<ChevronUp width={28} height={28} />
+					<ChevronUpIcon width={28} height={28} />
 				</Button>
 			)}
 		</>

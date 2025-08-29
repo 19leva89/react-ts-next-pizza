@@ -1,6 +1,6 @@
 'use client'
 
-import { X } from 'lucide-react'
+import { XIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import * as CartItemDetails from '@/components/shared/cart-item-details'
@@ -45,7 +45,7 @@ export const CheckoutDrawerItem = ({
 				<CartItemDetails.CountButton onClick={onClickCountButton} value={quantity} />
 
 				<button type='button' onClick={onClickRemove} className='transition duration-300 ease-in-out'>
-					<X className='cursor-pointer text-gray-400 hover:text-gray-600' size={20} />
+					<XIcon className='cursor-pointer text-gray-400 hover:text-gray-600' size={20} />
 				</button>
 			</div>
 		</div>

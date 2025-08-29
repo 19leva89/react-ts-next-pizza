@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, RefreshCcwIcon, UserIcon } from 'lucide-react'
+import { ArrowLeftIcon, RefreshCcwIcon, UserIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { Button } from '@/components/ui'
@@ -40,7 +40,7 @@ export const InfoBlock = ({ title, text, imageUrl, type, className }: Props) => 
 							onClick={() => router.push('/')}
 							className='transition-colors duration-300 ease-in-out'
 						>
-							<ArrowLeft size={16} />
+							<ArrowLeftIcon size={16} />
 							На головну
 						</Button>
 

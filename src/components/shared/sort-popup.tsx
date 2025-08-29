@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowUpDown } from 'lucide-react'
+import { ArrowUpDownIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { SortOption, sortOptions } from '@/constants'
@@ -30,7 +30,7 @@ export const SortPopup = ({ className }: Props) => {
 		<Popover open={isOpen} onOpenChange={setIsOpen}>
 			<PopoverTrigger asChild>
 				<div className={cn('inline-flex h-13 cursor-pointer items-center gap-1 rounded-2xl px-5', className)}>
-					<ArrowUpDown size={16} />
+					<ArrowUpDownIcon size={16} />
 
 					<b>Сортування:</b>
 

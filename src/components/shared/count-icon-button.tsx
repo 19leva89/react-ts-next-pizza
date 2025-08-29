@@ -1,4 +1,4 @@
-import { Minus, Plus } from 'lucide-react'
+import { MinusIcon, PlusIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { Button } from '@/components/ui'
@@ -24,9 +24,9 @@ export const CountIconButton = ({ size = 'sm', disabled, type, onClick }: Props)
 			)}
 		>
 			{type === 'plus' ? (
-				<Plus className={size === 'sm' ? 'h-4' : 'h-5'} />
+				<PlusIcon className={size === 'sm' ? 'h-4' : 'h-5'} />
 			) : (
-				<Minus className={size === 'sm' ? 'h-4' : 'h-5'} />
+				<MinusIcon className={size === 'sm' ? 'h-4' : 'h-5'} />
 			)}
 		</Button>
 	)

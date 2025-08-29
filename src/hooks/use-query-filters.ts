@@ -6,7 +6,7 @@ import { Filters } from '@/hooks/use-filters'
 
 export const useQueryFilters = (filters: Filters) => {
 	const router = useRouter()
-	const isMounted = useRef(false)
+	const isMounted = useRef<boolean>(false)
 
 	useEffect(() => {
 		if (isMounted.current) {

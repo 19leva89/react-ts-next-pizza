@@ -1,7 +1,7 @@
 'use client'
 
-import { Eye, EyeOff } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
+import { EyeIcon, EyeOffIcon } from 'lucide-react'
 import { InputHTMLAttributes, useState } from 'react'
 
 import { Input } from '@/components/ui'
@@ -59,7 +59,7 @@ export const FormInput = ({ className, name, label, type, placeholder, required,
 						onClick={togglePasswordVisibility}
 						className='absolute top-1/2 right-4 -translate-y-1/2 transform cursor-pointer opacity-30 transition duration-300 ease-in-out hover:opacity-100'
 					>
-						{isPasswordVisible ? <EyeOff className='size-5' /> : <Eye className='size-5' />}
+						{isPasswordVisible ? <EyeOffIcon className='size-5' /> : <EyeIcon className='size-5' />}
 					</button>
 				)}
 

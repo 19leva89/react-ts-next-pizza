@@ -1,4 +1,4 @@
-import { ArrowRight, Package, TicketPercent, Truck } from 'lucide-react'
+import { ArrowRightIcon, PackageIcon, TicketPercentIcon, TruckIcon } from 'lucide-react'
 
 import { cn } from '@/lib'
 import { DISCOUNT } from '@/constants/discount'
@@ -30,7 +30,7 @@ export const CheckoutSidebar = ({ totalAmount, loading, className }: Props) => {
 			<CheckoutItemDetails
 				title={
 					<div className='flex items-center'>
-						<Package size={18} className='mr-2 text-gray-400' />
+						<PackageIcon size={18} className='mr-2 text-gray-400' />
 						Вартість товарів:
 					</div>
 				}
@@ -40,7 +40,7 @@ export const CheckoutSidebar = ({ totalAmount, loading, className }: Props) => {
 			<CheckoutItemDetails
 				title={
 					<div className='flex items-center'>
-						<Truck size={18} className='mr-2 text-gray-400' />
+						<TruckIcon size={18} className='mr-2 text-gray-400' />
 						Доставка:
 					</div>
 				}
@@ -50,7 +50,7 @@ export const CheckoutSidebar = ({ totalAmount, loading, className }: Props) => {
 			<CheckoutItemDetails
 				title={
 					<div className='flex items-center'>
-						<TicketPercent size={18} className='mr-2 text-gray-400' />
+						<TicketPercentIcon size={18} className='mr-2 text-gray-400' />
 						Знижка:
 					</div>
 				}
@@ -63,7 +63,7 @@ export const CheckoutSidebar = ({ totalAmount, loading, className }: Props) => {
 				className='mt-6 h-14 w-full rounded-2xl text-base font-bold transition-colors duration-300 ease-in-out'
 			>
 				Перейти до оплати
-				<ArrowRight className='ml-2 w-5' />
+				<ArrowRightIcon className='ml-2 w-5' />
 			</Button>
 		</WhiteBlock>
 	)
