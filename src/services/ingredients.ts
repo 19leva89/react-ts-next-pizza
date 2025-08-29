@@ -8,3 +8,9 @@ export const getAll = async (): Promise<Ingredient[]> => {
 
 	return data
 }
+
+export const getUsedInProducts = async () => {
+	const { data } = await axiosInstance.get<Ingredient[]>(ApiRoutes.INGREDIENTS_USED)
+
+	return data
+}
