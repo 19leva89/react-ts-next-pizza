@@ -86,14 +86,14 @@ async function up() {
 			{
 				name: 'User',
 				email: 'user@gmail.com',
-				password: hashSync('IntelPentiumv2', 10),
+				password: hashSync('22vFq1989', 10),
 				emailVerified: new Date(),
 				role: 'USER',
 			},
 			{
 				name: 'Admin',
 				email: 'admin@gmail.com',
-				password: hashSync('IntelPentiumv2', 10),
+				password: hashSync('22vFq1989', 10),
 				emailVerified: new Date(),
 				role: 'ADMIN',
 			},

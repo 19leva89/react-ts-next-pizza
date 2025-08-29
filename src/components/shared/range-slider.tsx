@@ -6,24 +6,26 @@ import { forwardRef, Fragment, RefObject, useEffect, useState } from 'react'
 import { cn } from '@/lib'
 
 type Props = {
-	className?: string
 	min: number
 	max: number
 	step: number
-	formatLabel?: (value: number) => string
 	value?: number[] | readonly number[]
+	formatLabel?: (value: number) => string
 	onValueChange?: (values: number[]) => void
+	className?: string
 }
 
 export const RangeSlider = forwardRef(
-	({ className, min, max, step, formatLabel, value, onValueChange, ...props }: Props, ref) => {
-		const initialValue = value ? Array.from(value) : [min, max]
+	({ min, max, step, value, formatLabel, onValueChange, className, ...props }: Props, ref) => {
+		const initialValue = Array.isArray(value) && value.length > 0 ? Array.from(value) : [min, max]
 
 		const [values, setValues] = useState<number[]>(initialValue)
 
 		useEffect(() => {
-			// Update localValues when the external value prop changes
-			setValues(value ? Array.from(value) : [min, max])
+			// Update localValues when the external value prop changes (guard empty and shallow-compare)
+			const next = Array.isArray(value) && value.length > 0 ? Array.from(value) : [min, max]
+
+			setValues((prev) => (prev.length === next.length && prev.every((n, i) => n === next[i]) ? prev : next))
 		}, [min, max, value])
 
 		const handleValueChange = (newValues: number[]) => {
