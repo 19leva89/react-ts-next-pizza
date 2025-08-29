@@ -1,10 +1,12 @@
 'use client'
 
 import { SearchX } from 'lucide-react'
+import { useEffect, useState } from 'react'
+
 import { Input, Separator } from '@/components/ui'
-import { useIngredients, useFilters, useQueryFilters } from '@/hooks'
 import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE } from '@/constants/filter'
 import { Title, RangeSlider, CheckboxFiltersGroup } from '@/components/shared'
+import { useIngredients, useFilters, useQueryFilters, useDebouncedCallback } from '@/hooks'
 
 interface Props {
 	className?: string
@@ -12,23 +14,37 @@ interface Props {
 
 export const Filters = ({ className }: Props) => {
 	const filters = useFilters()
+
 	const { ingredients, loading } = useIngredients()
 
-	const items = ingredients.map((item) => ({
-		value: String(item.id),
-		text: item.name,
-	}))
+	// Add local state for price inputs
+	const [localPriceFrom, setLocalPriceFrom] = useState(filters.prices.priceFrom)
+	const [localPriceTo, setLocalPriceTo] = useState(filters.prices.priceTo)
 
-	const updatePrices = (prices: number[]) => {
+	useEffect(() => {
+		setLocalPriceFrom(filters.prices.priceFrom)
+		setLocalPriceTo(filters.prices.priceTo)
+	}, [filters.prices.priceFrom, filters.prices.priceTo])
+
+	const debouncePriceInput = useDebouncedCallback((name: 'priceFrom' | 'priceTo', value: number) => {
+		filters.setPrices(name, value)
+	}, 500)
+
+	const debounceRangeSlider = useDebouncedCallback((prices: number[]) => {
 		filters.setPrices('priceFrom', prices[0])
 		filters.setPrices('priceTo', prices[1])
-	}
+	}, 500)
 
 	const resetFilters = () => {
 		filters.reset()
 	}
 
 	useQueryFilters(filters)
+
+	const items = ingredients.map((item) => ({
+		value: String(item.id),
+		text: item.name,
+	}))
 
 	return (
 		<div className={className}>
@@ -73,8 +89,13 @@ export const Filters = ({ className }: Props) => {
 						placeholder='0'
 						min={0}
 						max={DEFAULT_MAX_PRICE}
-						value={filters.prices.priceFrom || DEFAULT_MIN_PRICE}
-						onChange={(e) => filters.setPrices('priceFrom', Number(e.target.value))}
+						value={localPriceFrom}
+						onChange={(e) => {
+							const value = Number(e.target.value)
+
+							setLocalPriceFrom(value)
+							debouncePriceInput('priceFrom', value)
+						}}
 					/>
 
 					<Input
@@ -82,8 +103,13 @@ export const Filters = ({ className }: Props) => {
 						min={100}
 						max={DEFAULT_MAX_PRICE}
 						placeholder={String(DEFAULT_MAX_PRICE)}
-						value={filters.prices.priceTo || DEFAULT_MAX_PRICE}
-						onChange={(e) => filters.setPrices('priceTo', Number(e.target.value))}
+						value={localPriceTo}
+						onChange={(e) => {
+							const value = Number(e.target.value)
+
+							setLocalPriceTo(value)
+							debouncePriceInput('priceTo', value)
+						}}
 					/>
 				</div>
 
@@ -91,8 +117,8 @@ export const Filters = ({ className }: Props) => {
 					min={DEFAULT_MIN_PRICE}
 					max={DEFAULT_MAX_PRICE}
 					step={10}
-					value={[filters.prices.priceFrom || DEFAULT_MIN_PRICE, filters.prices.priceTo || DEFAULT_MAX_PRICE]}
-					onValueChange={updatePrices}
+					value={[localPriceFrom, localPriceTo]}
+					onValueChange={debounceRangeSlider}
 				/>
 			</div>
 
