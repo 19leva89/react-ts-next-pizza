@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { Input, Separator } from '@/components/ui'
 import { DEFAULT_MAX_PRICE, DEFAULT_MIN_PRICE } from '@/constants/filter'
 import { Title, RangeSlider, CheckboxFiltersGroup } from '@/components/shared'
-import { useIngredients, useFilters, useQueryFilters, useDebouncedCallback } from '@/hooks'
+import { useFilters, useQueryFilters, useDebouncedCallback, useUsedIngredients } from '@/hooks'
 
 interface Props {
 	className?: string
@@ -15,7 +15,7 @@ interface Props {
 export const Filters = ({ className }: Props) => {
 	const filters = useFilters()
 
-	const { ingredients, loading } = useIngredients()
+	const { usedIngredients, loading } = useUsedIngredients()
 
 	// Add local state for price inputs
 	const [localPriceFrom, setLocalPriceFrom] = useState<number>(filters.prices.priceFrom)
@@ -41,7 +41,7 @@ export const Filters = ({ className }: Props) => {
 
 	useQueryFilters(filters)
 
-	const items = ingredients.map((item) => ({
+	const items = usedIngredients.map((item) => ({
 		value: String(item.id),
 		text: item.name,
 	}))
