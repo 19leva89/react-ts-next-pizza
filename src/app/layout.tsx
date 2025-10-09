@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
+import { Analytics } from '@vercel/analytics/next'
 
 import { siteConfig } from '@/config/site'
 import { Providers } from '@/components/shared/providers'
@@ -32,6 +33,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
 		<html lang='en'>
 			<body className={nunito.variable}>
 				<Providers>{children}</Providers>
+
+				{/* Allow track page views for Vercel */}
+				<Analytics />
 			</body>
 		</html>
 	)
