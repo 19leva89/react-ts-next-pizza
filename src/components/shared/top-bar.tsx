@@ -1,8 +1,7 @@
 'use client'
 
-import { Category } from '@prisma/client'
-
 import { cn } from '@/lib'
+import { Category } from '@/generated/prisma/client'
 import { Container, Categories } from '@/components/shared'
 
 interface Props {

@@ -1,5 +1,5 @@
 import { PizzaSize, PizzaType } from '@/constants'
-import { Ingredient, ProductItem } from '@prisma/client'
+import { Ingredient, ProductItem } from '@/generated/prisma/client'
 
 /**
  * Calculates the total price of a pizza based on its type, size, and selected ingredients.

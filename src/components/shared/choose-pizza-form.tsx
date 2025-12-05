@@ -1,12 +1,10 @@
 'use client'
 
-import { Ingredient, ProductItem } from '@prisma/client'
-
+import { Button } from '@/components/ui'
 import { usePizzaOptions } from '@/hooks'
 import { PizzaSize, PizzaType, pizzaTypes } from '@/constants'
 import { calcTotalPizzaPrice, cn, getPizzaDetails } from '@/lib'
-
-import { Button } from '@/components/ui'
+import { Ingredient, ProductItem } from '@/generated/prisma/client'
 import { GroupVariants, IngredientItem, PizzaImage, Title } from '@/components/shared'
 
 interface Props {

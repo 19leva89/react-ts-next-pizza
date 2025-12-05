@@ -1,4 +1,4 @@
-import { City, Community, District, State } from '@prisma/client'
+import { City, Community, District, State } from '@/generated/prisma/client'
 
 export type StateDTO = State & {
 	id: string

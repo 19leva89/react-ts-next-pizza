@@ -2,11 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { PlusIcon } from 'lucide-react'
 
-import { Ingredient } from '@prisma/client'
-
 import { cn } from '@/lib'
 import { Button } from '@/components/ui'
 import { Title } from '@/components/shared'
+import { Ingredient } from '@/generated/prisma/client'
 
 interface Props {
 	id: number

@@ -2,10 +2,9 @@
 
 import { toast } from 'sonner'
 
-import { Ingredient } from '@prisma/client'
-import { ProductWithRelations } from '@/config/prisma-types'
-
 import { useCartStore } from '@/store'
+import { Ingredient } from '@/generated/prisma/client'
+import { ProductWithRelations } from '@/config/prisma-types'
 import { ChoosePizzaForm, ChooseProductForm } from '@/components/shared'
 
 interface Props {

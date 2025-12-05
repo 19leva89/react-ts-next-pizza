@@ -1,9 +1,9 @@
 import { useSet } from 'react-use'
 import { useEffect, useState } from 'react'
-import { ProductItem } from '@prisma/client'
 
 import { getAvailablePizzaSizes } from '@/lib'
 import { PizzaSize, PizzaType } from '@/constants'
+import { ProductItem } from '@/generated/prisma/client'
 import { Variant } from '@/components/shared/group-variants'
 
 interface ReturnProps {

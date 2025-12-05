@@ -1,4 +1,4 @@
-import { Ingredient } from '@prisma/client'
+import { Ingredient } from '@/generated/prisma/client'
 import { mapPizzaType, PizzaSize, PizzaType } from '@/constants'
 
 /**

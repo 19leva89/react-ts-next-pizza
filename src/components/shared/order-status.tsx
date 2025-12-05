@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui'
-import { OrderStatus as IOrderStatus } from '@prisma/client'
+import { OrderStatus as IOrderStatus } from '@/generated/prisma/enums'
 
 interface Props {
 	variant: IOrderStatus

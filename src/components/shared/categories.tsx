@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { shallow } from 'zustand/shallow'
 
 import { cn } from '@/lib'
-import { Category } from '@prisma/client'
 import { useCategoryStore } from '@/store'
+import { Category } from '@/generated/prisma/client'
 
 interface Props {
 	items: Category[]

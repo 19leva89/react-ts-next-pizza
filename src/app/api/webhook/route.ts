@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { prisma } from '@/lib/prisma'
-import { OrderStatus } from '@prisma/client'
+import { OrderStatus } from '@/generated/prisma/enums'
 
 import { sendEmail } from '@/lib'
 import { stripe } from '@/lib/stripe'

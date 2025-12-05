@@ -8,8 +8,8 @@ import { cn, getCartItemDetails } from '@/lib'
 import { CartItemDTO } from '@/services/dto/cart.dto'
 import { PizzaSize, PizzaType } from '@/constants/pizza'
 import { OrderCartItem, Title } from '@/components/shared'
-import { OrderStatus as IOrderStatus } from '@prisma/client'
 import { OrderStatus } from '@/components/shared/order-status'
+import { OrderStatus as IOrderStatus } from '@/generated/prisma/enums'
 
 interface Props {
 	id: number

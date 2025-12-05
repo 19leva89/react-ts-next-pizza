@@ -1,6 +1,5 @@
-import { ProductItem } from '@prisma/client'
-
 import { PizzaType, pizzaSizes } from '@/constants'
+import { ProductItem } from '@/generated/prisma/client'
 import { Variant } from '@/components/shared/group-variants'
 
 /**

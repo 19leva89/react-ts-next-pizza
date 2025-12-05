@@ -1,5 +1,5 @@
-import { Ingredient } from '@prisma/client'
 import { PizzaSize, PizzaType } from '@/constants'
+import { Ingredient } from '@/generated/prisma/client'
 import { generatePizzaDescription } from './generate-pizza-description'
 
 /**

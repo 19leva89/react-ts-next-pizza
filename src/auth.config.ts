@@ -5,7 +5,7 @@ import GitHub from 'next-auth/providers/github'
 import Credentials from 'next-auth/providers/credentials'
 
 import { prisma } from '@/lib/prisma'
-import { UserRole } from '@prisma/client'
+import { UserRole } from '@/generated/prisma/enums'
 
 export default {
 	providers: [

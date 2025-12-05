@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Product } from '@prisma/client'
 import { useRef, useState } from 'react'
 import { SearchIcon, XIcon } from 'lucide-react'
 import { useClickAway, useDebounce } from 'react-use'
@@ -10,6 +9,7 @@ import { useClickAway, useDebounce } from 'react-use'
 import { cn } from '@/lib'
 import { Button } from '@/components/ui'
 import { Api } from '@/services/api-client'
+import { Product } from '@/generated/prisma/client'
 
 interface Props {
 	className?: string

@@ -6,7 +6,7 @@ import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 
 import { prisma } from '@/lib/prisma'
-import { Prisma } from '@prisma/client'
+import { Prisma } from '@/generated/prisma/client'
 
 import { sendEmail } from '@/lib'
 import { auth, signIn } from '@/auth'

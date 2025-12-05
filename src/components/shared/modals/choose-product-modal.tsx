@@ -2,11 +2,10 @@
 
 import { useRouter } from 'next/navigation'
 
-import { Ingredient } from '@prisma/client'
-import { ProductWithRelations } from '@/config/prisma-types'
-
 import { cn } from '@/lib'
 import { ProductForm } from '@/components/shared'
+import { Ingredient } from '@/generated/prisma/client'
+import { ProductWithRelations } from '@/config/prisma-types'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui'
 
 interface Props {

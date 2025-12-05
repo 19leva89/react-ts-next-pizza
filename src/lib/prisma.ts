@@ -1,13 +1,26 @@
-import { PrismaClient } from '@prisma/client'
+import 'dotenv/config'
+import { PrismaPg } from '@prisma/adapter-pg'
 
-const prismaClientSingleton = () => {
-	return new PrismaClient()
+//! Do not change the path, made for seed.ts
+import { PrismaClient } from '../generated/prisma/client'
+
+const isProduction = process.env.NODE_ENV === 'production'
+
+const adapter = new PrismaPg({
+	connectionString: process.env.DATABASE_URL!,
+})
+
+const globalForPrisma = global as unknown as {
+	prisma: PrismaClient
 }
 
-declare const globalThis: {
-	prismaGlobal: ReturnType<typeof prismaClientSingleton>
-} & typeof global
+const prisma =
+	globalForPrisma.prisma ||
+	new PrismaClient({
+		adapter,
+		log: isProduction ? ['warn', 'error'] : ['info', 'warn', 'error'],
+	})
 
-export const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
-if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma
+export { prisma }
